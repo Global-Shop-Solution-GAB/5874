@@ -1,0 +1,2118 @@
+﻿Program.Sub.ScreenSU.Start
+Gui.Form..Create(BaseForm)
+Gui.Form..Caption("Field Service")
+Gui.Form..Size(909,588)
+Gui.Form..MinX(0)
+Gui.Form..MinY(0)
+Gui.Form..Position(0,0)
+Gui.Form..BackColor(-2147483633)
+Gui.Form..MousePointer(0)
+Gui.Form..Event(UnLoad,Form_UnLoad)
+Gui.Form..Sizeable(False)
+Gui.Form..MaxButton(True)
+Gui.Form..AlwaysOnTop(False)
+Gui.Form..FontName("Tahoma")
+Gui.Form..FontSize(8.25)
+Gui.Form..ControlBox(True)
+Gui.Form..MinButton(True)
+Gui.Form..Moveable(True)
+Gui.Form..ShowInTaskBar(True)
+Gui.Form..TitleBar(True)
+Gui.Form.SplitContainer1.Create(SplitContainer)
+Gui.Form.SplitContainer1.Enabled(True)
+Gui.Form.SplitContainer1.Visible(True)
+Gui.Form.SplitContainer1.Zorder(0)
+Gui.Form.SplitContainer1.Size(851,558)
+Gui.Form.SplitContainer1.Position(0,0)
+Gui.Form.SplitContainer1.Orientation(1)
+Gui.Form.SplitContainer1.SplitterPosition(100)
+Gui.Form.SplitContainer1.Collapsed(False)
+Gui.Form.SplitContainer1.Dock(5)
+Gui.Form.lblDate.Create(Label,"Start Date",True,44,12,0,341,3,True,0,"Tahoma",7.8,,0,0)
+Gui.Form.lblDate.BorderStyle(0)
+Gui.Form.lblDate.Parent("SplitContainer1",1)
+Gui.Form.lblBin.Create(Label,"Bin",True,14,12,0,229,48,True,0,"Tahoma",7.8,,0,0)
+Gui.Form.lblBin.BorderStyle(0)
+Gui.Form.lblBin.Parent("SplitContainer1",0)
+Gui.Form.lblCrewL.Create(Label,"Crew Leader",True,57,12,0,420,48,True,0,"Tahoma",7.8,,0,0)
+Gui.Form.lblCrewL.BorderStyle(0)
+Gui.Form.lblCrewL.Parent("SplitContainer1",0)
+Gui.Form.txtSupName.Create(TextBox,"",True,143,20,0,50,66,False,0,"Arial",7.8,-2147483643,1)
+Gui.Form.txtSupName.Parent("SplitContainer1",0)
+Gui.Form.txtSupName.Event(LostFocus,FillSupervisorID)
+Gui.Form.txtSupName.TabStop(True)
+Gui.Form.txtSupName.TabIndex(5)
+Gui.Form.cmdBinSearch.Create(Button)
+Gui.Form.cmdBinSearch.Size(24,21)
+Gui.Form.cmdBinSearch.Position(333,65)
+Gui.Form.cmdBinSearch.Parent("SplitContainer1",0)
+Gui.Form.cmdBinSearch.Caption("^")
+Gui.Form.cmdBinSearch.Enabled(False)
+Gui.Form.cmdBinSearch.Event(Click,BinLookup)
+Gui.Form.cmdBinSearch.TabStop(True)
+Gui.Form.cmdBinSearch.TabIndex(11)
+Gui.Form.cmdBinSearch.Visible(True)
+Gui.Form.cmdBinSearch.Zorder(0)
+Gui.Form.cmdBinSearch.FontName("Tahoma")
+Gui.Form.cmdBinSearch.FontSize(7.8)
+Gui.Form.txtLoc.Create(TextBox,"",True,30,20,0,302,66,False,0,"Arial",7.8,-2147483643,1)
+Gui.Form.txtLoc.Parent("SplitContainer1",0)
+Gui.Form.txtLoc.TabStop(True)
+Gui.Form.txtLoc.TabIndex(10)
+Gui.Form.cmdViewAllSched.Create(Button)
+Gui.Form.cmdViewAllSched.Enabled(True)
+Gui.Form.cmdViewAllSched.Visible(True)
+Gui.Form.cmdViewAllSched.Zorder(0)
+Gui.Form.cmdViewAllSched.Size(92,25)
+Gui.Form.cmdViewAllSched.Position(790,28)
+Gui.Form.cmdViewAllSched.Caption("View Schedule")
+Gui.Form.cmdViewAllSched.FontName("Tahoma")
+Gui.Form.cmdViewAllSched.FontSize(7.8)
+Gui.Form.cmdViewAllSched.Parent("SplitContainer1",0)
+Gui.Form.cmdViewAllSched.Event(Click,cmdViewAllSched_Click)
+Gui.Form.cboEmployeeID.Create(ComboBox)
+Gui.Form.cboEmployeeID.Size(61,18)
+Gui.Form.cboEmployeeID.Position(4,21)
+Gui.Form.cboEmployeeID.Sorted(True)
+Gui.Form.cboEmployeeID.TabStop(True)
+Gui.Form.cboEmployeeID.TabIndex(1)
+Gui.Form.cboEmployeeID.Event(LostFocus,FillEmployeeName)
+Gui.Form.cboEmployeeID.Parent("SplitContainer1",0)
+Gui.Form.cboEmployeeID.Enabled(True)
+Gui.Form.cboEmployeeID.Visible(True)
+Gui.Form.cboEmployeeID.Zorder(0)
+Gui.Form.cboEmployeeID.FontName("Tahoma")
+Gui.Form.cboEmployeeID.FontSize(7.8)
+Gui.Form.cmdSupSearch.Create(Button)
+Gui.Form.cmdSupSearch.Size(24,21)
+Gui.Form.cmdSupSearch.Position(195,65)
+Gui.Form.cmdSupSearch.Parent("SplitContainer1",0)
+Gui.Form.cmdSupSearch.Caption("^")
+Gui.Form.cmdSupSearch.Enabled(False)
+Gui.Form.cmdSupSearch.Event(Click,SupervisorLookup)
+Gui.Form.cmdSupSearch.TabStop(True)
+Gui.Form.cmdSupSearch.TabIndex(6)
+Gui.Form.cmdSupSearch.Visible(True)
+Gui.Form.cmdSupSearch.Zorder(0)
+Gui.Form.cmdSupSearch.FontName("Tahoma")
+Gui.Form.cmdSupSearch.FontSize(7.8)
+Gui.Form.txtBin.Create(TextBox,"",True,68,20,0,229,66,False,0,"Arial",7.8,-2147483643,1)
+Gui.Form.txtBin.Parent("SplitContainer1",0)
+Gui.Form.txtBin.TabStop(True)
+Gui.Form.txtBin.TabIndex(9)
+Gui.Form.lblEmployee.Create(Label,"Employee",True,55,16,0,4,3,True,0,"Tahoma",7.8,,0,0)
+Gui.Form.lblEmployee.BorderStyle(0)
+Gui.Form.lblEmployee.Parent("SplitContainer1",0)
+Gui.Form.cboCCC.Create(ComboBox)
+Gui.Form.cboCCC.Size(75,18)
+Gui.Form.cboCCC.Position(251,21)
+Gui.Form.cboCCC.Parent("SplitContainer1",0)
+Gui.Form.cboCCC.Enabled(False)
+Gui.Form.cboCCC.TabStop(True)
+Gui.Form.cboCCC.TabIndex(7)
+Gui.Form.cboCCC.Visible(True)
+Gui.Form.cboCCC.Zorder(0)
+Gui.Form.cboCCC.FontName("Tahoma")
+Gui.Form.cboCCC.FontSize(7.8)
+Gui.Form.lblSupervisor.Create(Label,"Supervisor",True,61,16,0,4,48,True,0,"Tahoma",7.8,,0,0)
+Gui.Form.lblSupervisor.BorderStyle(0)
+Gui.Form.lblSupervisor.Parent("SplitContainer1",0)
+Gui.Form.txtCrewL.Create(TextBox,"",True,148,20,0,419,64,False,0,"Arial",7.8,-2147483643,1)
+Gui.Form.txtCrewL.TabStop(True)
+Gui.Form.txtCrewL.TabIndex(10)
+Gui.Form.txtCrewL.Parent("SplitContainer1",0)
+Gui.Form.cmdDelEmp.Create(Button)
+Gui.Form.cmdDelEmp.Enabled(False)
+Gui.Form.cmdDelEmp.Size(58,25)
+Gui.Form.cmdDelEmp.Position(594,59)
+Gui.Form.cmdDelEmp.Parent("SplitContainer1",0)
+Gui.Form.cmdDelEmp.TabStop(True)
+Gui.Form.cmdDelEmp.TabIndex(14)
+Gui.Form.cmdDelEmp.Caption("Del Emp")
+Gui.Form.cmdDelEmp.Event(Click,cmdDelEmp_Click)
+Gui.Form.cmdDelEmp.Visible(True)
+Gui.Form.cmdDelEmp.Zorder(0)
+Gui.Form.cmdDelEmp.FontName("Tahoma")
+Gui.Form.cmdDelEmp.FontSize(7.8)
+Gui.Form.GsGridControlMain.Create(GsGridControl)
+Gui.Form.GsGridControlMain.Size(909,394)
+Gui.Form.GsGridControlMain.Position(0,52)
+Gui.Form.GsGridControlMain.Event(RowCellClick,GsGridControlMain_RowCellClick)
+Gui.Form.GsGridControlMain.Enabled(True)
+Gui.Form.GsGridControlMain.Visible(True)
+Gui.Form.GsGridControlMain.Zorder(0)
+Gui.Form.GsGridControlMain.Parent("SplitContainer1",1)
+Gui.Form.GsGridControlMain.Dock(2)
+Gui.Form.lblDate2.Create(Label,"End Date",True,41,12,0,453,3,True,0,"Tahoma",7.8,,0,0)
+Gui.Form.lblDate2.BorderStyle(0)
+Gui.Form.lblDate2.Parent("SplitContainer1",1)
+Gui.Form.dtpDate.Create(DatePicker)
+Gui.Form.dtpDate.Enabled(True)
+Gui.Form.dtpDate.Visible(True)
+Gui.Form.dtpDate.Zorder(0)
+Gui.Form.dtpDate.Size(100,22)
+Gui.Form.dtpDate.Position(340,23)
+Gui.Form.dtpDate.CheckBox(False)
+Gui.Form.dtpDate.FontName("Tahoma")
+Gui.Form.dtpDate.FontSize(7.8)
+Gui.Form.dtpDate.Parent("SplitContainer1",1)
+Gui.Form.dtpDate.Event(Change,dtpDate_Change)
+Gui.Form.lblJob.Create(Label,"Job",True,19,16,0,4,3,True,0,"Tahoma",7.8,,0,0)
+Gui.Form.lblJob.BorderStyle(0)
+Gui.Form.lblJob.Parent("SplitContainer1",1)
+Gui.Form.cboJob.Create(ComboBox)
+Gui.Form.cboJob.Size(73,18)
+Gui.Form.cboJob.Position(4,23)
+Gui.Form.cboJob.Sorted(True)
+Gui.Form.cboJob.TabStop(True)
+Gui.Form.cboJob.TabIndex(15)
+Gui.Form.cboJob.Event(LostFocus,AdjustSuffix)
+Gui.Form.cboJob.Enabled(False)
+Gui.Form.cboJob.Visible(True)
+Gui.Form.cboJob.Zorder(0)
+Gui.Form.cboJob.FontName("Tahoma")
+Gui.Form.cboJob.FontSize(7.8)
+Gui.Form.cboJob.Parent("SplitContainer1",1)
+Gui.Form.lblDesc.Create(Label,"Description",True,63,16,0,161,3,True,0,"Tahoma",7.8,,0,0)
+Gui.Form.lblDesc.BorderStyle(0)
+Gui.Form.lblDesc.Parent("SplitContainer1",1)
+Gui.Form.dtpEndDate.Create(DatePicker)
+Gui.Form.dtpEndDate.Enabled(True)
+Gui.Form.dtpEndDate.Visible(True)
+Gui.Form.dtpEndDate.Zorder(0)
+Gui.Form.dtpEndDate.Size(100,18)
+Gui.Form.dtpEndDate.Position(452,25)
+Gui.Form.dtpEndDate.CheckBox(False)
+Gui.Form.dtpEndDate.FontName("Tahoma")
+Gui.Form.dtpEndDate.FontSize(7.8)
+Gui.Form.dtpEndDate.Parent("SplitContainer1",1)
+Gui.Form.txtJobDesc.Create(TextBox,"",True,139,20,0,161,23,False,0,"Arial",7.8,-2147483643,1)
+Gui.Form.txtJobDesc.Locked(True)
+Gui.Form.txtJobDesc.TabStop(True)
+Gui.Form.txtJobDesc.TabIndex(17)
+Gui.Form.txtJobDesc.Parent("SplitContainer1",1)
+Gui.Form.cmdJobSearch.Create(Button)
+Gui.Form.cmdJobSearch.Size(27,25)
+Gui.Form.cmdJobSearch.Position(305,20)
+Gui.Form.cmdJobSearch.Caption("^")
+Gui.Form.cmdJobSearch.Event(Click,JobLookup)
+Gui.Form.cmdJobSearch.Enabled(False)
+Gui.Form.cmdJobSearch.TabStop(True)
+Gui.Form.cmdJobSearch.TabIndex(18)
+Gui.Form.cmdJobSearch.Visible(True)
+Gui.Form.cmdJobSearch.Zorder(0)
+Gui.Form.cmdJobSearch.FontName("Tahoma")
+Gui.Form.cmdJobSearch.FontSize(7.8)
+Gui.Form.cmdJobSearch.Parent("SplitContainer1",1)
+Gui.Form.cmdClear.Create(Button)
+Gui.Form.cmdClear.Size(55,25)
+Gui.Form.cmdClear.Position(620,20)
+Gui.Form.cmdClear.Caption("Clear")
+Gui.Form.cmdClear.TabStop(True)
+Gui.Form.cmdClear.TabIndex(20)
+Gui.Form.cmdClear.Enabled(False)
+Gui.Form.cmdClear.Event(Click,cmdClear_Click)
+Gui.Form.cmdClear.Visible(True)
+Gui.Form.cmdClear.Zorder(0)
+Gui.Form.cmdClear.FontName("Tahoma")
+Gui.Form.cmdClear.FontSize(7.8)
+Gui.Form.cmdClear.Parent("SplitContainer1",1)
+Gui.Form.cmdAdd.Create(Button)
+Gui.Form.cmdAdd.Size(54,25)
+Gui.Form.cmdAdd.Position(560,20)
+Gui.Form.cmdAdd.Caption("Add")
+Gui.Form.cmdAdd.Event(Click,Add)
+Gui.Form.cmdAdd.TabStop(True)
+Gui.Form.cmdAdd.TabIndex(19)
+Gui.Form.cmdAdd.Enabled(False)
+Gui.Form.cmdAdd.Visible(True)
+Gui.Form.cmdAdd.Zorder(0)
+Gui.Form.cmdAdd.FontName("Tahoma")
+Gui.Form.cmdAdd.FontSize(7.8)
+Gui.Form.cmdAdd.Parent("SplitContainer1",1)
+Gui.Form.cmdViewSchedPersonal.Create(Button)
+Gui.Form.cmdViewSchedPersonal.Enabled(True)
+Gui.Form.cmdViewSchedPersonal.Visible(False)
+Gui.Form.cmdViewSchedPersonal.Zorder(0)
+Gui.Form.cmdViewSchedPersonal.Size(94,25)
+Gui.Form.cmdViewSchedPersonal.Position(757,20)
+Gui.Form.cmdViewSchedPersonal.Caption("View Schedule")
+Gui.Form.cmdViewSchedPersonal.FontName("Tahoma")
+Gui.Form.cmdViewSchedPersonal.FontSize(7.8)
+Gui.Form.cmdViewSchedPersonal.Parent("SplitContainer1",1)
+Gui.Form.cmdViewSchedPersonal.Event(Click,cmdViewSchedPersonal_Click)
+Gui.Form.lblCCC.Create(Label,"Company Code",True,71,12,0,251,3,True,0,"Tahoma",7.8,,0,0)
+Gui.Form.lblCCC.BorderStyle(0)
+Gui.Form.lblCCC.Parent("SplitContainer1",0)
+Gui.Form.lblSuffix.Create(Label,"Suffix",True,33,16,0,82,3,True,0,"Tahoma",7.8,,0,0)
+Gui.Form.lblSuffix.BorderStyle(0)
+Gui.Form.lblSuffix.Parent("SplitContainer1",1)
+Gui.Form.cboSuffix.Create(ComboBox)
+Gui.Form.cboSuffix.Size(73,18)
+Gui.Form.cboSuffix.Position(82,23)
+Gui.Form.cboSuffix.Sorted(True)
+Gui.Form.cboSuffix.TabStop(True)
+Gui.Form.cboSuffix.TabIndex(16)
+Gui.Form.cboSuffix.Event(LostFocus,JobDescription)
+Gui.Form.cboSuffix.Enabled(False)
+Gui.Form.cboSuffix.Visible(True)
+Gui.Form.cboSuffix.Zorder(0)
+Gui.Form.cboSuffix.FontName("Tahoma")
+Gui.Form.cboSuffix.FontSize(7.8)
+Gui.Form.cboSuffix.Parent("SplitContainer1",1)
+Gui.Form.cmdCrewLSearch.Create(Button)
+Gui.Form.cmdCrewLSearch.Enabled(False)
+Gui.Form.cmdCrewLSearch.Visible(True)
+Gui.Form.cmdCrewLSearch.Zorder(0)
+Gui.Form.cmdCrewLSearch.Size(24,21)
+Gui.Form.cmdCrewLSearch.Position(543,44)
+Gui.Form.cmdCrewLSearch.TabStop(True)
+Gui.Form.cmdCrewLSearch.TabIndex(6)
+Gui.Form.cmdCrewLSearch.Caption("^")
+Gui.Form.cmdCrewLSearch.FontName("Tahoma")
+Gui.Form.cmdCrewLSearch.FontSize(7.8)
+Gui.Form.cmdCrewLSearch.Parent("SplitContainer1",0)
+Gui.Form.cmdCrewLSearch.Event(Click,cmdCrewLSearch_Click)
+Gui.Form.lblLoc.Create(Label,"Loc",True,16,12,0,305,48,True,0,"Tahoma",7.8,,0,0)
+Gui.Form.lblLoc.BorderStyle(0)
+Gui.Form.lblLoc.Parent("SplitContainer1",0)
+Gui.Form.txtSupID.Create(TextBox,"",True,44,20,0,4,66,False,0,"Arial",7.8,-2147483643,1)
+Gui.Form.txtSupID.Parent("SplitContainer1",0)
+Gui.Form.txtSupID.Event(LostFocus,FillSupervisorName)
+Gui.Form.txtSupID.TabStop(True)
+Gui.Form.txtSupID.TabIndex(4)
+Gui.Form.cboEmployeeName.Create(ComboBox)
+Gui.Form.cboEmployeeName.Size(142,18)
+Gui.Form.cboEmployeeName.Position(72,21)
+Gui.Form.cboEmployeeName.Sorted(True)
+Gui.Form.cboEmployeeName.TabStop(True)
+Gui.Form.cboEmployeeName.TabIndex(2)
+Gui.Form.cboEmployeeName.Event(LostFocus,FillEmployeeID)
+Gui.Form.cboEmployeeName.Parent("SplitContainer1",0)
+Gui.Form.cboEmployeeName.Enabled(True)
+Gui.Form.cboEmployeeName.Visible(True)
+Gui.Form.cboEmployeeName.Zorder(0)
+Gui.Form.cboEmployeeName.FontName("Tahoma")
+Gui.Form.cboEmployeeName.FontSize(7.8)
+Gui.Form.cmdEmpSearch.Create(Button)
+Gui.Form.cmdEmpSearch.Size(24,21)
+Gui.Form.cmdEmpSearch.Position(217,19)
+Gui.Form.cmdEmpSearch.Parent("SplitContainer1",0)
+Gui.Form.cmdEmpSearch.Caption("^")
+Gui.Form.cmdEmpSearch.Event(Click,EmployeeLookup)
+Gui.Form.cmdEmpSearch.TabStop(True)
+Gui.Form.cmdEmpSearch.TabIndex(3)
+Gui.Form.cmdEmpSearch.Enabled(True)
+Gui.Form.cmdEmpSearch.Visible(True)
+Gui.Form.cmdEmpSearch.Zorder(0)
+Gui.Form.cmdEmpSearch.FontName("Tahoma")
+Gui.Form.cmdEmpSearch.FontSize(7.8)
+Gui.Form.cmdNew.Create(Button)
+Gui.Form.cmdNew.Size(58,25)
+Gui.Form.cmdNew.Position(594,3)
+Gui.Form.cmdNew.Caption("New")
+Gui.Form.cmdNew.TabStop(True)
+Gui.Form.cmdNew.TabIndex(12)
+Gui.Form.cmdNew.Parent("SplitContainer1",0)
+Gui.Form.cmdNew.Enabled(False)
+Gui.Form.cmdNew.Event(Click,New)
+Gui.Form.cmdNew.Visible(True)
+Gui.Form.cmdNew.Zorder(0)
+Gui.Form.cmdNew.FontName("Tahoma")
+Gui.Form.cmdNew.FontSize(7.8)
+Gui.Form.cmdSave.Create(Button)
+Gui.Form.cmdSave.Size(57,25)
+Gui.Form.cmdSave.Position(595,31)
+Gui.Form.cmdSave.Caption("Save")
+Gui.Form.cmdSave.TabStop(True)
+Gui.Form.cmdSave.TabIndex(13)
+Gui.Form.cmdSave.Parent("SplitContainer1",0)
+Gui.Form.cmdSave.Event(Click,Save)
+Gui.Form.cmdSave.Enabled(False)
+Gui.Form.cmdSave.Visible(True)
+Gui.Form.cmdSave.Zorder(0)
+Gui.Form.cmdSave.FontName("Tahoma")
+Gui.Form.cmdSave.FontSize(7.8)
+Gui.Form.lblViewSchedBy.Create(Label,"View Schedule By:",True,84,12,0,681,6,True,0,"Tahoma",7.8,,0,0)
+Gui.Form.lblViewSchedBy.BorderStyle(0)
+Gui.Form.cboViewSchedBy.Create(ComboBox)
+Gui.Form.cboViewSchedBy.Enabled(True)
+Gui.Form.cboViewSchedBy.Visible(True)
+Gui.Form.cboViewSchedBy.Zorder(0)
+Gui.Form.cboViewSchedBy.Size(92,18)
+Gui.Form.cboViewSchedBy.Position(790,3)
+Gui.Form.cboViewSchedBy.FontName("Tahoma")
+Gui.Form.cboViewSchedBy.FontSize(7.8)
+Gui.Form.cboViewSchedBy.Event(Change,cboViewSchedBy_Change)
+Gui.Form.cboSupervisors.Create(ComboBox)
+Gui.Form.cboSupervisors.Enabled(True)
+Gui.Form.cboSupervisors.Visible(False)
+Gui.Form.cboSupervisors.Zorder(0)
+Gui.Form.cboSupervisors.Size(125,18)
+Gui.Form.cboSupervisors.Position(661,32)
+Gui.Form.cboSupervisors.FontName("Tahoma")
+Gui.Form.cboSupervisors.FontSize(7.8)
+Gui.Form.cboEmployees.Create(ComboBox)
+Gui.Form.cboEmployees.Enabled(True)
+Gui.Form.cboEmployees.Visible(False)
+Gui.Form.cboEmployees.Zorder(0)
+Gui.Form.cboEmployees.Size(125,18)
+Gui.Form.cboEmployees.Position(660,32)
+Gui.Form.cboEmployees.FontName("Tahoma")
+Gui.Form.cboEmployees.FontSize(7.8)
+Gui.Form.chkGroupByEmpl.Create(CheckBox)
+Gui.Form.chkGroupByEmpl.Enabled(True)
+Gui.Form.chkGroupByEmpl.Visible(False)
+Gui.Form.chkGroupByEmpl.Zorder(0)
+Gui.Form.chkGroupByEmpl.Size(139,20)
+Gui.Form.chkGroupByEmpl.Position(662,55)
+Gui.Form.chkGroupByEmpl.Caption("Group by Employee")
+Gui.Form.chkGroupByEmpl.FontName("Tahoma")
+Gui.Form.chkGroupByEmpl.FontSize(7.8)
+Gui.Form.chkRealTime.Create(CheckBox)
+Gui.Form.chkRealTime.Enabled(True)
+Gui.Form.chkRealTime.Visible(True)
+Gui.Form.chkRealTime.Zorder(0)
+Gui.Form.chkRealTime.Size(138,20)
+Gui.Form.chkRealTime.Position(388,7)
+Gui.Form.chkRealTime.Caption("Manual Stop\Start Time")
+Gui.Form.chkRealTime.FontName("Tahoma")
+Gui.Form.chkRealTime.FontSize(7.8)
+Gui.Form.chkRealTime.TabStop(True)
+Gui.Form.chkRealTime.TabIndex(8)
+Gui.Form.chkCrew.Create(CheckBox)
+Gui.Form.chkCrew.Enabled(True)
+Gui.Form.chkCrew.Visible(True)
+Gui.Form.chkCrew.Zorder(0)
+Gui.Form.chkCrew.Size(50,20)
+Gui.Form.chkCrew.Position(366,64)
+Gui.Form.chkCrew.Caption("Crew")
+Gui.Form.chkCrew.FontName("Tahoma")
+Gui.Form.chkCrew.FontSize(8.25)
+Gui.Form.chkCrew.Event(Click,chkCrew_Click)
+Gui.Form.cboEquipment.Create(ComboBox)
+Gui.Form.cboEquipment.Enabled(True)
+Gui.Form.cboEquipment.Visible(False)
+Gui.Form.cboEquipment.Zorder(0)
+Gui.Form.cboEquipment.Size(125,18)
+Gui.Form.cboEquipment.Position(661,33)
+Gui.Form.cboEquipment.FontName("Tahoma")
+Gui.Form.cboEquipment.FontSize(7.8)
+Gui.Form.txtCrewLID.Create(TextBox,"",True,52,20,0,489,44,False,0,"Tahoma",8.25,,1)
+Gui.Form.txtCrewLID.Event(LostFocus,txtCrewLID_LostFocus)
+Gui.frmScheduler..Create(BaseForm)
+Gui.frmScheduler..Caption("Calendar")
+Gui.frmScheduler..Size(1200,649)
+Gui.frmScheduler..MinX(0)
+Gui.frmScheduler..MinY(0)
+Gui.frmScheduler..Position(0,0)
+Gui.frmScheduler..AlwaysOnTop(False)
+Gui.frmScheduler..FontName("Tahoma")
+Gui.frmScheduler..FontSize(8.25)
+Gui.frmScheduler..ControlBox(True)
+Gui.frmScheduler..MaxButton(True)
+Gui.frmScheduler..MinButton(True)
+Gui.frmScheduler..MousePointer(0)
+Gui.frmScheduler..Moveable(True)
+Gui.frmScheduler..Sizeable(True)
+Gui.frmScheduler..ShowInTaskBar(True)
+Gui.frmScheduler..TitleBar(True)
+Gui.frmScheduler..Event(UnLoad,frmScheduler_UnLoad)
+Gui.frmScheduler.GsSched.Create(GsSchedulerControl)
+Gui.frmScheduler.GsSched.Enabled(True)
+Gui.frmScheduler.GsSched.Visible(True)
+Gui.frmScheduler.GsSched.Zorder(0)
+Gui.frmScheduler.GsSched.Size(1179,551)
+Gui.frmScheduler.GsSched.Position(10,10)
+Gui.FrmEquipment..Create(BaseForm)
+Gui.FrmEquipment..Caption("Expenses and Equipment")
+Gui.FrmEquipment..Size(692,572)
+Gui.FrmEquipment..MinX(0)
+Gui.FrmEquipment..MinY(0)
+Gui.FrmEquipment..Position(0,0)
+Gui.FrmEquipment..AlwaysOnTop(False)
+Gui.FrmEquipment..FontName("Tahoma")
+Gui.FrmEquipment..FontSize(8.25)
+Gui.FrmEquipment..ControlBox(True)
+Gui.FrmEquipment..MaxButton(True)
+Gui.FrmEquipment..MinButton(True)
+Gui.FrmEquipment..MousePointer(0)
+Gui.FrmEquipment..Moveable(True)
+Gui.FrmEquipment..Sizeable(True)
+Gui.FrmEquipment..ShowInTaskBar(True)
+Gui.FrmEquipment..TitleBar(True)
+Gui.FrmEquipment..Event(UnLoad,FrmEquipment_UnLoad)
+Gui.FrmEquipment.lblJob.Create(Label,"JOB",True,19,13,0,237,5,True,0,"Tahoma",8.25,,0,0)
+Gui.FrmEquipment.lblJob.BorderStyle(0)
+Gui.FrmEquipment.txtJob.Create(TextBox,"",True,55,20,0,235,22,True,0,"Tahoma",8.25,,1)
+Gui.FrmEquipment.txtJob.Locked(True)
+Gui.FrmEquipment.lblSuffix.Create(Label,"SFX",True,18,13,0,299,5,True,0,"Tahoma",8.25,,0,0)
+Gui.FrmEquipment.lblSuffix.BorderStyle(0)
+Gui.FrmEquipment.txtSuffix.Create(TextBox,"",True,33,20,0,295,22,True,0,"Tahoma",8.25,,1)
+Gui.FrmEquipment.txtSuffix.Locked(True)
+Gui.FrmEquipment.lblJDesc.Create(Label,"DESCRIPTION",True,68,13,0,335,5,True,0,"Tahoma",8.25,,0,0)
+Gui.FrmEquipment.lblJDesc.BorderStyle(0)
+Gui.FrmEquipment.txtJDesc.Create(TextBox,"",True,207,20,0,332,22,True,0,"Tahoma",8.25,,1)
+Gui.FrmEquipment.txtJDesc.Locked(True)
+Gui.FrmEquipment.lblDateS.Create(Label,"Start Date",True,50,13,0,546,5,True,0,"Tahoma",8.25,,0,0)
+Gui.FrmEquipment.lblDateS.BorderStyle(0)
+Gui.FrmEquipment.txtDateS.Create(TextBox,"",True,68,20,0,543,22,True,0,"Tahoma",8.25,,1)
+Gui.FrmEquipment.txtDateS.Locked(True)
+Gui.FrmEquipment.lblDateE.Create(Label,"End Date",True,44,13,0,618,5,True,0,"Tahoma",8.25,,0,0)
+Gui.FrmEquipment.lblDateE.BorderStyle(0)
+Gui.FrmEquipment.txtDateE.Create(TextBox,"",True,68,20,0,616,22,True,0,"Tahoma",8.25,,1)
+Gui.FrmEquipment.txtDateE.Locked(True)
+Gui.FrmEquipment.lblType.Create(Label,"Type",True,24,13,0,11,60,True,0,"Tahoma",8.25,,0,0)
+Gui.FrmEquipment.lblType.BorderStyle(0)
+Gui.FrmEquipment.txtType.Create(TextBox,"",True,76,20,0,9,80,True,0,"Tahoma",8.25,,1)
+Gui.FrmEquipment.txtType.Locked(True)
+Gui.FrmEquipment.lblExpDesc.Create(Label,"Description",True,53,13,0,97,60,True,0,"Tahoma",8.25,,0,0)
+Gui.FrmEquipment.lblExpDesc.BorderStyle(0)
+Gui.FrmEquipment.txtEqDesc.Create(TextBox,"",True,170,20,0,91,80,True,0,"Tahoma",8.25,,1)
+Gui.FrmEquipment.txtEqDesc.Locked(True)
+Gui.FrmEquipment.lblValue.Create(Label,"Value",True,26,13,0,272,60,True,0,"Tahoma",8.25,,0,0)
+Gui.FrmEquipment.lblValue.BorderStyle(0)
+Gui.FrmEquipment.txtValue.Create(TextBox,"",True,100,20,0,267,80,True,0,"Tahoma",8.25,,1)
+Gui.FrmEquipment.txtValue.Locked(True)
+Gui.FrmEquipment.cmdBrwEqEx.Create(Button)
+Gui.FrmEquipment.cmdBrwEqEx.Enabled(True)
+Gui.FrmEquipment.cmdBrwEqEx.Visible(True)
+Gui.FrmEquipment.cmdBrwEqEx.Zorder(0)
+Gui.FrmEquipment.cmdBrwEqEx.Size(25,21)
+Gui.FrmEquipment.cmdBrwEqEx.Position(367,79)
+Gui.FrmEquipment.cmdBrwEqEx.Caption("^")
+Gui.FrmEquipment.cmdBrwEqEx.FontName("Tahoma")
+Gui.FrmEquipment.cmdBrwEqEx.FontSize(8.25)
+Gui.FrmEquipment.cmdBrwEqEx.Event(Click,cmdBrwEqEx_Click)
+Gui.FrmEquipment.cmdSaveEq.Create(Button)
+Gui.FrmEquipment.cmdSaveEq.Enabled(True)
+Gui.FrmEquipment.cmdSaveEq.Visible(True)
+Gui.FrmEquipment.cmdSaveEq.Zorder(0)
+Gui.FrmEquipment.cmdSaveEq.Size(75,23)
+Gui.FrmEquipment.cmdSaveEq.Position(100,257)
+Gui.FrmEquipment.cmdSaveEq.Caption("Save")
+Gui.FrmEquipment.cmdSaveEq.FontName("Tahoma")
+Gui.FrmEquipment.cmdSaveEq.FontSize(8.25)
+Gui.FrmEquipment.cmdSaveEq.Event(Click,cmdSaveEq_Click)
+Gui.FrmEquipment.cmdDelEq.Create(Button)
+Gui.FrmEquipment.cmdDelEq.Enabled(True)
+Gui.FrmEquipment.cmdDelEq.Visible(True)
+Gui.FrmEquipment.cmdDelEq.Zorder(0)
+Gui.FrmEquipment.cmdDelEq.Size(75,23)
+Gui.FrmEquipment.cmdDelEq.Position(185,257)
+Gui.FrmEquipment.cmdDelEq.Caption("Delete")
+Gui.FrmEquipment.cmdDelEq.FontName("Tahoma")
+Gui.FrmEquipment.cmdDelEq.FontSize(8.25)
+Gui.FrmEquipment.cmdDelEq.Event(Click,cmdDelEq_Click)
+Gui.FrmEquipment.lblEmployee.Create(Label,"EMPLOYEE",True,51,13,0,11,3,True,0,"Tahoma",8.25,,0,0)
+Gui.FrmEquipment.lblEmployee.BorderStyle(0)
+Gui.FrmEquipment.txtEmpID.Create(TextBox,"",True,46,20,0,8,22,True,0,"Tahoma",8.25,,1)
+Gui.FrmEquipment.txtEmpID.Locked(True)
+Gui.FrmEquipment.txtEmpName.Create(TextBox,"",True,170,20,0,59,22,True,0,"Tahoma",8.25,,1)
+Gui.FrmEquipment.txtEmpName.Locked(True)
+Gui.FrmEquipment.txtQty.Create(TextBox,"",True,68,20,0,398,79,True,0,"Tahoma",8.25,,1)
+Gui.FrmEquipment.txtQty.NumericOnly(1)
+Gui.FrmEquipment.lblQty.Create(Label,"Qty",True,18,13,0,401,60,True,0,"Tahoma",8.25,,0,0)
+Gui.FrmEquipment.lblQty.BorderStyle(0)
+Gui.FrmEquipment.lblType2.Create(Label,"Notes",True,28,13,0,11,112,True,0,"Tahoma",8.25,,0,0)
+Gui.FrmEquipment.lblType2.BorderStyle(0)
+Gui.FrmEquipment.txtNotes.Create(TextboxM)
+Gui.FrmEquipment.txtNotes.Enabled(True)
+Gui.FrmEquipment.txtNotes.Visible(True)
+Gui.FrmEquipment.txtNotes.Zorder(0)
+Gui.FrmEquipment.txtNotes.Size(673,116)
+Gui.FrmEquipment.txtNotes.Position(11,133)
+Gui.FrmEquipment.txtNotes.FontName("Tahoma")
+Gui.FrmEquipment.txtNotes.FontSize(8.25)
+Gui.FrmEquipment.GsGridEq.Create(GsGridControl)
+Gui.FrmEquipment.GsGridEq.Enabled(True)
+Gui.FrmEquipment.GsGridEq.Visible(True)
+Gui.FrmEquipment.GsGridEq.Zorder(0)
+Gui.FrmEquipment.GsGridEq.Size(668,215)
+Gui.FrmEquipment.GsGridEq.Position(15,319)
+Gui.FrmEquipment.GsGridEq.Event(RowClick,GsGridEq_RowClick)
+Gui.FrmEquipment.cmdNewEq.Create(Button)
+Gui.FrmEquipment.cmdNewEq.Enabled(True)
+Gui.FrmEquipment.cmdNewEq.Visible(True)
+Gui.FrmEquipment.cmdNewEq.Zorder(0)
+Gui.FrmEquipment.cmdNewEq.Size(75,23)
+Gui.FrmEquipment.cmdNewEq.Position(13,257)
+Gui.FrmEquipment.cmdNewEq.Caption("New")
+Gui.FrmEquipment.cmdNewEq.FontName("Tahoma")
+Gui.FrmEquipment.cmdNewEq.FontSize(8.25)
+Gui.FrmEquipment.cmdNewEq.Event(Click,cmdNewEq_Click)
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+	V.Global.bBusy.Declare
+	V.Global.sLastJob.Declare
+	V.Global.sLastEmployeeID.Declare
+	V.Global.sLastEmployeeName.Declare
+	V.Global.iLicNum.Declare
+	V.Global.iUCount.Declare
+	V.Global.bChange.Declare
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+	Function.Intrinsic.UI.UsePixels ' Allows you to use Pixels instead of Twips throughout
+	'License file required in the Files Folder, "GAB5874LIC.txt"
+	F.ODBC.Connection!con.OpenCompanyConnection
+	
+	F.Intrinsic.Control.CallSub(CreateTables)
+	
+	F.Intrinsic.Control.CallSub(TableProcessing)
+	
+	F.Intrinsic.Control.CallSub(FillDropDowns)
+	
+	F.Intrinsic.Control.CallSub(LoadDTFieldService)
+	
+	F.Intrinsic.Control.CallSub(CheckLicUsers)
+
+	Gui.Form.dtpDate.Enabled(False)
+	Gui.Form.dtpEndDate.Enabled(False)
+	
+	Gui.Form..Show
+Program.Sub.Main.End
+Program.Sub.CreateTables.Start
+	V.Local.bTableExists.Declare
+	V.Local.bRet.Declare
+	
+	F.ODBC.Connection!con.TableExists("Gab_5874_FS_Info", V.Local.bTableExists)
+	F.Intrinsic.Control.If(V.Local.bTableExists, =, False)
+		F.ODBC.Connection!con.Execute("CREATE TABLE Gab_5874_FS_Info (EmployeeID CHAR(5), EmployeeName CHAR(30), CompanyCode CHAR(3), Bin CHAR(6), Loc CHAR(2), SupervisorID CHAR(5), SupervisorName CHAR(30), MANUAL BIT DEFAULT '0' NOT NULL, CREW BIT DEFAULT '0' NOT NULL,  CREWLEADID CHAR(5), CREWLEADNAME CHAR(30) );")
+	f.Intrinsic.Control.Else
+		F.ODBC.Connection!con.OpenLocalRecordsetRO("rstT","SELECT * FROM GAB_5874_FS_INFO")
+		F.ODBC.Con!rstT.FieldExists("MANUAL",V.Local.bRet)
+		F.ODBC.Con!rstT.Close
+		F.Intrinsic.Control.If(V.Local.bRet, =, False)
+			F.ODBC.Connection!con.Execute("ALTER TABLE GAB_5874_FS_INFO( ADD COLUMN MANUAL BIT DEFAULT '0' NOT NULL)")
+		F.Intrinsic.Control.EndIf
+		F.ODBC.Connection!con.OpenLocalRecordsetRO("rstT","SELECT * FROM GAB_5874_FS_INFO")
+		F.ODBC.Con!rstT.FieldExists("CREW",V.Local.bRet)
+		F.ODBC.Con!rstT.Close
+		F.Intrinsic.Control.If(V.Local.bRet, =, False)
+			F.ODBC.Connection!con.Execute("ALTER TABLE GAB_5874_FS_INFO( ADD COLUMN CREW BIT DEFAULT '0' NOT NULL)")
+		F.Intrinsic.Control.EndIf
+		F.ODBC.Connection!con.OpenLocalRecordsetRO("rstT","SELECT * FROM GAB_5874_FS_INFO")
+		F.ODBC.Con!rstT.FieldExists("CREWLEADID",V.Local.bRet)
+		F.ODBC.Con!rstT.Close
+		F.Intrinsic.Control.If(V.Local.bRet, =, False)
+			F.ODBC.Connection!con.Execute("ALTER TABLE GAB_5874_FS_INFO( ADD COLUMN CREWLEADID CHAR(5))")
+		F.Intrinsic.Control.EndIf
+		F.ODBC.Connection!con.OpenLocalRecordsetRO("rstT","SELECT * FROM GAB_5874_FS_INFO")
+		F.ODBC.Con!rstT.FieldExists("CREWLEADNAME",V.Local.bRet)
+		F.ODBC.Con!rstT.Close
+		F.Intrinsic.Control.If(V.Local.bRet, =, False)
+			F.ODBC.Connection!con.Execute("ALTER TABLE GAB_5874_FS_INFO( ADD COLUMN CREWLEADNAME CHAR(30))")
+		F.Intrinsic.Control.EndIf
+		
+	F.Intrinsic.Control.EndIf
+	
+	
+	F.ODBC.Connection!con.TableExists("Gab_5874_FS_Job", V.Local.bTableExists)
+	F.Intrinsic.Control.If(V.Local.bTableExists, =, False)
+		F.ODBC.Connection!con.Execute("CREATE TABLE Gab_5874_FS_Job ( EmployeeID Char(5), EmployeeName Char(30), Job Char(6), Suffix Char(3), Description Char(30), PriorityJS INTEGER, FS_Date Date, FS_End_Date DateTime )")
+		F.ODBC.Connection!con.Execute("CREATE INDEX Gab_5874_FS_Job00 IN DICTIONARY ON Gab_5874_FS_Job(Job,Suffix);")
+		F.ODBC.Connection!con.Execute("CREATE INDEX Gab_5874_FS_Job01 IN DICTIONARY ON Gab_5874_FS_Job(FS_Date);")
+	F.Intrinsic.Control.EndIf
+	
+	F.ODBC.Connection!con.TableExists("GAB_5874_FS_EE", V.Local.bTableExists)
+	F.Intrinsic.Control.If(V.Local.bTableExists, =, False)
+		F.ODBC.Connection!con.Execute("CREATE TABLE  GAB_5874_FS_EE  (ID IDENTITY DEFAULT '0' CONSTRAINT  UK_ID UNIQUE USING 0, EMPLOYEE CHAR(5), JOB CHAR(6), SUFFIX CHAR(3), DATE DATE, TYPE CHAR(1), DESCRIPTION CHAR(20), QTY NUMERIC(12,4), VALUE NUMERIC(12,4), NOTES LONGVARCHAR, CREATEON DATETIME, CREATEONEMPLOYEEID CHAR(5) )")
+	F.Intrinsic.Control.EndIf
+	
+	F.ODBC.Connection!con.TableExists("GAB_5874_FS_EETABLE", V.Local.bTableExists)
+	F.Intrinsic.Control.If(V.Local.bTableExists, =, False)
+		F.ODBC.Connection!con.Execute("CREATE TABLE  GAB_5874_FS_EETABLE  (ID  IDENTITY DEFAULT '0' CONSTRAINT  UK_ID  UNIQUE USING 0, TYPE  CHAR(1), DESCRIPTION  CHAR(20), VALUE  NUMERIC(12,4) )")
+	F.Intrinsic.Control.EndIf	
+	
+	
+Program.Sub.CreateTables.End
+
+Program.Sub.TableProcessing.Start
+	F.ODBC.Connection!con.Execute("Delete from CNF_LABOR_STAGING WHERE STATUS IN('Processed','Declined') AND CREATEDON <DATEADD(month,-3,CURDATE())")
+	
+	F.ODBC.Connection!con.Execute("Delete from CNF_MATERIAL_STAGING WHERE STATUS IN('Processed','Declined') AND CREATEDON <DATEADD(month,-3,CURDATE())")
+	
+Program.Sub.TableProcessing.End
+
+
+Program.Sub.FillDropDowns.Start
+	V.Local.sRet.Declare
+	V.Local.i.Declare
+	V.Local.bFound.Declare
+	V.Local.sJob.Declare
+	V.Local.sSuffix.Declare
+	V.Local.sBin.Declare
+	
+	'Employee
+	F.Data.Datatable.CreateFromSQL("dtEmployee","con","Select EmployeeID, Rtrim(EmployeeName) as Name from Gab_5874_FS_Info Order By EmployeeID;")
+	Gui.Form.cboEmployeeID.AddItems("Datatable","dtEmployee","Name","EmployeeID")
+	Gui.Form.cboEmployeeName.AddItems("Datatable","dtEmployee","EmployeeID","Name")
+	Gui.Form.cboEmployees.AddItems("Datatable","dtEmployee","EmployeeID","Name")
+	F.Data.Datatable.Close("dtEmployee")
+	
+	'Supervisors
+	F.Data.Datatable.CreateFromSQL("dtSupervisor","con","Select Distinct SupervisorID, Rtrim(SupervisorName) as Supervisor from Gab_5874_FS_Info Order By Supervisor;")
+	Gui.Form.cboEmployeeID.AddItems("Datatable","dtSupervisor","Supervisor","SupervisorID")
+	Gui.Form.cboSupervisors.AddItems("Datatable","dtSupervisor","SupervisorID","Supervisor")
+	F.Data.Datatable.Close("dtSupervisor")
+	
+	'Equipment
+	F.Data.Datatable.CreateFromSQL("dtEquipment","con","Select Distinct Description as Equipment from GAB_5874_FS_EE Order by Description;")
+	Gui.Form.cboEquipment.AddItems("Datatable","dtEquipment","Equipment","Equipment")
+	F.Data.Datatable.Close("dtEquipment")	
+	
+	'View Sched By
+	Gui.Form.cboViewSchedBy.AddItem("All",0)
+	Gui.Form.cboViewSchedBy.AddItem("Employee",1)
+	Gui.Form.cboViewSchedBy.AddItem("Supervisor",2)
+	Gui.Form.cboViewSchedBy.AddItem("Equipment",3)
+	Gui.Form.cboViewSchedBy.Text("All")
+	
+	'Job
+	F.Data.Dictionary.CreateFromSQL("dicJobs","con","Select Distinct Job, Job from Job_Header where DATE_CLOSED='000000' Order By Job;")
+	Gui.Form.cboJob.AddItems(Dictionary,"dicJobs")
+	F.Data.Dictionary.Close("dicJobs")
+	
+	'Company Code
+	F.Global.General.GetCompanyCodes(V.Local.sRet)
+	F.Intrinsic.String.Split(V.Local.sRet, "*!*", V.Local.sRet)
+	F.Intrinsic.Control.For(V.Local.i, 0, V.Local.sRet.UBound)
+		Gui.Form.cboCCC.AddItem(V.Local.sRet(V.Local.i))
+	F.Intrinsic.Control.Next(V.Local.i)
+Program.Sub.FillDropDowns.End
+Program.Sub.LoadDTFieldService.Start
+F.Intrinsic.Control.SetErrorHandler("Sub_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+	V.Local.sPSQL.Declare
+	
+	F.Intrinsic.Control.If(V.DataTable.dtFieldService.Exists)
+		F.Data.DataTable.Close("dtFieldService")
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.String.Build("Select '+' AS JSUP,'-' AS JSDW,'Remove' AS REMOVE, 'Edit' As EDIT, 'Equipment' As EQUIPMENT, Job, Suffix, Description, FS_Date,FS_End_Date, EmployeeID, EmployeeName FROM Gab_5874_FS_Job WHERE EmployeeID = '{0}' ORDER BY FS_Date, PriorityJS;", V.Screen.Form!cboEmployeeID.Value, V.Local.sPSQL)
+'	F.Intrinsic.String.Build("Select '+' AS JSUP,'-' AS JSDW,'Remove' AS REMOVE, 'Edit' As EDIT, 'Equipment' As EQUIPMENT, Job, Suffix, Description, FS_Date,FS_End_Date, EmployeeID, EmployeeName FROM Gab_5874_FS_Job WHERE EmployeeID = '{0}' ORDER BY PriorityJS;", V.Screen.Form!cboEmployeeID.Value, V.Local.sPSQL)
+	F.Data.DataTable.CreateFromSQL("dtFieldService", "con", V.Local.sPSQL, True)
+	
+'	Gui.Form.cmdSave.Visible(False)
+	
+	F.Intrinsic.Control.CallSub(LoadGVFieldService)
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Sub_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: Project",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.Debug.SetLA(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+Program.Sub.LoadDTFieldService.End
+
+Program.Sub.LoadGVFieldService.Start
+F.Intrinsic.Control.SetErrorHandler("Sub_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+	V.Local.iCnt.Declare
+	
+	Gui.Form.GsGridControlMain.AddGridviewFromDatatable("gvFieldService", "dtFieldService")
+	Gui.Form.GsGridControlMain.SuspendLayout()
+	Gui.Form.GsGridControlMain.SetGridViewProperty("gvFieldService","OptionsViewShowGroupPanel",True)
+	Gui.Form.GsGridControlMain.SetGridViewProperty("gvFieldService","MultiSelect",True)
+	Gui.Form.GsGridControlMain.SetGridViewProperty("gvFieldService","AllowSort",True)
+	Gui.Form.GsGridControlMain.SetGridViewProperty("gvFieldService","AllowFilter",True)
+	Gui.Form.GsGridControlMain.SetGridViewProperty("gvFieldService","Editable",False)
+	Gui.Form.GsGridControlMain.SetGridViewProperty("gvFieldService","OptionsDetailShowDetailTabs",False)
+	Gui.Form.GsGridControlMain.SetGridViewProperty("gvFieldService","OptionsViewColumnAutoWidth",False)
+	Gui.Form.GsGridControlMain.SetGridviewProperty("gvFieldService", "Enableappearanceevenrow", True)
+	
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","JSUP","ShowCaption",False)
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","JSUP","CellHAlignment","Center")
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","JSUP","MinWidth","3")
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","JSUP","CellBackColor","LightGray")
+	
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","JSDW","ShowCaption",False)
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","JSDW","CellHAlignment","Center")
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","JSDW","MinWidth","3")
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","JSDW","CellBackColor","LightGray")
+	
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","REMOVE","ShowCaption",False)
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","REMOVE","CellHAlignment","Center")
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","REMOVE","MinWidth","10")
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","REMOVE","CellBackColor","LightGray")
+	
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","EDIT","ShowCaption",False)
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","EDIT","CellHAlignment","Center")
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","EDIT","MinWidth", "8")
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","EDIT","CellBackColor", "LightGray")
+	
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","EQUIPMENT","ShowCaption",False)
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","EQUIPMENT","CellHAlignment","Center")
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","EQUIPMENT","MinWidth", "8")
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","EQUIPMENT","CellBackColor", "LightGray")
+	
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","JSUP","Width", "35")
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","JSDW","Width", "35")
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","Job","MinWidth", "15")
+	
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","Suffix","MinWidth", "15")
+	
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","Description","MinWidth", "195")
+	
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","FS_Date","Caption", "Start Date")
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","FS_Date","AllowEdit", False)
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","FS_Date","CellHAlignment","Center")
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","FS_Date","MinWidth", "55")
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","FS_Date","DisplayCustomDatetime","d")
+	
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","FS_End_Date","Caption", "End Date")
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","FS_End_Date","AllowEdit", False)
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","FS_End_Date","CellHAlignment","Center")
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","FS_End_Date","MinWidth", "55")
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","FS_End_Date","DisplayCustomDatetime","d")
+	
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","EmployeeID","Visible",False)
+	
+	Gui.Form.GsGridControlMain.SetColumnProperty("gvFieldService","EmployeeName","Visible",False)
+	
+	Gui.Form.GsGridControlMain.ResumeLayout()
+	Gui.Form.GsGridControlMain.MainView("gvFieldService")
+	
+	F.Intrinsic.Control.If(V.Screen.Form!chkCrew.Value,=,1)
+		Gui.Form.GsGridControlMain.Enabled(False)
+		Gui.Form.GsGridControlMain.Visible(False)
+		Gui.Form.lblJob.Visible(False)
+		Gui.Form.cboJob.Visible(False)
+		Gui.Form.lblSuffix.Visible(False)
+		Gui.Form.cboSuffix.Visible(False)
+		Gui.Form.lblDesc.Visible(False)
+		Gui.Form.txtJobDesc.Visible(False)
+		Gui.Form.cmdJobSearch.Visible(False)
+		Gui.Form.lblDate.Visible(False)
+		Gui.Form.lblDate2.Visible(False)
+		Gui.Form.dtpDate.Visible(False)
+		Gui.Form.dtpEndDate.Visible(False)
+		Gui.Form.cmdAdd.Visible(False)
+		Gui.Form.cmdClear.Visible(False)
+	F.Intrinsic.Control.Else
+		Gui.Form.GsGridControlMain.Enabled(True)
+		Gui.Form.GsGridControlMain.Visible(True)
+		Gui.Form.lblJob.Visible(True)
+		Gui.Form.cboJob.Visible(True)
+		Gui.Form.lblSuffix.Visible(True)
+		Gui.Form.cboSuffix.Visible(True)
+		Gui.Form.lblDesc.Visible(True)
+		Gui.Form.txtJobDesc.Visible(True)
+		Gui.Form.cmdJobSearch.Visible(True)
+		Gui.Form.lblDate.Visible(True)
+		Gui.Form.lblDate2.Visible(True)
+		Gui.Form.dtpDate.Visible(True)
+		Gui.Form.dtpEndDate.Visible(True)
+		Gui.Form.cmdAdd.Visible(True)
+		Gui.Form.cmdClear.Visible(True)
+	F.Intrinsic.Control.EndIf
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Sub_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: Project",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.Debug.SetLA(V.Local.sError)
+Function.Intrinsic.Control.EndIf	
+	
+
+Program.Sub.LoadGVFieldService.End
+
+Program.Sub.Add.Start
+	F.Intrinsic.Control.If(V.Global.bBusy, =, False)
+		V.Global.bBusy.Set(True)
+		
+		V.Local.sPSQL.Declare	
+		V.Local.sExpression.Declare
+		V.Local.sRet.Declare
+		V.Local.iRet.Declare
+		V.Local.iPriNext.Declare(Long,0)
+		V.Local.sDesc.Declare
+		V.Local.sDate.Declare
+		V.Local.sDate2.Declare
+	
+		F.Intrinsic.Control.If(V.Screen.Form!cboJob.Value, <>, "")
+		
+			F.Intrinsic.String.Build("Job = '{0}' and Suffix = '{1}'", V.Screen.Form!cboJob.Value, V.Screen.Form!cboSuffix.Value, V.Local.sExpression)
+			F.Data.Datatable.Select("dtFieldService", V.Local.sExpression, V.Local.sRet)
+			
+			F.Intrinsic.Control.If(V.Local.sRet, =, "***NORETURN***")
+				F.Intrinsic.String.Build("SELECT TOP 1 PriorityJS FROM GAB_5874_FS_JOB WHERE EmployeeId ='{0}' ORDER BY PriorityJS DESC",V.Screen.Form!cboEmployeeID.Value,V.Local.sPSQL)
+				F.ODBC.Connection!con.ExecuteAndReturn(V.Local.sPSQL,V.Local.iPriNext)
+				F.Intrinsic.Math.Add(V.Local.iPriNext,1,V.Local.iPriNext)
+				
+				V.Local.sDesc.Set(V.Screen.Form!txtJobDesc.Value.Trim)
+				V.Local.sDate.Set(V.Screen.Form!dtpDate.Value)
+				F.Intrinsic.Date.DateAdd(H,1,V.Screen.Form!dtpEndDate.Value,V.Local.sDate2)
+				
+				
+				F.Intrinsic.String.Build("INSERT INTO Gab_5874_FS_Job (EmployeeID, EmployeeName, Job, Suffix, Description, PriorityJS, FS_Date, FS_END_DATE) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}','{5}','{6}','{7} 01:00:00.000')", V.Screen.Form!cboEmployeeID.Value, V.Screen.Form!cboEmployeeName.Value, V.Screen.Form!cboJob.Value, V.Screen.Form!cboSuffix.Value, V.Local.sDesc.PSQLFriendly,V.Local.iPriNext,V.Local.sDate.PervasiveDate,V.Local.sDate2.PervasiveDate, V.Local.sPSQL)
+				F.ODBC.Connection!con.Execute(V.Local.sPSQL)
+			
+				V.Global.bBusy.Set(False)
+				F.Intrinsic.Control.CallSub(cmdClear_Click)
+				V.Global.bBusy.Set(True)
+		
+				F.Intrinsic.Control.CallSub(LoadDTFieldService)
+				
+			F.Intrinsic.Control.Else
+				'F.Intrinsic.UI.Msgbox("Duplicate Entry")
+				F.Intrinsic.UI.Msgbox("Do you want to continue with updating?","Update Job",4,V.Local.iRet)
+				F.Intrinsic.Control.If(V.Local.iRet,=,6)
+					V.Local.sDesc.Set(V.Screen.Form!txtJobDesc.Value.Trim)
+					V.Local.sDate.Set(V.Screen.Form!dtpDate.Value)
+					F.Intrinsic.Date.DateAdd(H,1,V.Screen.Form!dtpEndDate.Value,V.Local.sDate2)
+					F.Intrinsic.String.Build("UPDATE Gab_5874_FS_Job SET FS_Date = '{0}', FS_End_Date ='{1} 01:00:00.000' Where EmployeeID = {2} And Job = '{3}' And Suffix = '{4}';", V.Local.sDate.PervasiveDate,V.Local.sDate2.PervasiveDate, V.Screen.Form!cboEmployeeID.Value, V.Screen.Form!cboJob.Value, V.Screen.Form!cboSuffix.Value, V.Local.sPSQL)
+					F.ODBC.Connection!con.Execute(V.Local.sPSQL)
+				
+					V.Global.bBusy.Set(False)
+					F.Intrinsic.Control.CallSub(cmdClear_Click)
+					V.Global.bBusy.Set(True)
+					
+					F.Intrinsic.Control.CallSub(LoadDTFieldService)
+				F.Intrinsic.Control.EndIf
+			
+			F.Intrinsic.Control.EndIf
+		F.Intrinsic.Control.Else
+			F.Intrinsic.UI.Msgbox("Missing Job or Suffix")
+			
+		F.Intrinsic.Control.EndIf
+		
+		V.Global.bBusy.Set(False)
+	F.Intrinsic.Control.EndIf
+Program.Sub.Add.End
+
+Program.Sub.cmdClear_Click.Start
+	Gui.Form.cboJob.Text("")
+	Gui.Form.cboSuffix.Text("")
+	Gui.Form.txtJobDesc.Text("")
+	Gui.Form.dtpDate.Value(V.Ambient.Date)
+	Gui.Form.dtpEndDate.Value(V.Ambient.Date)
+	Gui.Form.cmdAdd.Caption("Add")
+Program.Sub.cmdClear_Click.End
+
+Program.Sub.ClearTop.Start
+		Gui.Form.cboEmployeeID.Text("")
+		Gui.Form.cboEmployeeName.Text("")
+		Gui.Form.cboCCC.Text("")
+		Gui.Form.chkRealTime.Value(0)
+		Gui.Form.chkCrew.Value(0)
+		Gui.Form.txtBin.Text("")
+		Gui.Form.txtLoc.Text("")
+		Gui.Form.txtSupID.Text("")
+		Gui.Form.txtSupName.Text("")
+		Gui.Form.chkCrew.Value(0)
+		Gui.Form.txtCrewLID.Text("")
+		Gui.Form.txtCrewL.Text("")
+Program.Sub.ClearTop.End
+
+Program.Sub.FillEmployeeName.Start
+	F.Intrinsic.Control.If(V.Global.bBusy,=,False)
+		V.Global.bBusy.Set(True)
+
+		V.Local.sPSQL.Declare
+		V.Local.sRet.Declare
+		
+		F.Intrinsic.Control.If(V.Global.sLastEmployeeID, <>, V.Screen.Form!cboEmployeeID.Value)
+			V.Global.sLastEmployeeID.Set(V.Screen.Form!cboEmployeeID.Value)
+			
+			F.Intrinsic.Control.If(V.Screen.Form!cboEmployeeID.Value, <>, "")
+				F.Intrinsic.String.Build("Select Rtrim(Name) as Name from V_Employee_MSTR where Employee = '{0}'", V.Screen.Form!cboEmployeeID.Value, V.Local.sPSQL)
+				F.ODBC.Connection!con.OpenRecordSetRO("rstEmpName", V.Local.sPSQL)
+				F.ODBC.con!rstEmpName.Record2String(V.Local.sRet)
+				F.Intrinsic.Control.If(V.Local.sRet, <>, "***NORETURN***")
+					Gui.Form.cboEmployeeName.Text(V.Local.sRet)
+					V.Global.sLastEmployeeName.Set(V.Local.sRet)
+					F.Intrinsic.Control.CallSub(FillInfo)
+				F.Intrinsic.Control.Else
+					F.Intrinsic.UI.Msgbox("Invalid Employee ID")
+					Gui.Form.cboEmployeeName.Text("")
+					Gui.Form.cboEmployeeID.Text("")
+					F.Intrinsic.Control.CallSub(DisableAndClearFields)
+				F.Intrinsic.Control.EndIf
+				F.ODBC.con!rstEmpName.Close
+			F.Intrinsic.Control.Else	
+				F.Intrinsic.Control.CallSub(DisableAndClearFields)
+			F.Intrinsic.Control.EndIf
+			
+		F.Intrinsic.Control.EndIf
+
+		V.Global.bBusy.Set(False)
+	F.Intrinsic.Control.EndIf
+Program.Sub.FillEmployeeName.End
+
+Program.Sub.FillEmployeeID.Start
+	F.Intrinsic.Control.If(V.Global.bBusy,=,False)
+		V.Global.bBusy.Set(True)
+	
+		V.Local.sPSQL.Declare
+		V.Local.sRet.Declare
+		
+		F.Intrinsic.Control.If(V.Global.sLastEmployeeName, <>, V.Screen.Form!cboEmployeeName.Value)
+			V.Global.sLastEmployeeName.Set(V.Screen.Form!cboEmployeeName.Value)
+			
+			F.Intrinsic.Control.If(V.Screen.Form!cboEmployeeName.Value, <>, "")
+				F.Intrinsic.String.Build("Select Employee from V_Employee_MSTR where Name = '{0}'", V.Screen.Form!cboEmployeeName.Value, V.Local.sPSQL)
+				F.ODBC.Connection!con.OpenRecordSetRO("rstID", V.Local.sPSQL)
+				F.ODBC.con!rstID.Record2String(V.Local.sRet)
+				F.Intrinsic.Control.If(V.Local.sRet, <>, "***NORETURN***")
+					Gui.Form.cboEmployeeID.Text(V.Local.sRet)
+					V.Global.sLastEmployeeID.Set(V.Local.sRet)
+					F.Intrinsic.Control.CallSub(FillInfo)
+				F.Intrinsic.Control.Else
+					F.Intrinsic.UI.Msgbox("Invalid Employee Name")
+					Gui.Form.cboEmployeeID.Text("")
+					Gui.Form.cboEmployeeName.Text("")
+					F.Intrinsic.Control.CallSub(DisableAndClearFields)
+				F.Intrinsic.Control.EndIf
+				F.ODBC.con!rstID.Close
+			F.Intrinsic.Control.Else
+				F.Intrinsic.Control.CallSub(DisableAndClearFields)
+			F.Intrinsic.Control.EndIf
+			
+		F.Intrinsic.Control.EndIf
+
+		V.Global.bBusy.Set(False)
+	F.Intrinsic.Control.EndIf
+Program.Sub.FillEmployeeID.End
+Program.Sub.FillInfo.Start
+	V.Local.sPSQL.Declare
+	V.Local.sRet.Declare
+	
+	F.Intrinsic.String.Build("Select CompanyCode, Bin, Loc, SupervisorID, Rtrim(SupervisorName) as SupervisorName, MANUAL, CREW, CREWLEADID, CREWLEADNAME  from Gab_5874_FS_Info where EmployeeID = '{0}'", V.Screen.Form!cboEmployeeID.Value, V.Local.sPSQL)
+	F.ODBC.Connection!con.OpenRecordsetRO("rstInfo", V.Local.sPSQL)
+	F.ODBC.con!rstInfo.Record2String(V.Local.sRet)
+	F.ODBC.con!rstInfo.Close
+	
+	F.Intrinsic.Control.If(V.Local.sRet, <>, "***NORETURN***")
+		F.Intrinsic.String.Split(V.Local.sRet, "*!*", V.Local.sRet)
+		
+		Gui.Form.cboCCC.Text(V.Local.sRet(0))
+		Gui.Form.txtBin.Text(V.Local.sRet(1))
+		Gui.Form.txtLoc.Text(V.Local.sRet(2))
+		Gui.Form.txtSupID.Text(V.Local.sRet(3))
+		Gui.Form.txtSupName.Text(V.Local.sRet(4))
+		Gui.Form.chkRealTime.Value(V.Local.sRet(5))
+		V.Global.bChange.Set("True")
+		Gui.Form.chkCrew.Value(V.Local.sRet(6))
+		Gui.Form.txtCrewLID.Text(V.Local.sRet(7))
+		Gui.Form.txtCrewL.Text(V.Local.sRet(8))
+		
+		F.Intrinsic.Control.If(V.Screen.Form!chkCrew.Value,=,1)
+			Gui.Form.cmdCrewLSearch.Enabled(True)
+			Gui.Form.txtCrewLID.Enabled(True)
+			Gui.Form.txtCrewL.Enabled(True)
+		F.Intrinsic.Control.Else
+			Gui.Form.cmdCrewLSearch.Enabled(False)
+			Gui.Form.txtCrewLID.Enabled(False)
+			Gui.Form.txtCrewL.Enabled(False)	
+		F.Intrinsic.Control.EndIf
+		Gui.Form.cmdSave.Enabled(True)
+		Gui.Form.cmdDelEmp.Enabled(True)
+		Gui.Form.cmdNew.Enabled(False)
+		Gui.Form.cboJob.Enabled(True)
+		Gui.Form.cboSuffix.Enabled(True)
+		Gui.Form.txtJobDesc.Enabled(True)
+		Gui.Form.dtpDate.Enabled(True)
+		Gui.Form.dtpEndDate.Enabled(True)
+		Gui.Form.cmdJobSearch.Enabled(True)
+		Gui.Form.cmdAdd.Enabled(True)
+		gui.Form.cmdClear.Enabled(True)
+		
+	F.Intrinsic.Control.Else
+	
+		Gui.Form.cboCCC.Text("")
+		Gui.Form.chkRealTime.Value(0)
+		V.Global.bChange.Set("True")
+		Gui.Form.chkCrew.Value(0)
+		Gui.Form.txtBin.Text("")
+		Gui.Form.txtLoc.Text("")
+		Gui.Form.txtSupID.Text("")
+		Gui.Form.txtSupName.Text("")
+		Gui.Form.txtCrewLID.Text("")
+		Gui.Form.txtCrewL.Text("")
+	
+		Gui.Form.cmdSave.Enabled(False)
+		Gui.Form.cmdDelEmp.Enabled(False)
+		F.Intrinsic.Control.If(V.Global.iUCount,<,V.Global.iLicNum)
+			Gui.Form.cmdNew.Enabled(True)
+		F.Intrinsic.Control.Else
+			Gui.Form.cmdNew.Enabled(False)
+			Gui.Form.cmdAdd.Enabled(False)
+			gui.Form.cmdClear.Enabled(False)
+		F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.Control.EndIf
+	V.Global.bChange.Set("False")
+	
+	F.Intrinsic.Control.CallSub(LoadDTFieldService)
+		
+	F.Intrinsic.Control.CallSub(EnableFields)
+Program.Sub.FillInfo.End
+
+Program.Sub.EnableFields.Start
+	Gui.Form.txtSupID.Enabled(True)
+	Gui.Form.txtSupName.Enabled(True)
+	Gui.Form.cboCCC.Enabled(True)
+	Gui.Form.chkRealTime.Enabled(True)
+	Gui.Form.chkCrew.Enabled(True)
+	Gui.Form.txtBin.Enabled(True)
+	Gui.Form.txtLoc.Enabled(True)
+	Gui.Form.cmdSupSearch.Enabled(True)
+	Gui.Form.cmdBinSearch.Enabled(True)
+	F.Intrinsic.Control.If(V.Screen.Form!chkCrew.Value,=,1)
+		Gui.Form.cmdCrewLSearch.Enabled(True)
+		Gui.Form.txtCrewLID.Enabled(True)
+		Gui.Form.txtCrewL.Enabled(True)
+	F.Intrinsic.Control.Else
+		Gui.Form.cmdCrewLSearch.Enabled(False)
+		Gui.Form.txtCrewLID.Enabled(False)
+		Gui.Form.txtCrewL.Enabled(False)	
+	F.Intrinsic.Control.EndIf
+
+Program.Sub.EnableFields.End
+
+Program.Sub.DisableAndClearFields.Start
+	Gui.Form.txtSupID.Enabled(False)
+	Gui.Form.txtSupName.Enabled(False)
+	Gui.Form.cboCCC.Enabled(False)
+	Gui.Form.chkRealTime.Enabled(False)
+	Gui.Form.chkCrew.Enabled(False)
+	Gui.Form.txtBin.Enabled(False)
+	Gui.Form.txtLoc.Enabled(False)
+	Gui.Form.cmdSupSearch.Enabled(False)
+	Gui.Form.cmdBinSearch.Enabled(False)
+	Gui.Form.cmdNew.Enabled(False)
+	Gui.Form.cmdSave.Enabled(False)
+	Gui.Form.cboJob.Enabled(False)
+	Gui.Form.cboSuffix.Enabled(False)
+	Gui.Form.cmdJobSearch.Enabled(False)
+	Gui.Form.txtJobDesc.Enabled(False)
+	Gui.Form.cmdAdd.Enabled(False)
+	Gui.Form.dtpDate.Enabled(False)
+	Gui.Form.dtpEndDate.Enabled(False)
+	Gui.Form.cmdCrewLSearch.Enabled(False)
+	Gui.Form.txtCrewLID.Enabled(False)
+	Gui.Form.txtCrewL.Enabled(False)	
+	F.Intrinsic.Control.CallSub(ClearTop)
+Program.Sub.DisableAndClearFields.End
+
+Program.Sub.FillSupervisorName.Start
+	F.Intrinsic.Control.If(V.Global.bBusy,=,False)
+		V.Global.bBusy.Set(True)
+	
+		V.Local.sPSQL.Declare
+		V.Local.sRet.Declare
+		
+		F.Intrinsic.Control.If(V.Screen.Form!txtSupID.Value, <>, "")
+			F.Intrinsic.String.Build("Select Rtrim(Name) as Name from V_Employee_MSTR where Employee = '{0}'", V.Screen.Form!txtSupID.Value, V.Local.sPSQL)
+			F.ODBC.Connection!con.OpenRecordSetRO("rstSupName", V.Local.sPSQL)
+			F.ODBC.con!rstSupName.Record2String(V.Local.sRet)
+			F.Intrinsic.Control.If(V.Local.sRet, <>, "***NORETURN***")	
+				Gui.Form.txtSupName.Text(V.Local.sRet)
+			F.Intrinsic.Control.Else
+				F.Intrinsic.UI.Msgbox("Invalid Supervisor ID")
+				Gui.Form.txtSupID.Text("")
+			F.Intrinsic.Control.EndIf
+			F.ODBC.con!rstSupName.Close
+		F.Intrinsic.Control.Else
+			Gui.Form.txtSupName.Text("")
+		F.Intrinsic.Control.EndIf
+
+		V.Global.bBusy.Set(False)
+	F.Intrinsic.Control.EndIf
+Program.Sub.FillSupervisorName.End
+
+Program.Sub.FillSupervisorID.Start
+	F.Intrinsic.Control.If(V.Global.bBusy,=,False)
+		V.Global.bBusy.Set(True)
+	
+		V.Local.sPSQL.Declare
+		V.Local.sRet.Declare
+		
+		F.Intrinsic.Control.If(V.Screen.Form!txtSupName.Value, <>, "")
+			F.Intrinsic.String.Build("Select Employee from V_Employee_MSTR where Name = '{0}'", V.Screen.Form!txtSupName.Value, V.Local.sPSQL)
+			F.ODBC.Connection!con.OpenRecordSetRO("rstID", V.Local.sPSQL)
+			F.ODBC.con!rstID.Record2String(V.Local.sRet)
+			F.Intrinsic.Control.If(V.Local.sRet, <>, "***NORETURN***")
+				Gui.Form.txtSupID.Text(V.Local.sRet)
+			F.Intrinsic.Control.Else
+				F.Intrinsic.UI.Msgbox("Invalid Supervisor Name")
+				Gui.Form.txtSupName.Text("")
+			F.Intrinsic.Control.EndIf
+			F.ODBC.con!rstID.Close
+		F.Intrinsic.Control.Else
+			Gui.Form.txtSupID.Text("")
+		F.Intrinsic.Control.EndIf
+		
+		V.Global.bBusy.Set(False)
+	F.Intrinsic.Control.EndIf
+Program.Sub.FillSupervisorID.End
+
+Program.Sub.AdjustSuffix.Start
+	F.Intrinsic.Control.If(V.Global.bBusy,=,False)
+		V.Global.bBusy.Set(True)
+	
+		V.Local.sPSQL.Declare
+		V.Local.sRet.Declare
+		
+		F.Intrinsic.Control.If(V.Screen.Form!cboJob.Value, <>, V.Global.sLastJob)
+			
+			V.Global.sLastJob.Set(V.Screen.Form!cboJob.Value)
+			
+			Gui.Form.cboSuffix.Text("")
+			Gui.Form.txtJobDesc.Text("")
+			Gui.Form.cboSuffix.ClearItems
+			
+			F.Intrinsic.String.Build("SELECT Suffix FROM V_Job_Header WHERE Job = '{0}'", V.Screen.Form!cboJob.Value, V.Local.sPSQL)
+			F.ODBC.Connection!con.OpenRecordSetRO("rstSuf", V.Local.sPSQL)
+			
+			F.Intrinsic.Control.DoUntil(V.ODBC.con!rstSuf.EOF)
+				F.ODBC.con!rstSuf.Record2String(V.Local.sRet)
+				Gui.Form.cboSuffix.AddItem(V.Local.sRet)
+				F.ODBC.con!rstSuf.MoveNext
+			F.Intrinsic.Control.Loop
+			
+			F.ODBC.con!rstSuf.Close
+			
+		F.Intrinsic.Control.EndIF
+		
+		V.Global.bBusy.Set(False)
+	F.Intrinsic.Control.EndIf
+Program.Sub.AdjustSuffix.End
+
+Program.Sub.JobDescription.Start
+	V.Local.sPSQL.Declare
+	V.Local.sRet.Declare
+		
+	F.Intrinsic.String.Build("SELECT Description FROM V_Job_Header WHERE Job = '{0}' and Suffix = '{1}'", V.Screen.Form!cboJob.Value, V.Screen.Form!cboSuffix.Value, V.Local.sPSQL)
+	F.ODBC.Connection!con.OpenRecordSetRO("rstDesc", V.Local.sPSQL)
+	F.ODBC.con!rstDesc.Record2String(V.Local.sRet)
+	
+	F.Intrinsic.Control.If(V.Local.sRet, <>, "***NORETURN***")
+		Gui.Form.txtJobDesc.Text(V.Local.sRet.Trim)
+	F.Intrinsic.Control.Else
+		Gui.Form.txtJobDesc.Text("")
+	F.Intrinsic.Control.EndIf
+	
+	Gui.Form.dtpDate.Enabled(True)
+	Gui.Form.dtpEndDate.Enabled(True)
+	
+	F.ODBC.con!rstDesc.Close
+
+Program.Sub.JobDescription.End
+
+Program.Sub.EmployeeLookup.Start
+	V.Local.sRet.Declare
+	V.Local.sWidths.Declare
+	V.Local.sTitles.Declare
+	V.Local.sWidths.Redim(0,1)
+	V.Local.sWidths(0).Set(15)
+	V.Local.sWidths(1).Set(30)
+	
+	v.Local.sTitles.Set("Employee*!*Name")
+	F.Intrinsic.String.Split(V.Local.sTitles, "*!*", V.Local.sTitles)
+	F.Intrinsic.UI.SetBRowserHotTypeAhead(True)
+	F.Intrinsic.UI.Browser("Employee Lookup", "con", "Select Rtrim(Employee), Name from V_Employee_MSTR", V.Local.sTitles, V.Local.sWidths, V.Local.sRet)
+	
+	F.Intrinsic.Control.If(V.Local.sRet, <>, "***CANCEL***")
+		F.Intrinsic.String.Split(V.Local.sRet, "*!*", V.Local.sRet)
+		Gui.Form.cboEmployeeID.Text(V.Local.sRet(0))
+		V.Global.sLastEmployeeID.Set(V.Local.sRet(0))
+		Gui.Form.cboEmployeeName.Text(V.Local.sRet(1))
+		V.Global.sLastEmployeeName.Set(V.Local.sRet(1))
+		F.Intrinsic.Control.CallSub(FillInfo)
+	F.Intrinsic.Control.EndIf
+Program.Sub.EmployeeLookup.End
+
+Program.Sub.SupervisorLookup.Start
+	V.Local.sRet.Declare
+	V.Local.sWidths.Declare
+	V.Local.sTitles.Declare
+	
+	V.Local.sWidths.Redim(0,1)
+	V.Local.sWidths(0).Set(15)
+	V.Local.sWidths(1).Set(30)
+	
+	v.Local.sTitles.Set("Employee*!*Name")
+	F.Intrinsic.String.Split(V.Local.sTitles, "*!*", V.Local.sTitles)
+	F.Intrinsic.UI.SetBRowserHotTypeAhead(True)
+	F.Intrinsic.UI.Browser("Supervisor Lookup", "con", "Select Rtrim(Employee), Name from V_Employee_MSTR", V.Local.sTitles, V.Local.sWidths, V.Local.sRet)
+	
+	F.Intrinsic.Control.If(V.Local.sRet, <>, "***CANCEL***")
+		F.Intrinsic.String.Split(V.Local.sRet, "*!*", V.Local.sRet)
+		Gui.Form.txtSupID.Text(V.Local.sRet(0))
+		Gui.Form.txtSupName.Text(V.Local.sRet(1))
+	F.Intrinsic.Control.EndIf
+
+Program.Sub.SupervisorLookup.End
+
+Program.Sub.BinLookup.Start
+	V.Local.sRet.Declare
+	V.Local.sWidths.Declare
+	V.Local.sTitles.Declare
+	
+	V.Local.sWidths.Redim(0,2)
+	V.Local.sWidths(0).Set(15)
+	V.Local.sWidths(1).Set(15)
+	V.Local.sWidths(2).Set(30)
+	
+	v.Local.sTitles.Set("Bin*!*Location*!*Description")
+	F.Intrinsic.String.Split(V.Local.sTitles, "*!*", V.Local.sTitles)
+	F.Intrinsic.UI.SetBRowserHotTypeAhead(True)
+	F.Intrinsic.UI.MiniBrowser("Bin Lookup", "con", "Select Bin, Location, Bin_Description from V_Bin_Master", V.Local.sTitles, V.Local.sWidths, V.Local.sRet)
+	
+	F.Intrinsic.Control.If(V.Local.sRet, <>, "***CANCEL***")
+		F.Intrinsic.String.Split(V.Local.sRet, "*!*", V.Local.sRet)
+		Gui.Form.txtBin.Text(V.Local.sRet(0))
+		Gui.Form.txtLoc.Text(V.Local.sRet(1).Trim)
+	F.Intrinsic.Control.EndIf
+
+Program.Sub.BinLookup.End
+
+Program.Sub.JobLookup.Start
+	V.Local.sRet.Declare
+	V.Local.sWidths.Declare
+	V.Local.sTitles.Declare
+	
+	V.Local.sWidths.Redim(0,4)
+	V.Local.sWidths(0).Set(15)
+	V.Local.sWidths(1).Set(15)
+	V.Local.sWidths(2).Set(30)
+	V.Local.sWidths(3).Set(15)
+	V.Local.sWidths(4).Set(30)
+	v.Local.sTitles.Set("Job*!*Suffix*!*Description*!*Project*!*Project Desc")
+	F.Intrinsic.String.Split(V.Local.sTitles, "*!*", V.Local.sTitles)
+	F.Intrinsic.UI.SetBRowserHotTypeAhead(True)
+	F.Intrinsic.UI.Browser("Job Lookup", "con", "Select JH.Job, JH.Suffix, JH.Description, JH.Project, PM.DESCR from Job_Header JH LEFT OUTER JOIN PROJECT_MASTER PM ON JH.PROJECT=PM.PROJECT WHERE JH.DATE_CLOSED='000000' order by JH.Job, JH.suffix", V.Local.sTitles, V.Local.sWidths, V.Local.sRet)
+	
+	F.Intrinsic.Control.If(V.Local.sRet, <>, "***CANCEL***")
+		F.Intrinsic.String.Split(V.Local.sRet, "*!*", V.Local.sRet)
+		Gui.Form.cboJob.Text(V.Local.sRet(0))
+		V.Global.sLastJob.Set(V.Local.sRet(0))
+		F.Intrinsic.Control.CallSub(AdjustSuffix)
+		Gui.Form.cboSuffix.Text(V.Local.sRet(1).Trim)
+		gui.Form.txtJobDesc.Text(V.Local.sRet(2).Trim)
+	F.Intrinsic.Control.EndIf
+
+Program.Sub.JobLookup.End
+Program.Sub.New.Start
+	V.Local.sPSQL.Declare
+	
+	F.Intrinsic.Control.If(V.Global.bBusy, =, False)
+	F.Intrinsic.Control.AndIf(V.Screen.Form!cboEmployeeID.Value, <>, "")
+	F.Intrinsic.Control.AndIf(V.Screen.Form!cboEmployeeName.Value, <>, "")
+	F.Intrinsic.Control.AndIf(V.Screen.Form!cboCCC.Value, <>, "")
+'	F.Intrinsic.Control.AndIf(V.Screen.Form!chkRealTime.Value, <>, 0)
+	F.Intrinsic.Control.AndIf(V.Screen.Form!txtBin.Value, <>, "")
+	F.Intrinsic.Control.AndIf(V.Screen.Form!txtSupID.Value, <>, "")
+	F.Intrinsic.Control.AndIf(V.Screen.Form!txtSupName.Value, <>, "")
+	
+		F.Intrinsic.Control.If(V.Screen.Form!chkCrew.Value,=,0)
+			
+			V.Global.bBusy.Set(True)
+			
+			F.Intrinsic.String.Build("INSERT INTO Gab_5874_FS_Info (EmployeeID, EmployeeName, CompanyCode, Bin, Loc, SupervisorID, SupervisorName, Manual, Crew) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}')", V.Screen.Form!cboEmployeeID.Value, V.Screen.Form!cboEmployeeName.Value, V.Screen.Form!cboCCC.Value, V.Screen.Form!txtBin.Value, V.Screen.Form!txtLoc.Value, V.Screen.Form!txtSupID.Value, V.Screen.Form!txtSupName.Value,V.Screen.Form!chkRealTime.Value,V.Screen.Form!chkCrew.Value, V.Local.sPSQL)
+			F.ODBC.Connection!con.Execute(V.Local.sPSQL)
+		
+			F.Intrinsic.Control.CallSub(RefillEmployeeDropDowns)
+			F.Intrinsic.Control.CallSub(LoadDTFieldService)
+			
+			Gui.Form.cmdSave.Enabled(True)
+			Gui.Form.cmdNew.Enabled(False)
+			Gui.Form.cmdDelEmp.Enabled(True)
+			Gui.Form.cboJob.Enabled(True)
+			Gui.Form.cboSuffix.Enabled(True)
+			Gui.Form.txtJobDesc.Enabled(True)
+			Gui.Form.cmdJobSearch.Enabled(True)
+			Gui.Form.cmdAdd.Enabled(True)
+			gui.Form.cmdClear.Enabled(True)
+			
+			V.Global.bBusy.Set(False)
+			
+		F.Intrinsic.Control.Else
+			
+			V.Global.bBusy.Set(True)
+	
+'			F.Intrinsic.Control.If(V.Screen.Form!txtCrewLID.Text,<>,"")
+'			F.Intrinsic.Control.AndIf(V.Screen.Form!txtCrewL.Text,<>,"")
+		
+	
+				F.Intrinsic.String.Build("INSERT INTO Gab_5874_FS_Info (EmployeeID, EmployeeName, CompanyCode, Bin, Loc, SupervisorID, SupervisorName, Manual, Crew, Crewleadid, Crewleadname) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}','{9}','{10}')", V.Screen.Form!cboEmployeeID.Value, V.Screen.Form!cboEmployeeName.Value, V.Screen.Form!cboCCC.Value, V.Screen.Form!txtBin.Value, V.Screen.Form!txtLoc.Value, V.Screen.Form!txtSupID.Value, V.Screen.Form!txtSupName.Value,V.Screen.Form!chkRealTime.Value,V.Screen.Form!chkCrew.Value,V.Screen.Form!txtCrewLID.Value,V.Screen.Form!txtCrewL.Value, V.Local.sPSQL)
+				F.ODBC.Connection!con.Execute(V.Local.sPSQL)
+			
+				F.Intrinsic.Control.CallSub(RefillEmployeeDropDowns)
+				F.Intrinsic.Control.CallSub(LoadDTFieldService)
+				
+				Gui.Form.cmdSave.Enabled(True)
+				Gui.Form.cmdNew.Enabled(False)
+				Gui.Form.cmdDelEmp.Enabled(True)
+				Gui.Form.cboJob.Enabled(False)
+				Gui.Form.cboSuffix.Enabled(False)
+				Gui.Form.txtJobDesc.Enabled(False)
+				Gui.Form.cmdJobSearch.Enabled(False)
+				Gui.Form.cmdAdd.Enabled(False)
+				gui.Form.cmdClear.Enabled(False)		
+			
+'			F.Intrinsic.Control.Else
+'				F.Intrinsic.UI.Msgbox("One or more crew fields blank","Fields Validation")
+'			F.Intrinsic.Control.EndIf
+
+			
+			V.Global.bBusy.Set(False)
+			
+		F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("One or more fields blank","Fields Validation")
+	F.Intrinsic.Control.EndIf
+Program.Sub.New.End
+
+Program.Sub.ReFillEmployeeDropdowns.Start
+	V.Local.sRet.Declare
+
+	Gui.Form.cboEmployeeID.ClearItems
+	Gui.Form.cboEmployeeName.ClearItems
+
+	F.Intrinsic.Control.CallSub(CheckLicUsers)
+
+F.ODBC.Connection!con.OpenRecordsetRO("rstEmployee", "Select EmployeeID, Rtrim(EmployeeName) as Name from Gab_5874_FS_Info")
+	F.Intrinsic.Control.DoUntil(V.ODBC.con!rstEmployee.EOF)
+		F.ODBC.con!rstEmployee.Record2String(V.Local.sRet)
+		F.Intrinsic.String.Split(V.Local.sRet, "*!*", V.Local.sRet)
+		Gui.Form.cboEmployeeID.AddItem(V.Local.sRet(0))
+		Gui.Form.cboEmployeeName.AddItem(V.Local.sRet(1))
+		F.ODBC.con!rstEmployee.MoveNext
+	F.Intrinsic.Control.Loop
+	F.ODBC.con!rstEmployee.Close
+
+Program.Sub.ReFillEmployeeDropdowns.End
+Program.Sub.Save.Start
+	V.Local.sPSQL.Declare
+	F.Intrinsic.Control.If(V.Global.bBusy, =, False)
+	F.Intrinsic.Control.AndIf(V.Screen.Form!cboEmployeeID.Value, <>, "")
+	F.Intrinsic.Control.AndIf(V.Screen.Form!cboEmployeeName.Value, <>, "")
+	F.Intrinsic.Control.AndIf(V.Screen.Form!cboCCC.Value, <>, "")
+	F.Intrinsic.Control.AndIf(V.Screen.Form!txtBin.Value, <>, "")
+	F.Intrinsic.Control.AndIf(V.Screen.Form!txtSupID.Value, <>, "")
+	F.Intrinsic.Control.AndIf(V.Screen.Form!txtSupName.Value, <>, "")
+		F.Intrinsic.Control.If(V.Screen.Form!chkCrew.Value,=,0)
+			V.Global.bBusy.Set(True)
+	
+			F.Intrinsic.String.Build("UPDATE Gab_5874_FS_Info SET CompanyCode = '{1}', Bin = '{2}', Loc = '{3}', SupervisorID = '{4}', SupervisorName = '{5}', MANUAL = '{6}', CREW = '{7}', CREWLEADID = '', CREWLEADNAME ='' WHERE EmployeeID = '{0}'", V.Screen.Form!cboEmployeeID.Value, V.Screen.Form!cboCCC.Value, V.Screen.Form!txtBin.Value, V.Screen.Form!txtLoc.Value, V.Screen.Form!txtSupID.Value, V.Screen.Form!txtSupName.Value,V.Screen.Form!chkRealTime.Value,V.Screen.Form!chkCrew.Value,V.Screen.Form!txtCrewLID.Value,V.Screen.Form!txtCrewL.Value, V.Local.sPSQL)
+			F.ODBC.Connection!con.Execute(V.Local.sPSQL)
+			
+			F.Intrinsic.Control.CallSub(LoadDTFieldService)
+			
+			Gui.Form.cmdNew.Enabled(False)
+			
+			V.Global.bBusy.Set(False)
+			
+		F.Intrinsic.Control.Else
+			V.Global.bBusy.Set(True)
+			
+'			F.Intrinsic.Control.If(V.Screen.Form!txtCrewLID.Text,<>,"")
+'			F.Intrinsic.Control.AndIf(V.Screen.Form!txtCrewL.Text,<>,"")
+			
+				F.Intrinsic.String.Build("UPDATE Gab_5874_FS_Info SET CompanyCode = '{1}', Bin = '{2}', Loc = '{3}', SupervisorID = '{4}', SupervisorName = '{5}', MANUAL = '{6}', CREW = '{7}', CREWLEADID = '{8}', CREWLEADNAME ='{9}' WHERE EmployeeID = '{0}'", V.Screen.Form!cboEmployeeID.Value, V.Screen.Form!cboCCC.Value, V.Screen.Form!txtBin.Value, V.Screen.Form!txtLoc.Value, V.Screen.Form!txtSupID.Value, V.Screen.Form!txtSupName.Value,V.Screen.Form!chkRealTime.Value,V.Screen.Form!chkCrew.Value,V.Screen.Form!txtCrewLID.Value,V.Screen.Form!txtCrewL.Value, V.Local.sPSQL)
+				F.ODBC.Connection!con.Execute(V.Local.sPSQL)
+			
+				F.Intrinsic.Control.CallSub(LoadDTFieldService)
+				
+				Gui.Form.cmdNew.Enabled(False)
+			
+				V.Global.bBusy.Set(False)
+				
+
+			
+'			F.Intrinsic.Control.Else
+	
+'				F.Intrinsic.UI.Msgbox("One or more crew fields blank,","Fields Validation")
+				
+'			F.Intrinsic.Control.EndIf
+
+			F.Intrinsic.Control.CallSub(CheckLicUsers)
+		
+		F.Intrinsic.Control.EndIf
+		
+		F.Intrinsic.UI.Msgbox("Employee Saved","Saving")
+		
+	F.Intrinsic.Control.Else
+	
+		F.Intrinsic.UI.Msgbox("One or more fields blank","Fields Validation")
+	
+	F.Intrinsic.Control.EndIf
+Program.Sub.Save.End
+
+Program.Sub.Form_UnLoad.Start
+F.ODBC.Connection!con.Close
+F.Intrinsic.Control.End
+Program.Sub.Form_UnLoad.End
+
+Program.Sub.GsGridControlMain_RowCellClick.Start
+	V.Local.sJob.Declare
+	V.Local.sSuffix.Declare
+	V.Local.sDesc.Declare
+	V.Local.dDate.Declare
+	V.Local.sDate.Declare
+	V.Local.dDate2.Declare
+	V.Local.sDate2.Declare
+	V.Local.iPrevRow.Declare
+	V.Local.iNextRow.Declare
+	V.Local.sPSQL.Declare
+	V.Local.dDatePrev.Declare
+	V.Local.dDateNext.Declare
+		
+	F.Intrinsic.Control.BlockEvents
+	
+	F.Intrinsic.Math.Add(V.Args.RowIndex,1,V.Local.iNextRow)
+	F.Intrinsic.Math.Sub(V.Args.RowIndex,1,V.Local.iPrevRow)
+	
+	Gui.Form.GsGridControlMain.GetCellValueByColumnName("gvFieldService","Job",V.Args.RowIndex,V.Local.sJob)
+	Gui.Form.GsGridControlMain.GetCellValueByColumnName("gvFieldService","Suffix",V.Args.RowIndex,V.Local.sSuffix)
+	Gui.Form.GsGridControlMain.GetCellValueByColumnName("gvFieldService","Description",V.Args.RowIndex,V.Local.sDesc)
+	Gui.Form.GsGridControlMain.GetCellValueByColumnName("gvFieldService","FS_Date",V.Args.RowIndex,V.Local.dDate)
+	Gui.Form.GsGridControlMain.GetCellValueByColumnName("gvFieldService","FS_End_Date",V.Args.RowIndex,V.Local.dDate2)
+	
+	F.Intrinsic.Control.SelectCase(V.Args.Column)
+		F.Intrinsic.Control.Case("JSUP")
+			F.Intrinsic.Control.If(V.Args.RowIndex,<>,0)
+				Gui.Form.GsGridControlMain.GetCellValueByColumnName("gvFieldService","FS_Date",V.Local.iPrevRow,V.Local.dDatePrev)
+				F.Intrinsic.Control.If(V.Local.dDate,=,V.Local.dDatePrev)
+					F.Data.DataTable.MoveRow("dtFieldService",V.Args.RowIndex,V.Local.iPrevRow)
+					F.Intrinsic.Control.CallSub(cmdSaveP_Click)
+					F.Intrinsic.Control.CallSub(LoadDTFieldService)
+				F.Intrinsic.Control.EndIf
+				
+			F.Intrinsic.Control.EndIf
+		
+		F.Intrinsic.Control.Case("JSDW")
+			F.Intrinsic.Control.If(V.Args.RowIndex,<>,V.DataTable.dtFieldService.RowCount--)
+				Gui.Form.GsGridControlMain.GetCellValueByColumnName("gvFieldService","FS_Date",V.Local.iNextRow,V.Local.dDateNext)
+				F.Intrinsic.Control.If(V.Local.dDate,=,V.Local.dDateNext)
+					F.Data.DataTable.MoveRow("dtFieldService",V.Args.RowIndex,V.Local.iNextRow)
+					F.Intrinsic.Control.CallSub(cmdSaveP_Click)
+					F.Intrinsic.Control.CallSub(LoadDTFieldService)
+				F.Intrinsic.Control.EndIf
+			F.Intrinsic.Control.EndIf
+			
+		F.Intrinsic.Control.Case("REMOVE")
+			F.Data.DataTable.DeleteRow("dtFieldService",V.Args.RowIndex)
+			F.Intrinsic.String.Build("DELETE FROM Gab_5874_FS_Job WHERE EmployeeID='{0}' AND Job='{1}' AND Suffix='{2}'",V.Screen.Form!cboEmployeeID.Value,V.Local.sJob,V.Local.sSuffix, V.Local.sPSQL)
+			F.ODBC.Connection!con.Execute(V.Local.sPSQL)
+			F.Intrinsic.String.Build("DELETE FROM GAB_5874_FS_EE WHERE Employee='{0}' AND Job='{1}' AND Suffix='{2}'",V.Screen.Form!cboEmployeeID.Value,V.Local.sJob,V.Local.sSuffix, V.Local.sPSQL)
+			F.ODBC.Connection!con.Execute(V.Local.sPSQL)
+			
+		F.Intrinsic.Control.Case("EDIT")
+			Gui.Form.cboJob.Text(V.Local.sJob)
+			Gui.Form.cboSuffix.Text(V.Local.sSuffix)
+			Gui.Form.txtJobDesc.Text(V.Local.sDesc)
+			Gui.Form.dtpDate.Value(V.Local.dDate)
+			Gui.Form.dtpEndDate.Value(V.Local.dDate2)
+			Gui.Form.cmdAdd.Caption("Update")
+			
+		F.Intrinsic.Control.Case("EQUIPMENT")
+			Gui.FrmEquipment.txtEmpID.Text(V.Screen.Form!cboEmployeeID.Text)
+			Gui.FrmEquipment.txtEmpName.Text(V.Screen.Form!cboEmployeeName.Text)
+			Gui.FrmEquipment.txtJob.Text(V.Local.sJob)
+			Gui.FrmEquipment.txtSuffix.Text(V.Local.sSuffix)
+			Gui.FrmEquipment.txtJDesc.Text(V.Local.sDesc)
+			F.Intrinsic.String.Format(V.Local.dDate,"m/d/yyyy",V.Local.sDate)
+			Gui.FrmEquipment.txtDateS.Text(V.Local.sDate)
+			F.Intrinsic.String.Format(V.Local.dDate2,"m/d/yyyy",V.Local.sDate2)
+			Gui.FrmEquipment.txtDateE.Text(V.Local.sDate2)
+'			F.Intrinsic.String.Build("Select * from GAB_5874_FS_EE WHERE Employee='{0}' AND Job='{1}' AND Suffix='{2}'",V.Screen.Form!cboEmployeeID.Value,V.Local.sJob,V.Local.sSuffix, V.Local.sPSQL)
+
+'			F.ODBC.Connection!con.OpenRecordsetRO("rstEqExpLoad",V.Local.sPSQL)
+'			F.Intrinsic.Control.If(V.ODBC.con!rstEqExpLoad.EOF,=,False)
+'				F.Intrinsic.Control.If(V.ODBC.con!rstEqExpLoad.FieldVal!TYPE,=,"E")
+'					Gui.FrmEquipment.txtType.Text("Expense")
+'				F.Intrinsic.Control.Else
+'					Gui.FrmEquipment.txtType.Text("Equipment")
+'				F.Intrinsic.Control.EndIf
+'				Gui.FrmEquipment.txtEqDesc.text(V.ODBC.con!rstEqExpLoad.FieldVal!DESCRIPTION)
+'				Gui.FrmEquipment.txtValue.Text(V.ODBC.con!rstEqExpLoad.FieldVal!VALUE)
+'				Gui.FrmEquipment.txtQty.Text(V.ODBC.con!rstEqExpLoad.FieldVal!QTY)
+'				Gui.FrmEquipment.txtNotes.Text(V.ODBC.con!rstEqExpLoad.FieldVal!NOTES)
+'			F.Intrinsic.Control.Else
+'				Gui.FrmEquipment.txtType.Text("")
+'				Gui.FrmEquipment.txtEqDesc.text("")
+'				Gui.FrmEquipment.txtValue.Text("")
+'				Gui.FrmEquipment.txtNotes.Text("")
+'				Gui.FrmEquipment.txtQty.Text("0")
+'			
+'			F.Intrinsic.Control.EndIf
+'			
+'			F.ODBC.con!rstEqExpLoad.Close
+
+			Gui.Form..Enabled(False)
+			F.Intrinsic.Control.CallSub(LoadEquipment)
+			Gui.FrmEquipment..Visible(True)
+	F.Intrinsic.Control.EndSelect
+	
+	F.Intrinsic.Control.UnBlockEvents
+Program.Sub.GsGridControlMain_RowCellClick.End
+
+Program.Sub.cmdSaveP_Click.Start
+	V.Local.iC.Declare
+	V.Local.iCPriority.Declare
+	V.Local.sPSQL.Declare
+	V.Local.dFS_Date.Declare
+	F.Intrinsic.Date.DateSerial(1900,01,01,V.Local.dFS_Date)
+	F.Intrinsic.Control.BlockEvents
+	F.Intrinsic.Control.For(V.Local.iC,0,V.DataTable.dtFieldService.RowCount--)
+		F.Intrinsic.Control.If(V.Local.dFS_Date,=,V.DataTable.dtFieldService(V.Local.iC).FS_Date!FieldVal)
+			F.Intrinsic.Math.Add(V.Local.iCPriority,1,V.Local.iCPriority)
+		F.Intrinsic.Control.Else
+			V.Local.iCPriority.Set(0)
+			V.Local.dFS_Date.Set(V.DataTable.dtFieldService(V.Local.iC).FS_Date!FieldVal)
+		F.Intrinsic.Control.EndIf
+		F.Intrinsic.String.Build("Update Gab_5874_FS_Job Set PriorityJS={0} Where EmployeeID='{1}' AND Job='{2}' AND Suffix='{3}'",V.Local.iCPriority,V.Screen.Form!cboEmployeeID.Value,V.DataTable.dtFieldService(V.Local.iC).Job!FieldVal,V.DataTable.dtFieldService(V.Local.iC).Suffix!FieldVal,V.Local.sPSQL)
+		F.ODBC.Connection!con.Execute(V.Local.sPSQL)
+	F.Intrinsic.Control.Next(V.Local.iC)
+'	Gui.Form.cmdSaveP.Visible(False)
+	F.Intrinsic.Control.UnBlockEvents
+Program.Sub.cmdSaveP_Click.End
+
+Program.Sub.cmdDelEmp_Click.Start
+V.Local.sSql.Declare
+F.Intrinsic.String.Build("Delete FROM Gab_5874_FS_Info Where EmployeeID='{0}';",V.Screen.Form!cboEmployeeID.Value,V.Local.sSql)
+F.ODBC.Connection!con.Execute(V.Local.sSql)
+F.Intrinsic.String.Build("Delete FROM Gab_5874_FS_Job Where EmployeeID='{0}';",V.Screen.Form!cboEmployeeID.Value,V.Local.sSql)
+F.ODBC.Connection!con.Execute(V.Local.sSql)
+F.Intrinsic.Control.CallSub(FillInfo)
+
+Gui.Form.cboEmployeeID.Text("")
+Gui.Form.cboEmployeeName.Text("")
+
+F.Intrinsic.Control.CallSub(ReFillEmployeeDropdowns)
+
+Program.Sub.cmdDelEmp_Click.End
+
+Program.Sub.CheckLicUsers.Start
+V.Local.sFileLic.Declare
+V.Local.sFileString.Declare
+V.Local.bExists.Declare
+V.Local.sTemp.Declare
+V.Local.sTemp2.Declare
+V.Local.bTemp.Declare
+V.Local.sRet.Declare
+
+F.Intrinsic.String.Build("{0}{1}",V.Caller.FilesDir,"\GAB5874LIC.txt",V.Local.sFileLic)
+F.Intrinsic.File.Exists(V.Local.sFileLic,V.Local.bExists)
+F.Intrinsic.Control.If(V.Local.bExists,=,"True")
+	F.Intrinsic.File.FileToString(V.Local.sFileLic,V.Local.sFileString)
+	Function.Global.General.ReadOptionCommon(3280,0,0,1,"",Variable.Local.sTemp)
+	F.Intrinsic.String.UCase(V.Local.sTemp,V.Local.sTemp)
+	F.Communication.Misc.DecodeToString(10,V.Local.sFileString,V.Local.sRet)
+	F.Intrinsic.String.IsInString(V.Local.sRet,V.Local.sTemp,False,V.Local.bTemp)
+	F.Intrinsic.Control.If(V.Local.bTemp,=,"True")
+		F.Intrinsic.String.Replace(V.Local.sRet,V.Local.sTemp,"",V.Local.sTemp2)
+		V.Global.iLicNum.Set(V.Local.sTemp2)
+	F.Intrinsic.Control.Else
+		V.Global.iLicNum.Set(1)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.Else
+	V.Global.iLicNum.Set(1)
+F.Intrinsic.Control.EndIf
+
+F.ODBC.Connection!con.ExecuteAndReturn("Select COUNT(EmployeeID) AS CountU from Gab_5874_FS_Info Where EMPLOYEEID<>SUPERVISORID and CREW <> 1;",V.Global.iUCount)
+F.Intrinsic.String.Build("Field Service.  {0} of {1}",V.Global.iUCount,V.Global.iLicNum,V.Local.sTemp)
+
+Gui.Form..Caption(V.Local.sTemp)
+Program.Sub.CheckLicUsers.End
+
+Program.Sub.cboViewSchedBy_Change.Start
+	F.Intrinsic.Control.SelectCase(V.Screen.Form!cboViewSchedBy.ItemData)
+		F.Intrinsic.Control.Case(0)
+			Gui.Form.cboEmployees.Visible(False)
+			Gui.Form.cboSupervisors.Visible(False)
+			Gui.Form.chkGroupByEmpl.Visible(False)
+			Gui.Form.cboEquipment.Visible(False)
+		F.Intrinsic.Control.Case(1)
+			Gui.Form.cboEmployees.Visible(True)
+			Gui.Form.cboSupervisors.Visible(False)
+			Gui.Form.chkGroupByEmpl.Visible(False)
+			Gui.Form.cboEquipment.Visible(False)
+		F.Intrinsic.Control.Case(2)
+			Gui.Form.cboEmployees.Visible(False)
+			Gui.Form.cboSupervisors.Visible(True)
+			Gui.Form.chkGroupByEmpl.Visible(True)
+			Gui.Form.cboEquipment.Visible(False)
+		F.Intrinsic.Control.Case(3)
+			Gui.Form.cboEquipment.Visible(True)
+			Gui.Form.cboEmployees.Visible(False)
+			Gui.Form.cboSupervisors.Visible(False)
+			Gui.Form.chkGroupByEmpl.Visible(False)
+	F.Intrinsic.Control.EndSelect
+Program.Sub.cboViewSchedBy_Change.End
+
+Program.Sub.cmdViewSchedPersonal_Click.Start
+	F.Intrinsic.Control.If(V.DataTable.dtFieldService.Exists,=,False)
+		F.Intrinsic.Control.ExitSub()
+	F.Intrinsic.Control.EndIf
+
+	F.Intrinsic.Control.If(V.DataTable.dtFSCalView.Exists)
+		F.Data.DataTable.Close("dtFSCalEmps")
+		F.Data.DataTable.Close("dtFSCalJobs")
+		F.Data.DataView.Close("dtFieldService","dvFieldServiceEmps")
+		F.Data.DataView.Close("dtFieldService","dvFieldServiceJobs")
+	F.Intrinsic.Control.EndIf
+	
+	F.Data.DataView.Create("dtFieldService","dvFieldServiceEmps")
+	F.Data.DataView.ToDataTableDistinct("dtFieldService","dvFieldServiceEmps","dtFSCalEmps","EmployeeID*!*EmployeeName",True)
+	
+	F.Data.DataView.Create("dtFieldService","dvFieldServiceJobs")
+	F.Data.DataView.ToDataTable("dtFieldService","dvFieldServiceJobs","dtFSCalJobs",True)
+	F.Data.DataTable.RemoveColumn("dtFSCalJobs","JSUP")
+	F.Data.DataTable.RemoveColumn("dtFSCalJobs","JSDW")
+	F.Data.DataTable.RemoveColumn("dtFSCalJobs","REMOVE")
+	F.Data.DataTable.RemoveColumn("dtFSCalJobs","EDIT")
+	F.Data.DataTable.RemoveColumn("dtFSCalJobs","EQUIPMENT")
+	
+	F.Data.DataTable.AddExpressionColumn("dtFSCalJobs","Subject",String,"[Job]+IIF([Suffix] = '','','-'+[Suffix])+' || '+[Description]")
+		
+	F.Data.DataTable.AddColumn("dtFSCalJobs","Status",Long,5)
+	F.Data.DataTable.AddColumn("dtFSCalJobs","Label",Long,5)
+	F.Data.DataTable.AddColumn("dtFSCalJobs","All Day",Boolean,True)
+	
+	Gui.frmScheduler.GsSched.SetProperties("ActiveViewtype",1)
+	'Gui.frmScheduler.GsSched.SetAppearanceProperties("ActiveViewtype",1)
+	'Gui.frmScheduler.GsSched.SetProperties("ActiveViewtype",2)
+	
+	Gui.frmScheduler.GsSched.AddResources("dtFSCalEmps","ID*!*EmployeeId@!@Caption*!*EmployeeName")
+	Gui.frmScheduler.GsSched.AddAppointments("dtFSCalJobs","Start*!*FS_Date@!@End*!*FS_End_Date@!@ResourceId*!*EmployeeId@!@Subject*!*Subject@!@Label*!*Label@!@Status*!*Status")
+	
+	Gui.frmScheduler..Show
+Program.Sub.cmdViewSchedPersonal_Click.End
+
+Program.Sub.cmdViewAllSched_Click.Start
+	V.Local.sSQL.Declare
+	
+	F.Intrinsic.Control.If(V.DataTable.dtFieldServiceAll.Exists)
+		F.Data.DataTable.Close("dtFieldServiceAll")
+		F.Data.DataTable.Close("dtFSCalEmpsAll")
+		F.Data.DataTable.Close("dtFSCalJobsAll")
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.Control.SelectCase(V.Screen.Form!cboViewSchedBy.ItemData)
+		F.Intrinsic.Control.Case(0)
+			V.Local.sSQL.Set("Select JB.Job, JB.Suffix, RTRIM(JB.Description) AS Description, JB.FS_Date,JB.FS_End_Date, JB.EmployeeID, RTrim(JB.EmployeeName) As EmployeeName,RTRIM(IF(FSEE.DESCRIPTION IS NULL, '',FSEE.DESCRIPTION)) AS EE_DESC From Gab_5874_FS_Job JB LEFT OUTER JOIN GAB_5874_FS_EE FSEE ON JB.EmployeeID=FSEE.EMPLOYEE AND JB.Job=FSEE.JOB AND JB.Suffix=FSEE.SUFFIX AND JB.FS_DATE=FSEE.DATE Order By JB.EmployeeID;")
+		F.Intrinsic.Control.Case(1)
+			F.Intrinsic.String.Build("Select JB.Job, JB.Suffix, RTRIM(JB.Description) AS Description, JB.FS_Date,JB.FS_End_Date, JB.EmployeeID, RTrim(JB.EmployeeName) As EmployeeName,RTRIM(IF(FSEE.DESCRIPTION IS NULL, '',FSEE.DESCRIPTION)) AS EE_DESC From Gab_5874_FS_Job JB LEFT OUTER JOIN GAB_5874_FS_EE FSEE ON JB.EmployeeID=FSEE.EMPLOYEE AND JB.Job=FSEE.JOB AND JB.Suffix=FSEE.SUFFIX AND JB.FS_DATE=FSEE.DATE Where JB.EmployeeName = '{0}' Order By JB.EmployeeID;",V.Screen.Form!cboEmployees.Value,V.Local.sSQL)
+		F.Intrinsic.Control.Case(2)
+			F.Intrinsic.String.Build("Select JB.Job, JB.Suffix, RTRIM(JB.Description) AS Description, JB.FS_Date,JB.FS_End_Date, JB.EmployeeID, RTrim(JB.EmployeeName) As EmployeeName,RTRIM(IF(FSEE.DESCRIPTION IS NULL, '',FSEE.DESCRIPTION)) AS EE_DESC From Gab_5874_FS_Job JB LEFT OUTER JOIN GAB_5874_FS_EE FSEE ON JB.EmployeeID=FSEE.EMPLOYEE AND JB.Job=FSEE.JOB AND JB.Suffix=FSEE.SUFFIX AND JB.FS_DATE=FSEE.DATE Where JB.EmployeeName In (Select EmployeeName From Gab_5874_FS_Info Where SupervisorName = '{0}') Order By JB.EmployeeID;",V.Screen.Form!cboSupervisors.Value,V.Local.sSQL)
+		F.Intrinsic.Control.Case(3)
+			F.Intrinsic.String.Build("Select JB.Job, JB.Suffix, RTRIM(JB.Description) AS Description, JB.FS_Date,JB.FS_End_Date, JB.EmployeeID, RTrim(JB.EmployeeName) As EmployeeName,RTRIM(IF(FSEE.DESCRIPTION IS NULL, '',FSEE.DESCRIPTION)) AS EE_DESC From Gab_5874_FS_Job JB LEFT OUTER JOIN GAB_5874_FS_EE FSEE ON JB.EmployeeID=FSEE.EMPLOYEE AND JB.Job=FSEE.JOB AND JB.Suffix=FSEE.SUFFIX AND JB.FS_DATE=FSEE.DATE Where FSEE.Description= '{0}' Order By JB.EmployeeID;",V.Screen.Form!cboEquipment.Value,V.Local.sSQL)
+	F.Intrinsic.Control.EndSelect
+	
+	F.Data.DataTable.CreateFromSQL("dtFieldServiceAll","con",V.Local.sSQL,True)
+	
+	F.Data.DataView.Create("dtFieldServiceAll","dvFieldServiceEmpsAll")
+	F.Data.DataView.ToDataTableDistinct("dtFieldServiceAll","dvFieldServiceEmpsAll","dtFSCalEmpsAll","EmployeeID*!*EmployeeName",True)
+	
+	F.Data.DataView.Create("dtFieldServiceAll","dvFieldServiceJobsAll")
+	F.Data.DataView.ToDataTable("dtFieldServiceAll","dvFieldServiceJobsAll","dtFSCalJobsAll",True)
+	
+	F.Intrinsic.Control.If(V.Screen.Form!cboViewSchedBy.ItemData,=,3)
+		F.Data.DataTable.AddExpressionColumn("dtFSCalJobsAll","Subject",String,"[EE_Desc]+' || '+[EmployeeName]+' || '+[Job]+IIF([Suffix] = '','','-'+[Suffix])+' || '+[Description]")
+	F.Intrinsic.Control.Else
+		F.Data.DataTable.AddExpressionColumn("dtFSCalJobsAll","Subject",String,"[EmployeeName]+' || '+[Job]+IIF([Suffix] = '','','-'+[Suffix])+' || '+[Description]+' || '+[EE_Desc]")
+	F.Intrinsic.Control.EndIf
+	
+	F.Data.DataTable.AddColumn("dtFSCalJobsAll","Status",Long,5)
+	F.Data.DataTable.AddColumn("dtFSCalJobsAll","Label",Long,5)
+	F.Data.DataTable.AddColumn("dtFSCalJobsAll","AllDay",Boolean,True)
+	
+	F.Intrinsic.Control.If(V.Screen.Form!chkGroupByEmpl.Value,=,1)
+		'Group By: None/Date/Resource
+		Gui.frmScheduler.GsSched.SetProperties("GroupType","Date")
+		'Gui.frmScheduler.GsSched.SetProperties("GroupType","Resource")
+	F.Intrinsic.Control.Else
+		Gui.frmScheduler.GsSched.SetProperties("GroupType","None")
+	F.Intrinsic.Control.EndIf
+	
+	'none,recurring,nonrecurring,all,custom
+	Gui.frmScheduler.GsSched.SetProperties("AllowAppointmentCreate","None")
+	Gui.frmScheduler.GsSched.SetProperties("AllowAppointmentEdit","None")
+	Gui.frmScheduler.GsSched.SetProperties("AllowAppointmentDelete","None")
+	Gui.frmScheduler.GsSched.SetProperties("AllowAppointmentCopy","None")
+
+	'View Values
+	'Day = 0
+	'Week = 1
+	'Month = 2
+	'WorkWeek = 3
+	'Timeline = 4
+	'Gantt = 5
+	'FullWeek = 6
+	'Agenda = 7
+	Gui.frmScheduler.GsSched.SetProperties("ActiveViewtype",1)
+	'Gui.frmScheduler.GsSched.SetProperties("ActiveViewtype",2)
+	
+	Gui.frmScheduler.GsSched.AddResources("dtFSCalEmpsAll","ID*!*EmployeeId@!@Caption*!*EmployeeName")
+	Gui.frmScheduler.GsSched.AddAppointments("dtFSCalJobsAll","Start*!*FS_Date@!@End*!*FS_End_Date@!@ResourceId*!*EmployeeId@!@Subject*!*Subject@!@Label*!*Label@!@Status*!*Status@!@AllDay*!*AllDay")
+	
+	Gui.frmScheduler..Show
+Program.Sub.cmdViewAllSched_Click.End
+
+Program.Sub.frmScheduler_UnLoad.Start
+	Gui.frmScheduler..Visible(False)
+Program.Sub.frmScheduler_UnLoad.End
+Program.Sub.dtpDate_Change.Start
+Gui.Form.dtpEndDate.Value(V.Screen.Form!dtpDate.Value)
+Program.Sub.dtpDate_Change.End
+Program.Sub.cmdBrwEqEx_Click.Start
+V.Local.sCol.Declare(String)
+V.Local.sWidth.Declare(String)
+V.Local.sret.Declare(String)
+V.Local.squery.Declare(String)
+
+Gui.FrmEquipment..Visible(False)
+
+F.Intrinsic.String.Split("Type*!*Description*!*Value","*!*",V.Local.sCol)
+F.Intrinsic.String.Split("800*!*2000*!*2800","*!*",V.Local.swidth)
+V.Local.squery.Set("select TYPE, DESCRIPTION, VALUE from GAB_5874_FS_EETABLE ORDER by TYPE, DESCRIPTION")
+F.intrinsic.UI.Browser("SELECT","con",V.Local.squery,V.Local.sCol,V.Local.sWidth,7000,5000,V.Local.sret)
+F.Intrinsic.Control.If(V.Local.sret,<>,"***CANCEL***")
+	F.Intrinsic.string.Split(V.Local.sret,"*!*",V.Local.sret)
+	F.Intrinsic.Control.If(V.local.sret(0).trim,=,"E")
+		Gui.FrmEquipment.txtType.Text("Expense")
+	F.Intrinsic.Control.Else
+		Gui.FrmEquipment.txtType.Text("Equipment")
+	F.Intrinsic.Control.EndIf
+	Gui.FrmEquipment.txtEqDesc.text(V.local.sret(1).trim)
+	Gui.FrmEquipment.txtValue.Text(V.local.sret(2).trim)
+F.Intrinsic.Control.EndIf
+Gui.FrmEquipment..Visible(True)
+
+Program.Sub.cmdBrwEqEx_Click.End
+Program.Sub.cmdSaveEq_Click.Start
+V.Local.sType.Declare
+V.Local.sSql.Declare
+V.Local.sText.Declare
+V.Local.sEmployee.Declare
+V.Local.dDateCounter.Declare
+V.Local.dDateS.Declare
+V.Local.dDateET.Declare
+V.Local.dDateTime.Declare
+
+F.Intrinsic.Date.CombineDateTime(V.Ambient.Date,V.Ambient.Time,V.Local.dDateTime)
+
+F.Intrinsic.Control.SelectCase(V.Screen.FrmEquipment!txtType.Text)
+F.Intrinsic.Control.Case("Expense")
+	V.Local.sType.Set("E")
+F.Intrinsic.Control.Case("Equipment")
+	V.Local.sType.Set("Q")
+F.Intrinsic.Control.EndSelect
+
+V.Local.dDateS.Set(V.Screen.FrmEquipment!txtDateS.Text)
+V.Local.dDateET.Set(V.Screen.FrmEquipment!txtDateE.Text)
+
+F.Intrinsic.String.Build("Select * FROM GAB_5874_FS_EE WHERE Description ='{0}' and DATE Between '{1}' and '{2}' AND (EMPLOYEE<>'{3}' AND JOB='{4}' AND SUFFIX='{5}') AND Type='{6}'",V.Screen.FrmEquipment!txtEqDesc.Text,V.Local.dDateS.PervasiveDate,V.Local.dDateET.PervasiveDate,V.Screen.FrmEquipment!txtEmpID.Text,V.Screen.FrmEquipment!txtJob.Text,V.Screen.FrmEquipment!txtSuffix.Text,V.Local.sType,V.Local.sSql)
+F.ODBC.Connection!con.OpenRecordsetRO("rstEqExpChk",V.Local.sSql)
+
+F.Intrinsic.Control.If(V.ODBC.con!rstEqExpChk.EOF,=,True)
+	F.Intrinsic.Date.DateAdd("d",1,V.Local.dDateET,V.Local.dDateET)
+	
+	V.Local.dDateCounter.Set(V.Local.dDateS)
+	F.Intrinsic.Control.DoUntil(V.Local.dDateCounter,=,V.Local.dDateET)
+		F.Intrinsic.String.Build("Select * FROM GAB_5874_FS_EE WHERE Employee='{0}' and Job='{1}' and Suffix='{2}' and Date='{3}' AND Type='{4}' AND Description ='{5}'",V.Screen.FrmEquipment!txtEmpID.Text,V.Screen.FrmEquipment!txtJob.Text,V.Screen.FrmEquipment!txtSuffix.Text,V.Local.dDateCounter.PervasiveDate,V.Local.sType,V.Screen.FrmEquipment!txtEqDesc.Text,V.Local.sSql)
+		F.ODBC.Connection!con.OpenRecordsetRW("rstEqExpSave",V.Local.sSql)
+		F.Intrinsic.Control.If(V.ODBC.con!rstEqExpSave.EOF,=,True)
+			F.ODBC.con!rstEqExpSave.AddNew
+			F.ODBC.con!rstEqExpSave.Set!EMPLOYEE(V.Screen.FrmEquipment!txtEmpID.Text)
+			F.ODBC.con!rstEqExpSave.Set!JOB(V.Screen.FrmEquipment!txtJob.Text)
+			F.ODBC.con!rstEqExpSave.Set!SUFFIX(V.Screen.FrmEquipment!txtSuffix.Text)
+			F.ODBC.con!rstEqExpSave.Set!DATE(V.Local.dDateCounter)
+			F.ODBC.con!rstEqExpSave.Set!TYPE(V.Local.sType)
+			F.ODBC.con!rstEqExpSave.Set!DESCRIPTION(V.Screen.FrmEquipment!txtEqDesc.Text)
+			
+		F.Intrinsic.Control.EndIf
+		F.ODBC.con!rstEqExpSave.Set!QTY(V.Screen.FrmEquipment!txtQty.Text)
+		F.ODBC.con!rstEqExpSave.Set!VALUE(V.Screen.FrmEquipment!txtValue.Text)
+		F.ODBC.con!rstEqExpSave.Set!NOTES(V.Screen.FrmEquipment!txtNotes.Text)
+		F.ODBC.con!rstEqExpSave.Set!CREATEON(V.Local.dDateTime)
+		F.Global.Security.GetEmpNoFromUser(V.Caller.User,V.Local.sEmployee)
+		F.Intrinsic.Control.If(V.Local.sEmployee,=,"***NORETURN***")
+			V.Local.sEmployee.Set("NOEMP")
+		F.Intrinsic.Control.EndIf
+		F.ODBC.con!rstEqExpSave.Set!CREATEONEMPLOYEEID(V.Local.sEmployee.Trim)
+		F.ODBC.con!rstEqExpSave.Update
+		F.ODBC.con!rstEqExpSave.Close
+		F.Intrinsic.Date.DateAdd("d",1,V.Local.dDateCounter,V.Local.dDateCounter)
+	F.Intrinsic.Control.Loop
+	F.Intrinsic.String.Build("{0} is saved",V.Screen.FrmEquipment!txtType.Text,V.Local.sText)
+	F.Intrinsic.UI.Msgbox(V.Local.sText,"Save Message")
+F.Intrinsic.Control.Else
+	F.Intrinsic.String.Build("This {0} is already in use in one of the dates selected, no records were saved",V.Screen.FrmEquipment!txtType.Text,V.Local.sText)
+	F.Intrinsic.UI.Msgbox(V.Local.sText,"Message")
+F.Intrinsic.Control.EndIf
+F.ODBC.con!rstEqExpChk.Close
+F.Intrinsic.Control.CallSub(LoadEquipment)
+
+Program.Sub.cmdSaveEq_Click.End
+Program.Sub.cmdDelEq_Click.Start
+V.Local.sSql.Declare
+V.Local.sText.Declare
+V.Local.sType.Declare
+
+F.Intrinsic.Control.SelectCase(V.Screen.FrmEquipment!txtType.Text)
+F.Intrinsic.Control.Case("Expense")
+	V.Local.sType.Set("E")
+F.Intrinsic.Control.Case("Equipment")
+	V.Local.sType.Set("Q")
+F.Intrinsic.Control.EndSelect
+
+F.Intrinsic.String.Build("Select * FROM GAB_5874_FS_EE WHERE Employee='{0}' and Job='{1}' and Suffix='{2}' AND Type='{3}' AND Description ='{4}'",V.Screen.FrmEquipment!txtEmpID.Text,V.Screen.FrmEquipment!txtJob.Text,V.Screen.FrmEquipment!txtSuffix.Text,V.Local.sType,V.Screen.FrmEquipment!txtEqDesc.Text,V.Local.sSql)
+F.ODBC.Connection!con.OpenRecordsetRW("rstEqExpDel",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.con!rstEqExpDel.EOF,=,True)
+	V.Local.sText.Set("Expense/Equipment not found")
+F.Intrinsic.Control.Else
+	F.Intrinsic.String.Build("Delete GAB_5874_FS_EE  Where Employee='{0}' and Job='{1}' and Suffix='{2}' AND Type='{3}' AND Description ='{4}'",V.Screen.FrmEquipment!txtEmpID.Text,V.Screen.FrmEquipment!txtJob.Text,V.Screen.FrmEquipment!txtSuffix.Text,V.Local.sType,V.Screen.FrmEquipment!txtEqDesc.Text,V.Local.sSql)
+	F.Intrinsic.String.Build("{0} is Deleted",V.Screen.FrmEquipment!txtType.Text,V.Local.sText)
+	F.ODBC.Connection!con.Execute(V.Local.sSql)	
+'	F.ODBC.con!rstEqExpDel.Delete
+'	F.ODBC.con!rstEqExpDel.Update
+F.Intrinsic.Control.EndIf
+F.ODBC.con!rstEqExpDel.Close
+
+F.Intrinsic.UI.Msgbox(V.Local.sText,"Delete Message")
+
+F.Intrinsic.Control.CallSub(LoadEquipment)
+'F.Intrinsic.Control.CallSub(FrmEquipment_Unload)
+
+Program.Sub.cmdDelEq_Click.End
+Program.Sub.FrmEquipment_UnLoad.Start
+Gui.FrmEquipment..Visible(False)
+Gui.Form..Enabled(True)
+Gui.Form..AlwaysOnTop(True)
+Program.Sub.FrmEquipment_UnLoad.End
+Program.Sub.cmdCrewLSearch_Click.Start
+	V.Local.sRet.Declare
+	V.Local.sWidths.Declare
+	V.Local.sTitles.Declare
+	
+	V.Local.sWidths.Redim(0,1)
+	V.Local.sWidths(0).Set(15)
+	V.Local.sWidths(1).Set(30)
+	
+	v.Local.sTitles.Set("Employee*!*Name")
+	F.Intrinsic.String.Split(V.Local.sTitles, "*!*", V.Local.sTitles)
+	F.Intrinsic.UI.SetBRowserHotTypeAhead(True)
+	F.Intrinsic.UI.Browser("Supervisor Lookup", "con", "Select Rtrim(Employee), Name from V_Employee_MSTR", V.Local.sTitles, V.Local.sWidths, V.Local.sRet)
+	
+	F.Intrinsic.Control.If(V.Local.sRet, <>, "***CANCEL***")
+		F.Intrinsic.String.Split(V.Local.sRet, "*!*", V.Local.sRet)
+		Gui.Form.txtCrewLID.Text(V.Local.sRet(0))
+		Gui.Form.txtCrewL.Text(V.Local.sRet(1))
+	F.Intrinsic.Control.EndIf
+	
+Program.Sub.cmdCrewLSearch_Click.End
+Program.Sub.chkCrew_Click.Start
+	V.Local.sSql.Declare
+	
+	F.Intrinsic.Control.If(V.Screen.Form!chkCrew.Value,=,1)
+		Gui.Form.cmdCrewLSearch.Enabled(True)
+		Gui.Form.txtCrewLID.Enabled(True)
+		Gui.Form.txtCrewL.Enabled(True)
+		Gui.Form.GsGridControlMain.Enabled(False)
+		Gui.Form.GsGridControlMain.Visible(False)
+		Gui.Form.lblJob.Visible(False)
+		Gui.Form.cboJob.Visible(False)
+		Gui.Form.lblSuffix.Visible(False)
+		Gui.Form.cboSuffix.Visible(False)
+		Gui.Form.lblDesc.Visible(False)
+		Gui.Form.txtJobDesc.Visible(False)
+		Gui.Form.cmdJobSearch.Visible(False)
+		Gui.Form.lblDate.Visible(False)
+		Gui.Form.lblDate2.Visible(False)
+		Gui.Form.dtpDate.Visible(False)
+		Gui.Form.dtpEndDate.Visible(False)
+		Gui.Form.cmdAdd.Visible(False)
+		Gui.Form.cmdClear.Visible(False)
+		
+		F.Intrinsic.Control.If(V.Screen.Form!cmdSave.Enabled,=,"False")
+			Gui.Form.cmdNew.Enabled(True)
+		F.Intrinsic.Control.Else
+			Gui.Form.cmdNew.Enabled(False)
+		F.Intrinsic.Control.EndIf
+			
+	F.Intrinsic.Control.Else
+		F.Intrinsic.Control.If(V.Screen.Form!txtSupID.Text,<>,"")
+		F.Intrinsic.Control.AndIf(V.Screen.Form!cmdSave.Enabled,=,"True")
+		F.Intrinsic.Control.AndIf(V.Global.iUCount,>=,V.Global.iLicNum)
+			F.Intrinsic.Control.If(V.Global.bChange,<>,"True")
+				F.Intrinsic.UI.Msgbox("No more fields users available. Can't remove from crew","License Validation")
+				Gui.Form.chkCrew.Value(1)
+			F.Intrinsic.Control.EndIf
+			
+		F.Intrinsic.Control.Else
+			Gui.Form.txtCrewLID.Text("")
+			Gui.Form.txtCrewL.Text("")
+			Gui.Form.cmdCrewLSearch.Enabled(False)
+			Gui.Form.txtCrewLID.Enabled(False)
+			Gui.Form.txtCrewL.Enabled(False)
+			Gui.Form.GsGridControlMain.Enabled(True)
+			Gui.Form.GsGridControlMain.Visible(True)
+			Gui.Form.lblJob.Visible(True)
+			Gui.Form.cboJob.Visible(True)
+			Gui.Form.lblSuffix.Visible(True)
+			Gui.Form.cboSuffix.Visible(True)
+			Gui.Form.lblDesc.Visible(True)
+			Gui.Form.txtJobDesc.Visible(True)
+			Gui.Form.cmdJobSearch.Visible(True)
+			Gui.Form.lblDate.Visible(True)
+			Gui.Form.lblDate2.Visible(True)
+			Gui.Form.dtpDate.Visible(True)
+			Gui.Form.dtpEndDate.Visible(True)
+			Gui.Form.cmdAdd.Visible(True)
+			Gui.Form.cmdClear.Visible(True)
+			
+			F.Intrinsic.Control.If(V.Global.iUCount,>=,V.Global.iLicNum)
+				Gui.Form.cmdNew.Enabled(False)
+			F.Intrinsic.Control.EndIf
+		
+		F.Intrinsic.Control.EndIf
+		
+	F.Intrinsic.Control.EndIf
+Program.Sub.chkCrew_Click.End
+Program.Sub.txtCrewLID_LostFocus.Start
+	F.Intrinsic.Control.If(V.Global.bBusy,=,False)
+		V.Global.bBusy.Set(True)
+	
+		V.Local.sPSQL.Declare
+		V.Local.sRet.Declare
+		
+		F.Intrinsic.Control.If(V.Screen.Form!txtSupID.Value, <>, "")
+			F.Intrinsic.String.Build("Select Rtrim(Name) as Name from V_Employee_MSTR where Employee = '{0}'", V.Screen.Form!txtCrewLID.Value, V.Local.sPSQL)
+			F.ODBC.Connection!con.OpenRecordSetRO("rstCrewL", V.Local.sPSQL)
+			F.ODBC.con!rstCrewL.Record2String(V.Local.sRet)
+			F.Intrinsic.Control.If(V.Local.sRet, <>, "***NORETURN***")	
+				Gui.Form.txtCrewL.Text(V.Local.sRet)
+			F.Intrinsic.Control.Else
+				F.Intrinsic.UI.Msgbox("Invalid Crew Leader ID")
+				Gui.Form.txtCrewL.Text("")
+			F.Intrinsic.Control.EndIf
+			F.ODBC.con!rstCrewL.Close
+		F.Intrinsic.Control.Else
+			Gui.Form.txtCrewL.Text("")
+		F.Intrinsic.Control.EndIf
+
+		V.Global.bBusy.Set(False)
+	F.Intrinsic.Control.EndIf
+
+Program.Sub.txtCrewLID_LostFocus.End
+Program.Sub.cmdNewEq_Click.Start
+F.Intrinsic.Control.CallSub(LoadEquipment)
+
+Program.Sub.cmdNewEq_Click.End
+
+Program.Sub.LoadDTEquipment.Start
+	V.Local.sSql.Declare
+	
+	F.Intrinsic.Control.If(V.DataTable.dtEquipment.Exists)
+		F.Data.DataTable.Close("dtEquipment")
+	F.Intrinsic.Control.EndIf
+		
+	F.Intrinsic.String.Build("select Distinct GEE.Employee as EmpID, VEM.NAME as Name, IF(type='E','Expense','Equipment') As Type, description as Description, qty as Qty, value as Value, notes as Notes from GAB_5874_FS_EE GEE LEFT OUTER JOIN V_EMPLOYEE_MSTR VEM ON VEM.EMPLOYEE=GEE.EMPLOYEE WHERE JOB = '{0}' AND SUFFIX = '{1}' AND GEE.EMPLOYEE = '{2}'",V.Screen.FrmEquipment!txtJob.Text, V.Screen.FrmEquipment!txtSuffix.Text,V.Screen.FrmEquipment!txtEmpID.Text,V.Local.sSql)
+	F.Data.Datatable.CreateFromSQL("dtEquipment","con",V.Local.sSql,True)
+	F.Intrinsic.Control.CallSub(LoadGVEquipment)
+Program.Sub.LoadDTEquipment.End
+
+Program.Sub.LoadGVEquipment.Start
+	V.Local.iCnt.Declare
+	
+	Gui.FrmEquipment.GsGridEq.AddGridviewFromDatatable("gvEquipment", "dtEquipment")
+	Gui.FrmEquipment.GsGridEq.SuspendLayout()
+	Gui.FrmEquipment.GsGridEq.SetGridViewProperty("gvEquipment","OptionsViewShowGroupPanel",True)
+	Gui.FrmEquipment.GsGridEq.SetGridViewProperty("gvEquipment","MultiSelect",True)
+	Gui.FrmEquipment.GsGridEq.SetGridViewProperty("gvEquipment","AllowSort",True)
+	Gui.FrmEquipment.GsGridEq.SetGridViewProperty("gvEquipment","AllowFilter",True)
+	Gui.FrmEquipment.GsGridEq.SetGridViewProperty("gvEquipment","Editable",False)
+	Gui.FrmEquipment.GsGridEq.SetGridViewProperty("gvEquipment","OptionsDetailShowDetailTabs",False)
+	Gui.FrmEquipment.GsGridEq.SetGridViewProperty("gvEquipment","OptionsViewColumnAutoWidth",False)
+	Gui.FrmEquipment.GsGridEq.SetGridviewProperty("gvEquipment","Enableappearanceevenrow",True)
+	
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","EmpID","Caption", "Emp Id")
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","EmpID","AllowEdit", False)
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","EmpID","HeaderHAlignment","Center")
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","EmpID","CellHAlignment","Center")
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","EmpID","MinWidth", "25")	
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","EmpID","Visible",False)
+	
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","Name","Caption", "Name")
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","Name","AllowEdit", False)
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","Name","HeaderHAlignment","Left")
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","Name","CellHAlignment","Left")
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","Name","MinWidth", "150")
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","Name","Visible",False)
+	
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","Type","Caption", "Type")
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","Type","AllowEdit", False)
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","Type","HeaderHAlignment","Center")
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","Type","CellHAlignment","Center")
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","Type","MinWidth", "50")	
+	
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","Description","Caption", "Description")
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","Description","AllowEdit", False)
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","Description","HeaderHAlignment","Left")
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","Description","CellHAlignment","Left")
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","Description","MinWidth", "175")	
+
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","Qty","Caption", "Qty")
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","Qty","AllowEdit", False)
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","Qty","HeaderHAlignment","Center")
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","Qty","CellHAlignment","Center")
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","Qty","MinWidth", "55")
+	
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","Value","Caption", "Value")
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","Value","AllowEdit", False)
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","Value","HeaderHAlignment","Center")
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","Value","CellHAlignment","Center")
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","Value","MinWidth", "55")	
+	
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","Notes","Caption", "Notes")
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","Notes","AllowEdit", False)
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","Notes","CellHAlignment","Left")
+	Gui.FrmEquipment.GsGridEq.SetColumnProperty("gvEquipment","Notes","MinWidth", "190")	
+	
+	Gui.FrmEquipment.GsGridEq.ResumeLayout()
+	Gui.FrmEquipment.GsGridEq.MainView("gvEquipment")
+	
+Program.Sub.LoadGVEquipment.End
+Program.Sub.LoadEquipment.Start
+	Gui.FrmEquipment.txtType.Text("")
+	Gui.FrmEquipment.txtEqDesc.Text("")
+	Gui.FrmEquipment.txtValue.Text("")
+	Gui.FrmEquipment.txtQty.Text("")
+	Gui.FrmEquipment.txtNotes.Text("")
+	
+	F.Intrinsic.Control.CallSub(LoadDTEquipment)
+Program.Sub.LoadEquipment.End
+Program.Sub.GsGridEq_RowClick.Start
+	Gui.FrmEquipment.txtType.Text(V.DataTable.dtEquipment(V.Args.RowIndex).Type!FieldVal)
+	Gui.FrmEquipment.txtEqDesc.Text(V.DataTable.dtEquipment(V.Args.RowIndex).Description!FieldVal)
+	Gui.FrmEquipment.txtValue.Text(V.DataTable.dtEquipment(V.Args.RowIndex).Value!FieldVal)
+	Gui.FrmEquipment.txtQty.Text(V.DataTable.dtEquipment(V.Args.RowIndex).Qty!FieldVal)
+	Gui.FrmEquipment.txtNotes.Text(V.DataTable.dtEquipment(V.Args.RowIndex).Notes!FieldVal)
+	
+
+Program.Sub.GsGridEq_RowClick.End
+
+Program.Sub.Comments.Start
+${$5$}$20.1.8734.20247$}$1
+${$6$}$rrodriguez$}$20240115143432438$}$YnvOFTUOxTrnxbSzMvfBmnrP7dtKqN6ZKEdpzIv886qTZmi8FdafmSW1+19I6Y2o5c3GzA0/S4BWqNNWo2M3cg==
+Program.Sub.Comments.End
