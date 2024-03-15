@@ -1,0 +1,216 @@
+Program.Sub.ScreenSU.Start
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+V.Local.bTableExists.Declare
+'Mod 030222 RRC
+'Wireless
+' Add images to doc control, add signature, add notes
+
+
+f.ODBC.Connection!Conx.openconnection(v.Ambient.PDSN,v.Ambient.PUser,v.Ambient.PPass)
+	
+F.ODBC.Connection!Conx.TableExists("GAB_5874_FS_DCCPATH", V.Local.bTableExists)
+F.Intrinsic.Control.If(V.Local.bTableExists, =, False)
+	F.ODBC.Connection!Conx.Execute("CREATE TABLE GAB_5874_FS_DCCPATH(GDCCID INTEGER, GRP_ID INTEGER, PATH LONGVARCHAR);")
+F.Intrinsic.Control.EndIf
+
+F.ODBC.Connection!Conx.TableExists("Gab_5874_FS_Sig", V.Local.bTableExists)
+F.Intrinsic.Control.If(V.Local.bTableExists, =, False)
+	F.ODBC.Connection!Conx.Execute("CREATE TABLE Gab_5874_FS_Sig(ID IDENTITY DEFAULT 0 NOT NULL, Job CHAR(6), Suffix CHAR(3), Signature LONGVARBINARY, SigName CHAR(30), CreatedOn DATETIME, CreatedOnEmployeeID CHAR(5), Status CHAR(20));")
+F.Intrinsic.Control.EndIf
+
+F.ODBC.Connection!Conx.TableExists("GAB_5874_FS_NOTES", V.Local.bTableExists)
+F.Intrinsic.Control.If(V.Local.bTableExists, =, False)
+	F.ODBC.Connection!Conx.Execute("CREATE TABLE GAB_5874_FS_NOTES (ID IDENTITY DEFAULT 0 CONSTRAINT UK_ID UNIQUE USING 0, JOB CHAR(6), SUFFIX CHAR(3), FSNOTES LONGVARCHAR, SEQ CHAR(3), CREATEDON DATETIME, CREATEDONEMPLOYEEID CHAR(5) );")
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.CallSub(SubAddImage)
+F.Intrinsic.Control.CallSub(SubAddSig)
+F.Intrinsic.Control.CallSub(SubAddNotes)
+
+F.ODBC.Connection!Conx.Close
+
+Program.Sub.Main.End
+
+Program.Sub.SubAddImage.Start
+V.Local.sSql.Declare
+V.Local.sJob.Declare
+V.Local.sLinkID.Declare
+V.Local.iIDLink.Declare
+V.Local.sFileType.Declare
+V.Local.sFile.Declare
+V.Local.sFileNum.Declare
+V.Local.sDCCPath.Declare
+V.Local.iGrp_Id.Declare
+V.Local.sTemp.Declare
+V.Local.sDate.Declare
+V.Local.sTime.Declare
+
+V.Local.sFileType.Set("JPG")
+F.ODBC.Connection!Conx.OpenRecordsetRW("rstIMG","Select Job,Suffix,Picture,PictureName,Status From cnf_Pictures_Staging where Status='Submitted';")
+F.Intrinsic.Control.If(V.ODBC.Conx!rstIMG.EOF,=,False)
+	F.Intrinsic.Control.DoUntil(V.ODBC.Conx!rstIMG.EOF,=,True)
+		'Get / Create LinkID 
+		F.Intrinsic.String.RPad(V.ODBC.Conx!rstIMG.FieldValTrim!JOB," ",6,V.Local.sJob)
+		F.Intrinsic.String.Build("{0}{1}",V.Local.sJob,V.ODBC.Conx!rstIMG.FieldValTrim!SUFFIX,V.Local.sLinkID)
+		F.Global.DocumentControl.GetLinkID(V.Local.sLinkID,20,V.Local.iIDLink)
+		F.Intrinsic.Control.If(V.Local.iIDLink,<,1)
+			F.Global.DocumentControl.CreateReference(V.Local.sLinkID,20,V.Local.iIDLink)
+		F.Intrinsic.Control.EndIf
+		'Assign Filename
+		F.Intrinsic.String.Format(V.Ambient.Date,"YYYYMMDD",V.Local.sDate)
+		F.Intrinsic.String.Format(V.Ambient.Time,"hhnnss",V.Local.sTime)
+		F.Intrinsic.String.Build("{0}_{1}_{2}.{3}",V.ODBC.Conx!rstIMG.FieldValTrim!PictureName,V.Local.sDate,V.Local.sTime,V.Local.sFileType,V.Local.sFile)
+		
+		'Get File Num
+		V.Local.sFileNum.Set(V.ODBC.Conx!rstIMG.FieldValTrim!PictureName)
+		
+		'Load Info (Group / Path) from DCC
+		V.Local.sSql.Set("Select * FROM GAB_5874_FS_DCCPATH WHERE GDCCID=0")
+		F.ODBC.Connection!Conx.OpenRecordsetRW("rstLoadDCC",V.Local.sSql)
+		F.Intrinsic.Control.If(V.ODBC.Conx!rstLoadDCC.EOF,=,False)
+			V.Local.iGrp_Id.Set(V.ODBC.Conx!rstLoadDCC.FieldVal!GRP_ID)
+			V.Local.sDCCPath.Set(V.ODBC.Conx!rstLoadDCC.FieldVal!PATH)
+		F.Intrinsic.Control.Else
+			V.Local.iGrp_Id.Set(-1)
+			V.Local.sDCCPath.Set(V.Caller.DocDir)
+		F.Intrinsic.Control.EndIf
+		F.ODBC.Conx!rstLoadDCC.Close
+	
+		'Copy new file to new path
+		F.Intrinsic.String.Right(V.Local.sDCCPath,1,V.Local.sTemp)
+		F.Intrinsic.Control.If(V.Local.sTemp,<>,"\")
+			F.Intrinsic.String.Concat(V.Local.sDCCPath,"\",V.Local.sFile,V.Local.sFile)
+		F.Intrinsic.Control.Else
+			F.Intrinsic.String.Concat(V.Local.sDCCPath,V.Local.sFile,V.Local.sFile)
+		F.Intrinsic.Control.EndIf
+		F.ODBC.Conx!rstImg.SaveBLOBtoFile("Picture",V.Local.sFile)
+		F.Global.DocumentControl.AddDocument(V.Local.iIDLink,V.Local.sFile,V.Local.sFileNum,V.Local.iGrp_Id,"FS",V.Local.sFileType)
+		
+		'Change Record to Processed
+		F.ODBC.Conx!rstIMG.Set!Status("Processed")
+		F.ODBC.Conx!rstIMG.Update
+		F.Intrinsic.UI.Sleep(1)
+		'Move to the next Image
+		
+		F.ODBC.Conx!rstIMG.MoveNext
+	F.Intrinsic.Control.Loop
+F.Intrinsic.Control.EndIf
+F.ODBC.Conx!rstIMG.Close
+
+Program.Sub.SubAddImage.End
+
+
+Program.Sub.SubAddSig.Start
+V.Local.sSql.Declare
+V.Local.sJob.Declare
+V.Local.sLinkID.Declare
+V.Local.iIDLink.Declare
+V.Local.sFileType.Declare
+V.Local.sFile.Declare
+V.Local.sFileNum.Declare
+V.Local.sDCCPath.Declare
+V.Local.iGrp_Id.Declare
+V.Local.sTemp.Declare
+V.Local.sDate.Declare
+V.Local.sTime.Declare
+
+V.Local.sFileType.Set("PNG")
+F.ODBC.Connection!Conx.OpenRecordsetRW("rstSig","Select Job, Suffix, Signature, SigName, Status from Gab_5874_FS_Sig where Status is Null;")
+F.Intrinsic.Control.If(V.ODBC.Conx!rstSig.EOF,=,False)
+	F.Intrinsic.Control.DoUntil(V.ODBC.Conx!rstSig.EOF,=,True)
+		'Get / Create LinkID 
+		F.Intrinsic.String.RPad(V.ODBC.Conx!rstSig.FieldValTrim!JOB," ",6,V.Local.sJob)
+		F.Intrinsic.String.Build("{0}{1}",V.Local.sJob,V.ODBC.Conx!rstSig.FieldValTrim!SUFFIX,V.Local.sLinkID)
+		F.Global.DocumentControl.GetLinkID(V.Local.sLinkID,20,V.Local.iIDLink)
+		F.Intrinsic.Control.If(V.Local.iIDLink,<,1)
+			F.Global.DocumentControl.CreateReference(V.Local.sLinkID,20,V.Local.iIDLink)
+		F.Intrinsic.Control.EndIf
+		'Assign Filename
+		F.Intrinsic.String.Format(V.Ambient.Date,"YYYYMMDD",V.Local.sDate)
+		F.Intrinsic.String.Format(V.Ambient.Time,"hhnnss",V.Local.sTime)
+		F.Intrinsic.String.Build("{0}_{1}_{2}_{3}.{4}",V.ODBC.Conx!rstSig.FieldValTrim!SigName,v.Local.sLinkID,V.Local.sDate,V.Local.sTime,V.Local.sFileType,V.Local.sFile)
+		
+		'Get File Num
+		V.Local.sFileNum.Set(V.ODBC.Conx!rstSig.FieldValTrim!SigName)
+		
+		'Load Info (Group / Path) from DCC
+		V.Local.sSql.Set("Select * FROM GAB_5874_FS_DCCPATH WHERE GDCCID=0")
+		F.ODBC.Connection!Conx.OpenRecordsetRW("rstLoadDCC",V.Local.sSql)
+		F.Intrinsic.Control.If(V.ODBC.Conx!rstLoadDCC.EOF,=,False)
+			V.Local.iGrp_Id.Set(V.ODBC.Conx!rstLoadDCC.FieldVal!GRP_ID)
+			V.Local.sDCCPath.Set(V.ODBC.Conx!rstLoadDCC.FieldVal!PATH)
+		F.Intrinsic.Control.Else
+			V.Local.iGrp_Id.Set(-1)
+			V.Local.sDCCPath.Set(V.Caller.DocDir)
+		F.Intrinsic.Control.EndIf
+		F.ODBC.Conx!rstLoadDCC.Close
+	
+		'Copy new file to new path
+		F.Intrinsic.String.Right(V.Local.sDCCPath,1,V.Local.sTemp)
+		F.Intrinsic.Control.If(V.Local.sTemp,<>,"\")
+			F.Intrinsic.String.Concat(V.Local.sDCCPath,"\",V.Local.sFile,V.Local.sFile)
+		F.Intrinsic.Control.Else
+			F.Intrinsic.String.Concat(V.Local.sDCCPath,V.Local.sFile,V.Local.sFile)
+		F.Intrinsic.Control.EndIf
+		F.ODBC.Conx!rstSig.SaveBLOBtoFile("Signature",V.Local.sFile)
+		F.Global.DocumentControl.AddDocument(V.Local.iIDLink,V.Local.sFile,V.Local.sFileNum,V.Local.iGrp_Id,"FS",V.Local.sFileType)
+		
+		'Change Record to Processed
+		F.ODBC.Conx!rstSig.Set!Status("Processed")
+		F.ODBC.Conx!rstSig.Update
+		F.Intrinsic.UI.Sleep(1)
+		'Move to the next Signature
+		
+		F.ODBC.Conx!rstSig.MoveNext
+	F.Intrinsic.Control.Loop
+F.Intrinsic.Control.EndIf
+F.ODBC.Conx!rstSig.Close
+
+Program.Sub.SubAddSig.End
+
+
+Program.Sub.SubAddNotes.Start
+V.Local.sSql.Declare
+V.Local.iSeq.Declare
+V.Local.sDateNotes.Declare
+
+F.ODBC.Connection!Conx.OpenRecordsetRW("rstNotes","Select Job,Suffix,Notes,CreatedOn,CreatedOnEmployeeId,Status From cnf_Notes_Staging where Status='Submitted' order by CreatedOn")
+F.Intrinsic.Control.If(V.ODBC.Conx!rstNotes.EOF,=,False)
+	F.ODBC.Connection!Conx.OpenRecordsetRW("rstSaveNotes","Select * From GAB_5874_FS_NOTES")
+	'add Notes to GAB_5874_FS_Notes table
+	F.Intrinsic.Control.DoUntil(V.ODBC.Conx!rstNotes.EOF,=,True)
+		F.ODBC.Conx!rstSaveNotes.AddNew
+		F.ODBC.Conx!rstSaveNotes.Set!JOB(V.ODBC.Conx!rstNotes.FieldVal!JOB)
+		F.ODBC.Conx!rstSaveNotes.Set!SUFFIX(V.ODBC.Conx!rstNotes.FieldVal!SUFFIX)
+		F.ODBC.Conx!rstSaveNotes.Set!FSNOTES(V.ODBC.Conx!rstNotes.FieldVal!NOTES)
+		'Create Seq numbering
+		F.Intrinsic.String.Format(V.ODBC.Conx!rstNotes.FieldVal!CREATEDON,"YYYY-MM-DD",V.Local.sDateNotes)
+		F.Intrinsic.String.Build("select TOP 1 SEQ from GAB_5874_FS_NOTES WHERE JOB='{0}' AND SUFFIX='{1}' AND CREATEDONEMPLOYEEID='{2}' AND CAST(CREATEDON AS DATE) = '{3}' ORDER BY SEQ DESC",V.ODBC.Conx!rstNotes.FieldVal!JOB,V.ODBC.Conx!rstNotes.FieldVal!SUFFIX,V.ODBC.Conx!rstNotes.FieldVal!CREATEDONEMPLOYEEID,V.Local.sDateNotes,V.Local.sSql)
+		F.ODBC.Connection!Conx.OpenRecordsetRW("rstSeq",V.Local.sSql)
+		F.Intrinsic.Control.If(V.ODBC.Conx!rstSeq.EOF,=,True)
+			F.ODBC.Conx!rstSaveNotes.Set!SEQ("1")
+		F.Intrinsic.Control.Else
+			F.Intrinsic.Math.Add(V.ODBC.Conx!rstSeq.FieldValLong!SEQ,1,V.Local.iSeq)
+			F.ODBC.Conx!rstSaveNotes.Set!SEQ(V.Local.iSeq)
+		F.Intrinsic.Control.EndIf
+		F.ODBC.Conx!rstSeq.Close
+		F.ODBC.Conx!rstSaveNotes.Set!CREATEDON(V.ODBC.Conx!rstNotes.FieldVal!CREATEDON)
+		F.ODBC.Conx!rstSaveNotes.Set!CREATEDONEMPLOYEEID(V.ODBC.Conx!rstNotes.FieldVal!CREATEDONEMPLOYEEID)
+		F.ODBC.Conx!rstSaveNotes.Update
+
+		'Updating CNF_NOTES_STAGING to Processed
+		F.ODBC.Conx!rstNotes.Set!Status("Processed")
+		F.ODBC.Conx!rstNotes.Update
+
+		F.ODBC.Conx!rstNotes.MoveNext
+	F.Intrinsic.Control.Loop
+	F.ODBC.Conx!rstSaveNotes.Close
+F.Intrinsic.Control.EndIf
+F.ODBC.Conx!rstNotes.Close
+
+Program.Sub.SubAddNotes.End
