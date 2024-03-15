@@ -1,0 +1,996 @@
+﻿Program.Sub.ScreenSU.Start
+Gui.FieldServiceNotes..Create(BaseForm)
+Gui.FieldServiceNotes..Size(10905,9735)
+Gui.FieldServiceNotes..MinX(0)
+Gui.FieldServiceNotes..MinY(0)
+Gui.FieldServiceNotes..Position(0,0)
+Gui.FieldServiceNotes..AlwaysOnTop(True)
+Gui.FieldServiceNotes..BackColor(-2147483633)
+Gui.FieldServiceNotes..MaxButton(True)
+Gui.FieldServiceNotes..MousePointer(0)
+Gui.FieldServiceNotes..Sizeable(False)
+Gui.FieldServiceNotes..Event(UnLoad,FieldServiceNotes_UnLoad)
+Gui.FieldServiceNotes..Caption("Field Service Notes")
+Gui.FieldServiceNotes..FontName("Tahoma")
+Gui.FieldServiceNotes..FontSize(8.25)
+Gui.FieldServiceNotes..ControlBox(True)
+Gui.FieldServiceNotes..MinButton(True)
+Gui.FieldServiceNotes..Moveable(True)
+Gui.FieldServiceNotes..ShowInTaskBar(True)
+Gui.FieldServiceNotes..TitleBar(True)
+Gui.FieldServiceNotes.tabMain.Create(Tab)
+Gui.FieldServiceNotes.tabMain.Enabled(True)
+Gui.FieldServiceNotes.tabMain.Visible(True)
+Gui.FieldServiceNotes.tabMain.Zorder(0)
+Gui.FieldServiceNotes.tabMain.Size(10575,8685)
+Gui.FieldServiceNotes.tabMain.Position(90,150)
+Gui.FieldServiceNotes.tabMain.FontName("Tahoma")
+Gui.FieldServiceNotes.tabMain.FontSize(8.25)
+Gui.FieldServiceNotes.tabMain.Tabs(3)
+Gui.FieldServiceNotes.tabMain.SetTab(0)
+Gui.FieldServiceNotes.tabMain.Caption("Notes")
+Gui.FieldServiceNotes.tabMain.SetTab(1)
+Gui.FieldServiceNotes.tabMain.Caption("Equipment")
+Gui.FieldServiceNotes.tabMain.SetTab(2)
+Gui.FieldServiceNotes.tabMain.Caption("Expenses")
+Gui.FieldServiceNotes.GSGCFldSerEx.Create(GsGridControl)
+Gui.FieldServiceNotes.GSGCFldSerEx.Enabled(True)
+Gui.FieldServiceNotes.GSGCFldSerEx.Visible(True)
+Gui.FieldServiceNotes.GSGCFldSerEx.Zorder(0)
+Gui.FieldServiceNotes.GSGCFldSerEx.Size(10350,4350)
+Gui.FieldServiceNotes.GSGCFldSerEx.Position(90,60)
+Gui.FieldServiceNotes.GSGCFldSerEx.Anchor(13)
+Gui.FieldServiceNotes.GSGCFldSerEx.Parent("tabMain",2)
+Gui.FieldServiceNotes.GSGCFldSerEx.Event(RowCellClick,GSGCFldSerEx_RowCellClick)
+Gui.FieldServiceNotes.txtExDesc.Create(TextBox,"",True,2385,300,0,6465,4515,True,0,"Tahoma",8.25,,1)
+Gui.FieldServiceNotes.txtExDesc.Locked(True)
+Gui.FieldServiceNotes.txtExDesc.Parent("tabMain",2)
+Gui.FieldServiceNotes.lblEqNotes.Create(Label,"Notes:",True,435,180,0,135,4560,True,0,"Tahoma",7.8,,0,0)
+Gui.FieldServiceNotes.lblEqNotes.BorderStyle(0)
+Gui.FieldServiceNotes.lblEqNotes.Parent("tabMain",1)
+Gui.FieldServiceNotes.GSGCFldSerEq.Create(GsGridControl)
+Gui.FieldServiceNotes.GSGCFldSerEq.Enabled(True)
+Gui.FieldServiceNotes.GSGCFldSerEq.Visible(True)
+Gui.FieldServiceNotes.GSGCFldSerEq.Zorder(0)
+Gui.FieldServiceNotes.GSGCFldSerEq.Size(10350,4350)
+Gui.FieldServiceNotes.GSGCFldSerEq.Position(90,60)
+Gui.FieldServiceNotes.GSGCFldSerEq.Anchor(13)
+Gui.FieldServiceNotes.GSGCFldSerEq.Parent("tabMain",1)
+Gui.FieldServiceNotes.GSGCFldSerEq.Event(RowCellClick,GSGCFldSerEq_RowCellClick)
+Gui.FieldServiceNotes.cmdEqClear.Create(Button)
+Gui.FieldServiceNotes.cmdEqClear.Enabled(True)
+Gui.FieldServiceNotes.cmdEqClear.Visible(True)
+Gui.FieldServiceNotes.cmdEqClear.Zorder(0)
+Gui.FieldServiceNotes.cmdEqClear.Size(1125,345)
+Gui.FieldServiceNotes.cmdEqClear.Position(1485,7740)
+Gui.FieldServiceNotes.cmdEqClear.Caption("Clear")
+Gui.FieldServiceNotes.cmdEqClear.FontName("Tahoma")
+Gui.FieldServiceNotes.cmdEqClear.FontSize(8.25)
+Gui.FieldServiceNotes.cmdEqClear.Parent("tabMain",1)
+Gui.FieldServiceNotes.cmdEqClear.Event(Click,cmdEqClear_Click)
+Gui.FieldServiceNotes.cmdEqDel.Create(Button)
+Gui.FieldServiceNotes.cmdEqDel.Enabled(True)
+Gui.FieldServiceNotes.cmdEqDel.Visible(True)
+Gui.FieldServiceNotes.cmdEqDel.Zorder(0)
+Gui.FieldServiceNotes.cmdEqDel.Size(1125,345)
+Gui.FieldServiceNotes.cmdEqDel.Position(2850,7740)
+Gui.FieldServiceNotes.cmdEqDel.Caption("Delete")
+Gui.FieldServiceNotes.cmdEqDel.FontName("Tahoma")
+Gui.FieldServiceNotes.cmdEqDel.FontSize(8.25)
+Gui.FieldServiceNotes.cmdEqDel.Parent("tabMain",1)
+Gui.FieldServiceNotes.cmdEqDel.Event(Click,cmdEqDel_Click)
+Gui.FieldServiceNotes.GSGCFldSerNotes.Create(GsGridControl)
+Gui.FieldServiceNotes.GSGCFldSerNotes.Enabled(True)
+Gui.FieldServiceNotes.GSGCFldSerNotes.Visible(True)
+Gui.FieldServiceNotes.GSGCFldSerNotes.Zorder(0)
+Gui.FieldServiceNotes.GSGCFldSerNotes.Size(10350,4350)
+Gui.FieldServiceNotes.GSGCFldSerNotes.Position(90,60)
+Gui.FieldServiceNotes.GSGCFldSerNotes.Anchor(13)
+Gui.FieldServiceNotes.GSGCFldSerNotes.Event(RowCellClick,GSGCFldSerNotes_RowCellClick)
+Gui.FieldServiceNotes.GSGCFldSerNotes.Parent("tabMain",0)
+Gui.FieldServiceNotes.cmdNotesNew.Create(Button)
+Gui.FieldServiceNotes.cmdNotesNew.Enabled(True)
+Gui.FieldServiceNotes.cmdNotesNew.Visible(True)
+Gui.FieldServiceNotes.cmdNotesNew.Zorder(0)
+Gui.FieldServiceNotes.cmdNotesNew.Size(1125,345)
+Gui.FieldServiceNotes.cmdNotesNew.Position(2835,7740)
+Gui.FieldServiceNotes.cmdNotesNew.Caption("New")
+Gui.FieldServiceNotes.cmdNotesNew.FontName("Tahoma")
+Gui.FieldServiceNotes.cmdNotesNew.FontSize(8.25)
+Gui.FieldServiceNotes.cmdNotesNew.Parent("tabMain",0)
+Gui.FieldServiceNotes.cmdNotesNew.Event(Click,cmdNotesNew_Click)
+Gui.FieldServiceNotes.lblNotes.Create(Label,"Notes:",True,435,180,0,135,4560,True,0,"Tahoma",7.8,,0,0)
+Gui.FieldServiceNotes.lblNotes.BorderStyle(0)
+Gui.FieldServiceNotes.lblNotes.Parent("tabMain",0)
+Gui.FieldServiceNotes.txtNotesEmpN.Create(TextBox,"",True,2385,300,0,1845,4515,True,0,"Tahoma",8.25,,1)
+Gui.FieldServiceNotes.txtNotesEmpN.Locked(True)
+Gui.FieldServiceNotes.txtNotesEmpN.Parent("tabMain",0)
+Gui.FieldServiceNotes.txtNotes.Create(TextboxM)
+Gui.FieldServiceNotes.txtNotes.Enabled(True)
+Gui.FieldServiceNotes.txtNotes.Visible(True)
+Gui.FieldServiceNotes.txtNotes.Zorder(0)
+Gui.FieldServiceNotes.txtNotes.Size(10335,2595)
+Gui.FieldServiceNotes.txtNotes.Position(90,4935)
+Gui.FieldServiceNotes.txtNotes.FontName("Tahoma")
+Gui.FieldServiceNotes.txtNotes.FontSize(7.8)
+Gui.FieldServiceNotes.txtNotes.Anchor(15)
+Gui.FieldServiceNotes.txtNotes.Parent("tabMain",0)
+Gui.FieldServiceNotes.lblNotesSeq.Create(Label,"Seq:",True,315,180,0,6090,4605,True,0,"Tahoma",7.8,,0,0)
+Gui.FieldServiceNotes.lblNotesSeq.BorderStyle(0)
+Gui.FieldServiceNotes.lblNotesSeq.Parent("tabMain",0)
+Gui.FieldServiceNotes.lblNotesCreated.Create(Label,"Created:",True,585,180,0,4305,4605,True,0,"Tahoma",7.8,,0,0)
+Gui.FieldServiceNotes.lblNotesCreated.BorderStyle(0)
+Gui.FieldServiceNotes.lblNotesCreated.Parent("tabMain",0)
+Gui.FieldServiceNotes.lblNotesEmp.Create(Label,"Employee:",True,720,180,0,1095,4605,True,0,"Tahoma",7.8,,0,0)
+Gui.FieldServiceNotes.lblNotesEmp.BorderStyle(0)
+Gui.FieldServiceNotes.lblNotesEmp.Parent("tabMain",0)
+Gui.FieldServiceNotes.cmdNotesClear.Create(Button)
+Gui.FieldServiceNotes.cmdNotesClear.Enabled(True)
+Gui.FieldServiceNotes.cmdNotesClear.Visible(True)
+Gui.FieldServiceNotes.cmdNotesClear.Zorder(0)
+Gui.FieldServiceNotes.cmdNotesClear.Size(1125,345)
+Gui.FieldServiceNotes.cmdNotesClear.Position(1485,7740)
+Gui.FieldServiceNotes.cmdNotesClear.Caption("Clear")
+Gui.FieldServiceNotes.cmdNotesClear.FontName("Tahoma")
+Gui.FieldServiceNotes.cmdNotesClear.FontSize(8.25)
+Gui.FieldServiceNotes.cmdNotesClear.Parent("tabMain",0)
+Gui.FieldServiceNotes.cmdNotesClear.Event(Click,cmdNotesClear_Click)
+Gui.FieldServiceNotes.txtNotesSeq.Create(TextBox,"",True,480,300,0,6480,4515,True,0,"Tahoma",8.25,,1)
+Gui.FieldServiceNotes.txtNotesSeq.Parent("tabMain",0)
+Gui.FieldServiceNotes.txtNotesSeq.Locked(True)
+Gui.FieldServiceNotes.txtNotesDate.Create(TextBox,"",True,1050,300,0,4920,4515,True,0,"Tahoma",8.25,,1)
+Gui.FieldServiceNotes.txtNotesDate.Parent("tabMain",0)
+Gui.FieldServiceNotes.txtNotesDate.Locked(True)
+Gui.FieldServiceNotes.txtNotesEmployee.Create(TextBox,"",False,1005,300,0,7230,4530,True,0,"Tahoma",8.25,,1)
+Gui.FieldServiceNotes.txtNotesEmployee.Parent("tabMain",0)
+Gui.FieldServiceNotes.txtNotesEmployee.Locked(True)
+Gui.FieldServiceNotes.cmdNotesSave.Create(Button)
+Gui.FieldServiceNotes.cmdNotesSave.Enabled(True)
+Gui.FieldServiceNotes.cmdNotesSave.Visible(True)
+Gui.FieldServiceNotes.cmdNotesSave.Zorder(0)
+Gui.FieldServiceNotes.cmdNotesSave.Size(1125,345)
+Gui.FieldServiceNotes.cmdNotesSave.Position(120,7740)
+Gui.FieldServiceNotes.cmdNotesSave.Caption("Save")
+Gui.FieldServiceNotes.cmdNotesSave.FontName("Tahoma")
+Gui.FieldServiceNotes.cmdNotesSave.FontSize(8.25)
+Gui.FieldServiceNotes.cmdNotesSave.Parent("tabMain",0)
+Gui.FieldServiceNotes.cmdNotesSave.Event(Click,cmdNotesSave_Click)
+Gui.FieldServiceNotes.txtEqNotes.Create(TextboxM)
+Gui.FieldServiceNotes.txtEqNotes.Enabled(True)
+Gui.FieldServiceNotes.txtEqNotes.Visible(True)
+Gui.FieldServiceNotes.txtEqNotes.Zorder(0)
+Gui.FieldServiceNotes.txtEqNotes.Size(10335,2595)
+Gui.FieldServiceNotes.txtEqNotes.Position(90,4935)
+Gui.FieldServiceNotes.txtEqNotes.FontName("Tahoma")
+Gui.FieldServiceNotes.txtEqNotes.FontSize(8.25)
+Gui.FieldServiceNotes.txtEqNotes.Parent("tabMain",1)
+Gui.FieldServiceNotes.txtEqEmployee.Create(TextBox,"",False,1005,300,0,9405,4515,True,0,"Tahoma",8.25,,1)
+Gui.FieldServiceNotes.txtEqEmployee.Parent("tabMain",1)
+Gui.FieldServiceNotes.txtEqEmployee.Locked(True)
+Gui.FieldServiceNotes.txtEqDesc.Create(TextBox,"",True,2385,300,0,6465,4515,True,0,"Tahoma",8.25,,1)
+Gui.FieldServiceNotes.txtEqDesc.Locked(True)
+Gui.FieldServiceNotes.txtEqDesc.Parent("tabMain",1)
+Gui.FieldServiceNotes.cmdExDel.Create(Button)
+Gui.FieldServiceNotes.cmdExDel.Enabled(True)
+Gui.FieldServiceNotes.cmdExDel.Visible(True)
+Gui.FieldServiceNotes.cmdExDel.Zorder(0)
+Gui.FieldServiceNotes.cmdExDel.Size(1125,345)
+Gui.FieldServiceNotes.cmdExDel.Position(2850,7740)
+Gui.FieldServiceNotes.cmdExDel.Caption("Delete")
+Gui.FieldServiceNotes.cmdExDel.FontName("Tahoma")
+Gui.FieldServiceNotes.cmdExDel.FontSize(8.25)
+Gui.FieldServiceNotes.cmdExDel.Parent("tabMain",2)
+Gui.FieldServiceNotes.cmdExDel.Event(Click,cmdExDel_Click)
+Gui.FieldServiceNotes.cmdExClear.Create(Button)
+Gui.FieldServiceNotes.cmdExClear.Enabled(True)
+Gui.FieldServiceNotes.cmdExClear.Visible(True)
+Gui.FieldServiceNotes.cmdExClear.Zorder(0)
+Gui.FieldServiceNotes.cmdExClear.Size(1125,345)
+Gui.FieldServiceNotes.cmdExClear.Position(1485,7740)
+Gui.FieldServiceNotes.cmdExClear.Caption("Clear")
+Gui.FieldServiceNotes.cmdExClear.FontName("Tahoma")
+Gui.FieldServiceNotes.cmdExClear.FontSize(8.25)
+Gui.FieldServiceNotes.cmdExClear.Parent("tabMain",2)
+Gui.FieldServiceNotes.cmdExClear.Event(Click,cmdExClear_Click)
+Gui.FieldServiceNotes.txtExNotes.Create(TextboxM)
+Gui.FieldServiceNotes.txtExNotes.Enabled(True)
+Gui.FieldServiceNotes.txtExNotes.Visible(True)
+Gui.FieldServiceNotes.txtExNotes.Zorder(0)
+Gui.FieldServiceNotes.txtExNotes.Size(10335,2595)
+Gui.FieldServiceNotes.txtExNotes.Position(90,4935)
+Gui.FieldServiceNotes.txtExNotes.FontName("Tahoma")
+Gui.FieldServiceNotes.txtExNotes.FontSize(8.25)
+Gui.FieldServiceNotes.txtExNotes.Parent("tabMain",2)
+Gui.FieldServiceNotes.lblExType.Create(Label,"Type:",True,405,180,0,4425,4605,True,0,"Tahoma",7.8,,0,0)
+Gui.FieldServiceNotes.lblExType.BorderStyle(0)
+Gui.FieldServiceNotes.lblExType.Parent("tabMain",2)
+Gui.FieldServiceNotes.txtExEmpN.Create(TextBox,"",True,2385,300,0,1890,4515,True,0,"Tahoma",8.25,,1)
+Gui.FieldServiceNotes.txtExEmpN.Locked(True)
+Gui.FieldServiceNotes.txtExEmpN.Parent("tabMain",2)
+Gui.FieldServiceNotes.lblExEmpID.Create(Label,"Employee:",True,720,180,0,1110,4605,True,0,"Tahoma",7.8,,0,0)
+Gui.FieldServiceNotes.lblExEmpID.BorderStyle(0)
+Gui.FieldServiceNotes.lblExEmpID.Parent("tabMain",2)
+Gui.FieldServiceNotes.lblExNotes.Create(Label,"Notes:",True,435,180,0,135,4560,True,0,"Tahoma",7.8,,0,0)
+Gui.FieldServiceNotes.lblExNotes.BorderStyle(0)
+Gui.FieldServiceNotes.lblExNotes.Parent("tabMain",2)
+Gui.FieldServiceNotes.txtExEmployee.Create(TextBox,"",False,1005,300,0,9405,4515,True,0,"Tahoma",8.25,,1)
+Gui.FieldServiceNotes.txtExEmployee.Parent("tabMain",2)
+Gui.FieldServiceNotes.txtExEmployee.Locked(True)
+Gui.FieldServiceNotes.txtExType.Create(TextBox,"",True,1005,300,0,4875,4515,True,0,"Tahoma",8.25,,1)
+Gui.FieldServiceNotes.txtExType.Locked(True)
+Gui.FieldServiceNotes.txtExType.Parent("tabMain",2)
+Gui.FieldServiceNotes.txtEqType.Create(TextBox,"",True,1005,300,0,4875,4515,True,0,"Tahoma",8.25,,1)
+Gui.FieldServiceNotes.txtEqType.Locked(True)
+Gui.FieldServiceNotes.txtEqType.Parent("tabMain",1)
+Gui.FieldServiceNotes.lblExDesc.Create(Label,"Desc:",True,375,180,0,6045,4605,True,0,"Tahoma",7.8,,0,0)
+Gui.FieldServiceNotes.lblExDesc.BorderStyle(0)
+Gui.FieldServiceNotes.lblExDesc.Parent("tabMain",2)
+Gui.FieldServiceNotes.cmdExSave.Create(Button)
+Gui.FieldServiceNotes.cmdExSave.Enabled(True)
+Gui.FieldServiceNotes.cmdExSave.Visible(True)
+Gui.FieldServiceNotes.cmdExSave.Zorder(0)
+Gui.FieldServiceNotes.cmdExSave.Size(1125,345)
+Gui.FieldServiceNotes.cmdExSave.Position(120,7740)
+Gui.FieldServiceNotes.cmdExSave.Caption("Save")
+Gui.FieldServiceNotes.cmdExSave.FontName("Tahoma")
+Gui.FieldServiceNotes.cmdExSave.FontSize(8.25)
+Gui.FieldServiceNotes.cmdExSave.Parent("tabMain",2)
+Gui.FieldServiceNotes.cmdExSave.Event(MouseClick,cmdExSave_MouseClick)
+Gui.FieldServiceNotes.txtEqEmpN.Create(TextBox,"",True,2385,300,0,1890,4515,True,0,"Tahoma",8.25,,1)
+Gui.FieldServiceNotes.txtEqEmpN.Locked(True)
+Gui.FieldServiceNotes.txtEqEmpN.Parent("tabMain",1)
+Gui.FieldServiceNotes.lblEqType.Create(Label,"Type:",True,405,180,0,4425,4605,True,0,"Tahoma",7.8,,0,0)
+Gui.FieldServiceNotes.lblEqType.BorderStyle(0)
+Gui.FieldServiceNotes.lblEqType.Parent("tabMain",1)
+Gui.FieldServiceNotes.lblEqDesc.Create(Label,"Desc:",True,375,180,0,6045,4605,True,0,"Tahoma",7.8,,0,0)
+Gui.FieldServiceNotes.lblEqDesc.BorderStyle(0)
+Gui.FieldServiceNotes.lblEqDesc.Parent("tabMain",1)
+Gui.FieldServiceNotes.cmdEqSave.Create(Button)
+Gui.FieldServiceNotes.cmdEqSave.Enabled(True)
+Gui.FieldServiceNotes.cmdEqSave.Visible(True)
+Gui.FieldServiceNotes.cmdEqSave.Zorder(0)
+Gui.FieldServiceNotes.cmdEqSave.Size(1125,345)
+Gui.FieldServiceNotes.cmdEqSave.Position(120,7740)
+Gui.FieldServiceNotes.cmdEqSave.Caption("Save")
+Gui.FieldServiceNotes.cmdEqSave.FontName("Tahoma")
+Gui.FieldServiceNotes.cmdEqSave.FontSize(8.25)
+Gui.FieldServiceNotes.cmdEqSave.Event(Click,cmdEqSave_Click)
+Gui.FieldServiceNotes.cmdEqSave.Parent("tabMain",1)
+Gui.FieldServiceNotes.lblEqEmpID.Create(Label,"Employee:",True,720,180,0,1110,4605,True,0,"Tahoma",7.8,,0,0)
+Gui.FieldServiceNotes.lblEqEmpID.BorderStyle(0)
+Gui.FieldServiceNotes.lblEqEmpID.Parent("tabMain",1)
+Gui.NewNote..Create(BaseForm)
+Gui.NewNote..Caption("New Note")
+Gui.NewNote..Size(7140,5565)
+Gui.NewNote..MinX(0)
+Gui.NewNote..MinY(0)
+Gui.NewNote..Position(0,0)
+Gui.NewNote..AlwaysOnTop(False)
+Gui.NewNote..FontName("Tahoma")
+Gui.NewNote..FontSize(8.25)
+Gui.NewNote..ControlBox(True)
+Gui.NewNote..MaxButton(True)
+Gui.NewNote..MinButton(True)
+Gui.NewNote..MousePointer(0)
+Gui.NewNote..Moveable(True)
+Gui.NewNote..Sizeable(True)
+Gui.NewNote..ShowInTaskBar(True)
+Gui.NewNote..TitleBar(True)
+Gui.NewNote..Event(UnLoad,NewNote_UnLoad)
+Gui.NewNote.txtJob.Create(TextBox,"",True,765,300,0,210,450,False,0,"Tahoma",8.25,,1)
+Gui.NewNote.txtSuffix.Create(TextBox,"",True,465,300,0,1020,450,False,0,"Tahoma",8.25,,1)
+Gui.NewNote.txtDesc.Create(TextBox,"",True,3090,300,0,3525,450,False,0,"Tahoma",8.25,,1)
+Gui.NewNote.cmdBrwJob.Create(Button)
+Gui.NewNote.cmdBrwJob.Enabled(True)
+Gui.NewNote.cmdBrwJob.Visible(True)
+Gui.NewNote.cmdBrwJob.Zorder(0)
+Gui.NewNote.cmdBrwJob.Size(345,300)
+Gui.NewNote.cmdBrwJob.Position(6645,450)
+Gui.NewNote.cmdBrwJob.Caption("^")
+Gui.NewNote.cmdBrwJob.FontName("Tahoma")
+Gui.NewNote.cmdBrwJob.FontSize(8.25)
+Gui.NewNote.cmdBrwJob.Event(Click,cmdBrwJob_Click)
+Gui.NewNote.lblJob.Create(Label,"JOB",True,285,195,0,255,210,True,0,"Tahoma",8.25,,0,0)
+Gui.NewNote.lblJob.BorderStyle(0)
+Gui.NewNote.lblSuf.Create(Label,"SFX",True,270,195,0,1110,210,True,0,"Tahoma",8.25,,0,0)
+Gui.NewNote.lblSuf.BorderStyle(0)
+Gui.NewNote.lblDesc.Create(Label,"DESCRIPTION",True,1020,195,0,3585,210,True,0,"Tahoma",8.25,,0,0)
+Gui.NewNote.lblDesc.BorderStyle(0)
+Gui.NewNote.lblEmp.Create(Label,"EMPLOYEE",True,765,195,0,255,930,True,0,"Tahoma",8.25,,0,0)
+Gui.NewNote.lblEmp.BorderStyle(0)
+Gui.NewNote.txtEmp.Create(TextBox,"",True,645,300,0,210,1200,False,0,"Tahoma",8.25,,1)
+Gui.NewNote.txtEmpN.Create(TextBox,"",True,2535,300,0,885,1200,False,0,"Tahoma",8.25,,1)
+Gui.NewNote.cmdBrwEmp.Create(Button)
+Gui.NewNote.cmdBrwEmp.Enabled(True)
+Gui.NewNote.cmdBrwEmp.Visible(True)
+Gui.NewNote.cmdBrwEmp.Zorder(0)
+Gui.NewNote.cmdBrwEmp.Size(345,300)
+Gui.NewNote.cmdBrwEmp.Position(3420,1200)
+Gui.NewNote.cmdBrwEmp.Caption("^")
+Gui.NewNote.cmdBrwEmp.FontName("Tahoma")
+Gui.NewNote.cmdBrwEmp.FontSize(8.25)
+Gui.NewNote.cmdBrwEmp.Event(Click,cmdBrwEmp_Click)
+Gui.NewNote.dtpDt.Create(DatePicker)
+Gui.NewNote.dtpDt.Enabled(True)
+Gui.NewNote.dtpDt.Visible(True)
+Gui.NewNote.dtpDt.Zorder(0)
+Gui.NewNote.dtpDt.Size(1260,300)
+Gui.NewNote.dtpDt.Position(3915,1200)
+Gui.NewNote.dtpDt.CheckBox(False)
+Gui.NewNote.dtpDt.FontName("Tahoma")
+Gui.NewNote.dtpDt.FontSize(8.25)
+Gui.NewNote.lblDate.Create(Label,"DATE",True,390,195,0,3960,930,True,0,"Tahoma",8.25,,0,0)
+Gui.NewNote.lblDate.BorderStyle(0)
+Gui.NewNote.lblNotes.Create(Label,"NOTES",True,495,195,0,270,1695,True,0,"Tahoma",8.25,,0,0)
+Gui.NewNote.lblNotes.BorderStyle(0)
+Gui.NewNote.txtNotes.Create(TextboxM)
+Gui.NewNote.txtNotes.Enabled(True)
+Gui.NewNote.txtNotes.Visible(True)
+Gui.NewNote.txtNotes.Zorder(0)
+Gui.NewNote.txtNotes.Size(6705,2295)
+Gui.NewNote.txtNotes.Position(225,1950)
+Gui.NewNote.txtNotes.FontName("Tahoma")
+Gui.NewNote.txtNotes.FontSize(8.25)
+Gui.NewNote.cmdNotesSave.Create(Button)
+Gui.NewNote.cmdNotesSave.Enabled(True)
+Gui.NewNote.cmdNotesSave.Visible(True)
+Gui.NewNote.cmdNotesSave.Zorder(0)
+Gui.NewNote.cmdNotesSave.Size(1125,345)
+Gui.NewNote.cmdNotesSave.Position(1935,4545)
+Gui.NewNote.cmdNotesSave.Caption("Save")
+Gui.NewNote.cmdNotesSave.FontName("Tahoma")
+Gui.NewNote.cmdNotesSave.FontSize(8.25)
+Gui.NewNote.cmdNotesSave.Event(Click,cmdSave_Click)
+Gui.NewNote.cmdNotesClear.Create(Button)
+Gui.NewNote.cmdNotesClear.Enabled(True)
+Gui.NewNote.cmdNotesClear.Visible(True)
+Gui.NewNote.cmdNotesClear.Zorder(0)
+Gui.NewNote.cmdNotesClear.Size(1125,345)
+Gui.NewNote.cmdNotesClear.Position(3645,4560)
+Gui.NewNote.cmdNotesClear.Caption("Clear")
+Gui.NewNote.cmdNotesClear.FontName("Tahoma")
+Gui.NewNote.cmdNotesClear.FontSize(8.25)
+Gui.NewNote.cmdNotesClear.Event(Click,cmdClear_Click)
+Gui.NewNote.txtPart.Create(TextBox,"",True,1950,300,0,1530,450,False,0,"Tahoma",8.25,,1)
+Gui.NewNote.lblPart.Create(Label,"PART",True,390,195,0,1605,210,True,0,"Tahoma",8.25,,0,0)
+Gui.NewNote.lblPart.BorderStyle(0)
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+' 13580 - Populate - WO View
+' 13620 - Script 1 - WO View
+
+V.Local.bVal.Declare(Boolean)
+V.Local.sSql.Declare(String)
+V.Local.bTableExists.Declare
+	
+F.Intrinsic.Control.SelectCase(V.Caller.Hook)
+	F.Intrinsic.Control.Case(13580)
+		'13580 - Populate - WO View
+		V.Passed.000057.Set("Field Service")
+		
+	F.Intrinsic.Control.Case(13620)
+		F.ODBC.Connection!con.OpenCompanyConnection(500)
+	
+		F.ODBC.Connection!con.TableExists("Gab_5874_FS_Notes", V.Local.bTableExists)
+		F.Intrinsic.Control.If(V.Local.bTableExists, =, False)
+			F.ODBC.Connection!con.Execute("CREATE TABLE GAB_5874_FS_NOTES (ID IDENTITY DEFAULT 0 CONSTRAINT UK_ID UNIQUE USING 0, JOB CHAR(6), SUFFIX CHAR(3), FSNOTES LONGVARCHAR, SEQ CHAR(3), CREATEDON DATETIME, CREATEDONEMPLOYEEID CHAR(5) );")
+		'F.Intrinsic.Control.Else
+			'F.ODBC.Connection!con.OpenRecordsetRW("rstFSNotesFLDS","Select * FROM GAB_5874_FS_Notes")
+			'F.ODBC.con!rstFSNotesFLDS.FieldExists("SEQ",V.Local.bVal)
+			'F.ODBC.con!rstFSNotesFLDS.Close
+			'F.Intrinsic.Control.If(V.Local.bVal,=,False)
+			'	F.ODBC.Connection!con.Execute("ALTER TABLE GAB_5874_FS_Notes ADD SEQ CHAR(3);")
+			'F.Intrinsic.Control.EndIf
+		F.Intrinsic.Control.EndIf
+	
+		'13620 - Script 1 - WO View
+		F.Intrinsic.Control.CallSub(SetContextMenus)
+		F.Intrinsic.Control.CallSub(SubFSNotes_View)
+		F.Intrinsic.Control.CallSub(SubFSEq_View)
+		F.Intrinsic.Control.CallSub(SubFSEx_View)
+		Gui.FieldServiceNotes.tabMain.SetTab(0)
+		Gui.FieldServiceNotes..Show
+
+F.Intrinsic.Control.EndSelect
+
+Program.Sub.Main.End
+
+Program.Sub.FieldServiceNotes_UnLoad.Start
+	F.ODBC.Connection!con.Close
+	F.Intrinsic.Control.End
+Program.Sub.FieldServiceNotes_UnLoad.End
+
+Program.Sub.SetContextMenus.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	Gui.FieldServiceNotes..ContextMenuCreate("ctxFldSerNotes")
+	Gui.FieldServiceNotes.GSGCFldSerNotes.ContextMenuAttach("ctxFldSerNotes")
+	Gui.FieldServiceNotes..ContextMenuAddItem("ctxFldSerNotes","Export",0,"Export")
+	Gui.FieldServiceNotes..ContextMenuSetItemEventHandler("ctxFldSerNotes","Export","Export")
+	
+	F.Intrinsic.Control.Catch
+		F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End 
+	F.Intrinsic.Control.EndTry
+Program.Sub.SetContextMenus.End
+
+Program.Sub.Export.Start
+	F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	V.Local.bExcel.Declare
+	V.Local.sExt.Declare
+	V.Local.sFileExport.Declare
+	V.Local.bFileLocked.Declare
+	V.Local.sMsg.Declare
+	
+	F.Automation.MSExcel.CheckPresence(V.Local.bExcel)
+	F.Intrinsic.Control.If(V.Local.bExcel)
+		V.Local.sExt.Set("xlsx")
+	F.Intrinsic.Control.Else
+		V.Local.sExt.Set("csv")
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.String.Build("{0}\GAB_5874_FldSerNotes_Export.{1}",V.Caller.LocalGssTempDir,V.Local.sExt,V.Local.sFileExport)
+	F.Intrinsic.File.IsFileLocked(V.Local.sFileExport,V.Local.bFileLocked)
+	F.Intrinsic.Control.If(V.Local.bFileLocked)
+		F.Intrinsic.String.Build("File is already open. Please close and export again.{0}File: {1}",V.Ambient.NewLine,V.Local.sFileExport,V.Local.sMsg)
+		F.Intrinsic.UI.Msgbox(V.Local.sMsg,"File In Use")
+	F.Intrinsic.Control.Else
+		Gui.FieldServiceNotes.GSGCFldSerNotes.Export(V.Local.sFileExport,V.Local.sExt)
+		F.Intrinsic.Task.ShellExec(0,"",V.Local.sFileExport,"","",1)
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.Control.Catch
+		F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		F.Intrinsic.Control.End 
+	F.Intrinsic.Control.EndTry
+Program.Sub.Export.End
+
+Program.Sub.SubFSNotes_View.Start
+	V.Local.sSql.Declare
+	V.Local.sJob.Declare
+	V.Local.sSuffix.Declare
+	V.Local.sText.Declare
+	
+	F.Intrinsic.String.Left(V.Passed.000001,6,V.Local.sJob)
+	F.Intrinsic.String.Mid(V.Passed.000001,7,3,V.Local.sSuffix)
+	
+	F.Intrinsic.Control.If(V.DataTable.dtFldSerNotes.Exists)
+		F.Data.DataTable.Close("dtFldSerNotes")
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.String.Build("Field Service Notes/Equipment/Expenses [{0}-{1}]",V.Local.sJob,V.Local.sSuffix,V.Local.sText)
+	Gui.FieldServiceNotes..Caption(V.Local.sText)
+	F.Intrinsic.String.Build("select CREATEDONEMPLOYEEID AS EMP_ID, VEM.NAME, CAST(CREATEDON AS DATE) AS CREATED, SEQ, FSNOTES from GAB_5874_FS_NOTES GN LEFT OUTER JOIN V_EMPLOYEE_MSTR VEM ON VEM.EMPLOYEE=CREATEDONEMPLOYEEID WHERE JOB = '{0}' AND SUFFIX = '{1}' ORDER BY CREATEDONEMPLOYEEID,CAST(CREATEDON AS DATE), SEQ",V.Local.sJob,V.Local.sSuffix,V.Local.sSql)
+	
+	F.Data.Datatable.CreateFromSQL("dtFldSerNotes","con",V.Local.sSql,True)
+	
+	F.Intrinsic.Control.CallSub(LoadGvFldSerNotes)
+Program.Sub.SubFSNotes_View.End
+
+Program.Sub.LoadGvFldSerNotes.Start
+	V.Local.sColumn.Declare
+	
+	Gui.FieldServiceNotes.GSGCFldSerNotes.AddGridViewFromDataTable("gvFldSerNotes","dtFldSerNotes")
+	Gui.FieldServiceNotes.GSGCFldSerNotes.SuspendLayout()
+	Gui.FieldServiceNotes.GSGCFldSerNotes.setGridViewProperty("gvFldSerNotes","MultiSelect",True)
+	Gui.FieldServiceNotes.GSGCFldSerNotes.setGridViewProperty("gvFldSerNotes","Editable",False)
+	Gui.FieldServiceNotes.GSGCFldSerNotes.setGridViewProperty("gvFldSerNotes","AllowSort",True)
+	Gui.FieldServiceNotes.GSGCFldSerNotes.setGridViewProperty("gvFldSerNotes","AllowFilter",True)
+	Gui.FieldServiceNotes.GSGCFldSerNotes.setGridViewProperty("gvFldSerNotes","OptionsDetailShowDetailTabs",False)
+	Gui.FieldServiceNotes.GSGCFldSerNotes.setGridViewProperty("gvFldSerNotes","OptionsFindAlwaysVisible",True)
+	Gui.FieldServiceNotes.GSGCFldSerNotes.SetGridViewProperty("gvFldSerNotes","OptionsViewShowGroupPanel",True)
+	Gui.FieldServiceNotes.GSGCFldSerNotes.SetGridViewProperty("gvFldSerNotes","EnableAppearanceOddRow",True)
+	
+	V.Local.sColumn.Set("EMP_ID")
+	Gui.FieldServiceNotes.GSGCFldSerNotes.SetColumnProperty("gvFldSerNotes",V.Local.sColumn,"Visible",False)
+	Gui.FieldServiceNotes.GSGCFldSerNotes.SetColumnProperty("gvFldSerNotes",V.Local.sColumn,"Caption","EMP_ID")
+	Gui.FieldServiceNotes.GSGCFldSerNotes.SetColumnProperty("gvFldSerNotes",V.Local.sColumn,"MinWidth","100")
+	Gui.FieldServiceNotes.GSGCFldSerNotes.SetColumnProperty("gvFldSerNotes",V.Local.sColumn,"HeaderHAlignment","Center")
+	Gui.FieldServiceNotes.GSGCFldSerNotes.SetColumnProperty("gvFldSerNotes",V.Local.sColumn,"CellHAlignment","Center")
+	
+	V.Local.sColumn.Set("NAME")
+	Gui.FieldServiceNotes.GSGCFldSerNotes.SetColumnProperty("gvFldSerNotes",V.Local.sColumn,"Visible",True)
+	Gui.FieldServiceNotes.GSGCFldSerNotes.SetColumnProperty("gvFldSerNotes",V.Local.sColumn,"Caption","Employee")
+	Gui.FieldServiceNotes.GSGCFldSerNotes.SetColumnProperty("gvFldSerNotes",V.Local.sColumn,"MinWidth","200")
+	Gui.FieldServiceNotes.GSGCFldSerNotes.SetColumnProperty("gvFldSerNotes",V.Local.sColumn,"HeaderHAlignment","Left")
+	Gui.FieldServiceNotes.GSGCFldSerNotes.SetColumnProperty("gvFldSerNotes",V.Local.sColumn,"CellHAlignment","Left")
+		
+	V.Local.sColumn.Set("CREATED")
+	Gui.FieldServiceNotes.GSGCFldSerNotes.SetColumnProperty("gvFldSerNotes",V.Local.sColumn,"Visible",True)
+	Gui.FieldServiceNotes.GSGCFldSerNotes.SetColumnProperty("gvFldSerNotes",V.Local.sColumn,"Caption","Created")
+	Gui.FieldServiceNotes.GSGCFldSerNotes.SetColumnProperty("gvFldSerNotes",V.Local.sColumn,"MinWidth","100")
+	Gui.FieldServiceNotes.GSGCFldSerNotes.SetColumnProperty("gvFldSerNotes",V.Local.sColumn,"HeaderHAlignment","Center")
+	Gui.FieldServiceNotes.GSGCFldSerNotes.SetColumnProperty("gvFldSerNotes",V.Local.sColumn,"CellHAlignment","Center")
+	Gui.FieldServiceNotes.GSGCFldSerNotes.SetColumnProperty("gvFldSerNotes",V.Local.sColumn,"CellHAlignment","Center")
+	Gui.FieldServiceNotes.GSGCFldSerNotes.SetColumnProperty("gvFldSerNotes",V.Local.sColumn,"DisplayCustomDatetime","d")
+	
+	V.Local.sColumn.Set("SEQ")
+	Gui.FieldServiceNotes.GSGCFldSerNotes.SetColumnProperty("gvFldSerNotes",V.Local.sColumn,"Visible",True)
+	Gui.FieldServiceNotes.GSGCFldSerNotes.SetColumnProperty("gvFldSerNotes",V.Local.sColumn,"Caption","Seq")
+	Gui.FieldServiceNotes.GSGCFldSerNotes.SetColumnProperty("gvFldSerNotes",V.Local.sColumn,"MinWidth","100")
+	Gui.FieldServiceNotes.GSGCFldSerNotes.SetColumnProperty("gvFldSerNotes",V.Local.sColumn,"HeaderHAlignment","Center")
+	Gui.FieldServiceNotes.GSGCFldSerNotes.SetColumnProperty("gvFldSerNotes",V.Local.sColumn,"CellHAlignment","Center")
+	Gui.FieldServiceNotes.GSGCFldSerNotes.SetColumnProperty("gvFldSerNotes",V.Local.sColumn,"CellForeColor","Blue")
+	Gui.FieldServiceNotes.GSGCFldSerNotes.SetColumnProperty("gvFldSerNotes",V.Local.sColumn,"CellFontUnderline",True)
+	
+	V.Local.sColumn.Set("FSNOTES")
+	Gui.FieldServiceNotes.GSGCFldSerNotes.SetColumnProperty("gvFldSerNotes",V.Local.sColumn,"Visible",True)
+	Gui.FieldServiceNotes.GSGCFldSerNotes.SetColumnProperty("gvFldSerNotes",V.Local.sColumn,"Caption","Notes")
+	Gui.FieldServiceNotes.GSGCFldSerNotes.SetColumnProperty("gvFldSerNotes",V.Local.sColumn,"MinWidth","250")
+	Gui.FieldServiceNotes.GSGCFldSerNotes.SetColumnProperty("gvFldSerNotes",V.Local.sColumn,"HeaderHAlignment","Left")
+	Gui.FieldServiceNotes.GSGCFldSerNotes.SetColumnProperty("gvFldSerNotes",V.Local.sColumn,"CellHAlignment","Left")
+
+	Gui.FieldServiceNotes.GSGCFldSerNotes.ResumeLayout()
+	Gui.FieldServiceNotes.GSGCFldSerNotes.MainView("gvFldSerNotes")
+	Gui.FieldServiceNotes.tabMain.SetTab(0)
+	
+Program.Sub.LoadGvFldSerNotes.End
+Program.Sub.GSGCFldSerNotes_RowCellClick.Start
+	V.Local.sText.Declare
+	V.Local.iDateD.Declare
+	V.Local.iDateM.Declare
+	V.Local.iDateY.Declare
+	V.Local.dDate.Declare
+	V.Local.sDate.Declare
+	
+	
+	F.Intrinsic.Control.SelectCase(V.Args.Column)
+		F.Intrinsic.Control.CaseAny("Seq","SEQ")
+		
+			Gui.FieldServiceNotes.txtNotes.Text(V.DataTable.dtFldSerNotes(V.Args.RowIndex).FSNOTES!FieldVal)
+			Gui.FieldServiceNotes.txtNotesEmployee.Text(V.DataTable.dtFldSerNotes(V.Args.RowIndex).EMP_ID!FieldVal)
+			Gui.FieldServiceNotes.txtNotesEmpN.Text(V.DataTable.dtFldSerNotes(V.Args.RowIndex).NAME!FieldVal)
+			F.Intrinsic.Date.Day(V.DataTable.dtFldSerNotes(V.Args.RowIndex).CREATED!.FieldVal,V.Local.iDateD)
+			F.Intrinsic.Date.Month(V.DataTable.dtFldSerNotes(V.Args.RowIndex).CREATED!.FieldVal,V.Local.iDateM)
+			F.Intrinsic.Date.Year(V.DataTable.dtFldSerNotes(V.Args.RowIndex).CREATED!.FieldVal,V.Local.iDateY)
+			F.Intrinsic.Date.DateSerial(V.Local.iDateY,V.Local.iDateM,V.Local.iDateD,V.Local.dDate)
+			F.Intrinsic.String.Format(V.Local.dDate,"M/D/YYYY",V.Local.sDate)
+			Gui.FieldServiceNotes.txtNotesDate.Text(V.Local.sDate)
+			Gui.FieldServiceNotes.txtNotesSeq.Text(V.DataTable.dtFldSerNotes(V.Args.RowIndex).SEQ!FieldVal)
+			
+	F.Intrinsic.Control.EndSelect
+Program.Sub.GSGCFldSerNotes_RowCellClick.End
+
+Program.Sub.SubFSEq_View.Start
+	V.Local.sSql.Declare
+	V.Local.sJob.Declare
+	V.Local.sSuffix.Declare
+	V.Local.sText.Declare
+	
+	F.Intrinsic.Control.If(V.DataTable.dtFldSerEq.Exists)
+		F.Data.DataTable.Close("dtFldSerEq")
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.String.Left(V.Passed.000001,6,V.Local.sJob)
+	F.Intrinsic.String.Mid(V.Passed.000001,7,3,V.Local.sSuffix)
+	
+	F.Intrinsic.String.Build("select GEE.EMPLOYEE  AS EMP_ID, VEM.NAME, DATE, DESCRIPTION, QTY, VALUE, NOTES from GAB_5874_FS_EE GEE LEFT OUTER JOIN V_EMPLOYEE_MSTR VEM ON VEM.EMPLOYEE=GEE.EMPLOYEE WHERE JOB = '{0}' AND SUFFIX = '{1}' AND TYPE='Q' ORDER BY GEE.EMPLOYEE, DATE",V.Local.sJob,V.Local.sSuffix,V.Local.sSql)
+	F.Data.Datatable.CreateFromSQL("dtFldSerEq","con",V.Local.sSql,True)
+
+	F.Intrinsic.Control.CallSub(LoadGvFldSerEq)
+	
+Program.Sub.SubFSEq_View.End
+Program.Sub.LoadGvFldSerEq.Start
+	V.Local.sColumn.Declare
+	
+	Gui.FieldServiceNotes.GSGCFldSerEq.AddGridViewFromDataTable("gvFldSerEq","dtFldSerEq")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SuspendLayout()
+	Gui.FieldServiceNotes.GSGCFldSerEq.setGridViewProperty("gvFldSerEq","MultiSelect",True)
+	Gui.FieldServiceNotes.GSGCFldSerEq.setGridViewProperty("gvFldSerEq","Editable",False)
+	Gui.FieldServiceNotes.GSGCFldSerEq.setGridViewProperty("gvFldSerEq","AllowSort",True)
+	Gui.FieldServiceNotes.GSGCFldSerEq.setGridViewProperty("gvFldSerEq","AllowFilter",True)
+	Gui.FieldServiceNotes.GSGCFldSerEq.setGridViewProperty("gvFldSerEq","OptionsDetailShowDetailTabs",False)
+	Gui.FieldServiceNotes.GSGCFldSerEq.setGridViewProperty("gvFldSerEq","OptionsFindAlwaysVisible",True)
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetGridViewProperty("gvFldSerEq","OptionsViewShowGroupPanel",True)
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetGridViewProperty("gvFldSerEq","EnableAppearanceOddRow",True)
+	
+	V.Local.sColumn.Set("EMP_ID")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"Visible",False)
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"Caption","EMP_ID")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"MinWidth","75")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"HeaderHAlignment","Center")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"CellHAlignment","Center")
+	
+	V.Local.sColumn.Set("NAME")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"Visible",True)
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"Caption","Employee")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"MinWidth","200")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"HeaderHAlignment","Left")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"CellHAlignment","Left")
+		
+	V.Local.sColumn.Set("DATE")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"Visible",True)
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"Caption","Date")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"MinWidth","75")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"HeaderHAlignment","Center")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"CellHAlignment","Center")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"CellHAlignment","Center")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"DisplayCustomDatetime","d")
+	
+	V.Local.sColumn.Set("DESCRIPTION")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"Visible",True)
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"Caption","Description")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"MinWidth","110")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"HeaderHAlignment","Center")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"CellHAlignment","Left")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"CellForeColor","Blue")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"CellFontUnderline",True)
+	
+	V.Local.sColumn.Set("QTY")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"Visible",True)
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"Caption","Qty")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"MinWidth","75")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"HeaderHAlignment","Center")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"CellHAlignment","Center")
+			
+	V.Local.sColumn.Set("VALUE")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"Visible",True)
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"Caption","Value")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"MinWidth","75")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"HeaderHAlignment","Center")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"CellHAlignment","Center")
+			
+	V.Local.sColumn.Set("NOTES")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"Visible",True)
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"Caption","Notes")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"MinWidth","250")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"HeaderHAlignment","Left")
+	Gui.FieldServiceNotes.GSGCFldSerEq.SetColumnProperty("gvFldSerEq",V.Local.sColumn,"CellHAlignment","Left")
+
+	Gui.FieldServiceNotes.GSGCFldSerEq.ResumeLayout()
+	Gui.FieldServiceNotes.GSGCFldSerEq.MainView("gvFldSerEq")
+	Gui.FieldServiceNotes.tabMain.SetTab(1)
+Program.Sub.LoadGvFldSerEq.End
+Program.Sub.cmdEqSave_Click.Start
+	V.Local.sJob.Declare
+	V.Local.sSuffix.Declare
+	V.Local.sText.Declare
+	V.Local.sSql.Declare
+	V.Local.sEqEx.Declare
+	
+	F.Intrinsic.Control.If(V.Screen.FieldServiceNotes!txtEqType.Text,=,"Equipment")
+		V.Local.sEqEx.Set("Q")
+	F.Intrinsic.Control.Else
+		V.Local.sEqEx.Set("E")
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.String.Left(V.Passed.000001,6,V.Local.sJob)
+	F.Intrinsic.String.Mid(V.Passed.000001,7,3,V.Local.sSuffix)
+	
+	F.Intrinsic.String.Build("UPDATE GAB_5874_FS_EE SET NOTES = '{0}' Where Employee = '{1}' And Job = '{2}' And Suffix = '{3}' And Type='{4}' And Description='{5}';",V.Screen.FieldServiceNotes!txtEqNotes.Text,V.Screen.FieldServiceNotes!txtEqEmployee.Text,V.Local.sJob,V.Local.sSuffix,V.Local.sEqEx,V.Screen.FieldServiceNotes!txtEqDesc.Text, V.Local.sSQL)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL)
+	
+	F.Intrinsic.Control.CallSub(cmdEqClear_Click)
+	
+	F.Intrinsic.Control.CallSub(SubFSEq_View)
+
+Program.Sub.cmdEqSave_Click.End
+Program.Sub.GSGCFldSerEq_RowCellClick.Start
+	V.Local.sText.Declare
+	
+	F.Intrinsic.Control.SelectCase(V.Args.Column)
+		F.Intrinsic.Control.CaseAny("Description","DESCRIPTION")
+			Gui.FieldServiceNotes.txtEqNotes.Text(V.DataTable.dtFldSerEq(V.Args.RowIndex).NOTES!FieldVal)
+			Gui.FieldServiceNotes.txtEqEmployee.Text(V.DataTable.dtFldSerEq(V.Args.RowIndex).EMP_ID!FieldVal)
+			Gui.FieldServiceNotes.txtEqType.Text("Equipment")
+			Gui.FieldServiceNotes.txtEqDesc.Text(V.DataTable.dtFldSerEq(V.Args.RowIndex).DESCRIPTION!FieldVal)
+			Gui.FieldServiceNotes.txtEqEmpN.Text(V.DataTable.dtFldSerEq(V.Args.RowIndex).NAME!FieldVal)
+			
+	F.Intrinsic.Control.EndSelect
+	
+Program.Sub.GSGCFldSerEq_RowCellClick.End
+
+Program.Sub.SubFSEx_View.Start
+	V.Local.sSql.Declare
+	V.Local.sJob.Declare
+	V.Local.sSuffix.Declare
+	V.Local.sText.Declare
+	
+	F.Intrinsic.Control.If(V.DataTable.dtFldSerEx.Exists)
+		F.Data.DataTable.Close("dtFldSerEx")
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.String.Left(V.Passed.000001,6,V.Local.sJob)
+	F.Intrinsic.String.Mid(V.Passed.000001,7,3,V.Local.sSuffix)
+	
+	F.Intrinsic.String.Build("select GEE.EMPLOYEE  AS EMP_ID, VEM.NAME, DATE, DESCRIPTION, QTY, VALUE, NOTES from GAB_5874_FS_EE GEE LEFT OUTER JOIN V_EMPLOYEE_MSTR VEM ON VEM.EMPLOYEE=GEE.EMPLOYEE WHERE JOB = '{0}' AND SUFFIX = '{1}' AND TYPE='E' ORDER BY GEE.EMPLOYEE, DATE",V.Local.sJob,V.Local.sSuffix,V.Local.sSql)
+	F.Data.Datatable.CreateFromSQL("dtFldSerEx","con",V.Local.sSql,True)
+
+	F.Intrinsic.Control.CallSub(LoadGvFldSerEx)
+Program.Sub.SubFSEx_View.End
+Program.Sub.LoadGvFldSerEx.Start
+	V.Local.sColumn.Declare
+	
+	Gui.FieldServiceNotes.GSGCFldSerEx.AddGridViewFromDataTable("gvFldSerEx","dtFldSerEx")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SuspendLayout()
+	Gui.FieldServiceNotes.GSGCFldSerEx.setGridViewProperty("gvFldSerEx","MultiSelect",True)
+	Gui.FieldServiceNotes.GSGCFldSerEx.setGridViewProperty("gvFldSerEx","Editable",False)
+	Gui.FieldServiceNotes.GSGCFldSerEx.setGridViewProperty("gvFldSerEx","AllowSort",True)
+	Gui.FieldServiceNotes.GSGCFldSerEx.setGridViewProperty("gvFldSerEx","AllowFilter",True)
+	Gui.FieldServiceNotes.GSGCFldSerEx.setGridViewProperty("gvFldSerEx","OptionsDetailShowDetailTabs",False)
+	Gui.FieldServiceNotes.GSGCFldSerEx.setGridViewProperty("gvFldSerEx","OptionsFindAlwaysVisible",True)
+	Gui.FieldServiceNotes.GSGCFldSerEx.setGridViewProperty("gvFldSerEx","OptionsViewShowGroupPanel",True)
+	Gui.FieldServiceNotes.GSGCFldSerEx.setGridViewProperty("gvFldSerEx","EnableAppearanceOddRow",True)
+	
+	V.Local.sColumn.Set("EMP_ID")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"Visible",False)
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"Caption","EMP_ID")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"MinWidth","75")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"HeaderHAlignment","Center")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"CellHAlignment","Center")
+	
+	V.Local.sColumn.Set("NAME")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"Visible",True)
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"Caption","Employee")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"MinWidth","200")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"HeaderHAlignment","Left")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"CellHAlignment","Left")
+		
+	V.Local.sColumn.Set("DATE")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"Visible",True)
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"Caption","Date")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"MinWidth","75")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"HeaderHAlignment","Center")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"CellHAlignment","Center")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"CellHAlignment","Center")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"DisplayCustomDatetime","d")
+	
+	V.Local.sColumn.Set("DESCRIPTION")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"Visible",True)
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"Caption","Description")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"MinWidth","110")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"HeaderHAlignment","Center")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"CellHAlignment","Left")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"CellForeColor","Blue")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"CellFontUnderline",True)
+	
+	V.Local.sColumn.Set("QTY")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"Visible",True)
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"Caption","Qty")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"MinWidth","75")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"HeaderHAlignment","Center")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"CellHAlignment","Center")
+			
+	V.Local.sColumn.Set("VALUE")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"Visible",True)
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"Caption","Value")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"MinWidth","75")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"HeaderHAlignment","Center")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"CellHAlignment","Center")
+			
+	V.Local.sColumn.Set("NOTES")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"Visible",True)
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"Caption","Notes")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"MinWidth","250")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"HeaderHAlignment","Left")
+	Gui.FieldServiceNotes.GSGCFldSerEx.SetColumnProperty("gvFldSerEx",V.Local.sColumn,"CellHAlignment","Left")
+
+	Gui.FieldServiceNotes.GSGCFldSerEx.ResumeLayout()
+	Gui.FieldServiceNotes.GSGCFldSerEx.MainView("gvFldSerEx")
+	Gui.FieldServiceNotes.tabMain.SetTab(2)
+Program.Sub.LoadGvFldSerEx.End
+Program.Sub.GSGCFldSerEx_RowCellClick.Start
+	V.Local.sText.Declare
+	
+	F.Intrinsic.Control.SelectCase(V.Args.Column)
+		F.Intrinsic.Control.CaseAny("Description","DESCRIPTION")
+			Gui.FieldServiceNotes.txtExNotes.Text(V.DataTable.dtFldSerEx(V.Args.RowIndex).NOTES!FieldVal)
+			gui.FieldServiceNotes.txtExEmployee.Text(V.DataTable.dtFldSerEx(V.Args.RowIndex).EMP_ID!FieldVal)
+			Gui.FieldServiceNotes.txtExType.Text("Expenses")
+			Gui.FieldServiceNotes.txtExDesc.Text(V.DataTable.dtFldSerEx(V.Args.RowIndex).DESCRIPTION!FieldVal)
+			Gui.FieldServiceNotes.txtExEmpN.Text(V.DataTable.dtFldSerEx(V.Args.RowIndex).NAME!FieldVal)			
+	F.Intrinsic.Control.EndSelect
+Program.Sub.GSGCFldSerEx_RowCellClick.End
+Program.Sub.cmdExSave_MouseClick.Start
+	V.Local.sJob.Declare
+	V.Local.sSuffix.Declare
+	V.Local.sSql.Declare
+	V.Local.sEqEx.Declare
+	
+	F.Intrinsic.Control.If(V.Screen.FieldServiceNotes!txtExType.Text,=,"Expenses")
+		V.Local.sEqEx.Set("E")
+	F.Intrinsic.Control.Else
+		V.Local.sEqEx.Set("Q")
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.String.Left(V.Passed.000001,6,V.Local.sJob)
+	F.Intrinsic.String.Mid(V.Passed.000001,7,3,V.Local.sSuffix)
+	
+	F.Intrinsic.String.Build("UPDATE GAB_5874_FS_EE SET NOTES = '{0}' Where Employee = '{1}' And Job = '{2}' And Suffix = '{3}' And Type='{4}' And Description='{5}';",V.Screen.FieldServiceNotes!txtExNotes.Text,V.Screen.FieldServiceNotes!txtExEmployee.Text,V.Local.sJob,V.Local.sSuffix,V.Local.sEqEx,V.Screen.FieldServiceNotes!txtExDesc.Text, V.Local.sSQL)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL)
+	
+	F.Intrinsic.Control.CallSub(cmdExClear_Click)
+	
+	F.Intrinsic.Control.CallSub(SubFSEx_View)
+	
+Program.Sub.cmdExSave_MouseClick.End
+Program.Sub.cmdNotesSave_Click.Start
+	V.Local.sJob.Declare
+	V.Local.sSuffix.Declare
+	V.Local.sSql.Declare
+	V.Local.dCREATEON.Declare
+	V.Local.sNote.Declare
+	
+	F.Intrinsic.Control.If(V.Screen.FieldServiceNotes!txtNotesEmployee.Text,<>,"")
+		F.Intrinsic.String.Left(V.Passed.000001,6,V.Local.sJob)
+		F.Intrinsic.String.Mid(V.Passed.000001,7,3,V.Local.sSuffix)
+		V.Local.dCREATEON.Set(V.Screen.FieldServiceNotes!txtNotesDate.Text)
+		V.Local.sNote.Set(V.Screen.FieldServiceNotes!txtNotes.Text)
+		F.Intrinsic.String.Build("UPDATE GAB_5874_FS_NOTES SET FSNOTES='{0}' where JOB='{1}' and SUFFIX='{2}' AND SEQ='{3}' AND CREATEDONEMPLOYEEID='{4}' AND CAST(CREATEDON AS DATE) ='{5}';",V.Local.sNote.PSQLFriendly,V.Local.sJob,V.Local.sSuffix,V.Screen.FieldServiceNotes!txtNotesSeq.Text,V.Screen.FieldServiceNotes!txtNotesEmployee.Text,V.Local.dCREATEON.PervasiveDate,V.Local.sSQL)
+		F.ODBC.Connection!con.Execute(V.Local.sSQL)
+		F.Intrinsic.Control.CallSub(cmdNotesClear_Click)
+		F.Intrinsic.Control.CallSub(SubFSNotes_View)	
+	F.Intrinsic.Control.EndIf
+
+	
+Program.Sub.cmdNotesSave_Click.End
+Program.Sub.cmdNotesClear_Click.Start
+	Gui.FieldServiceNotes.txtNotes.Text("")
+	Gui.FieldServiceNotes.txtNotesEmployee.Text("")
+	Gui.FieldServiceNotes.txtNotesEmpN.Text("")
+	Gui.FieldServiceNotes.txtNotesDate.Text("")
+	Gui.FieldServiceNotes.txtNotesSeq.Text("")
+Program.Sub.cmdNotesClear_Click.End
+Program.Sub.cmdEqClear_Click.Start
+	Gui.FieldServiceNotes.txtEqNotes.Text("")
+	gui.FieldServiceNotes.txtEqEmployee.Text("")
+	Gui.FieldServiceNotes.txtEqEmpN.Text("")
+	Gui.FieldServiceNotes.txtEqDesc.Text("")
+	Gui.FieldServiceNotes.txtEqType.Text("")
+Program.Sub.cmdEqClear_Click.End
+Program.Sub.cmdExClear_Click.Start
+	Gui.FieldServiceNotes.txtExNotes.Text("")
+	Gui.FieldServiceNotes.txtExEmployee.Text("")
+	Gui.FieldServiceNotes.txtExEmpN.Text("")
+	Gui.FieldServiceNotes.txtExDesc.Text("")
+	Gui.FieldServiceNotes.txtExType.Text("")
+Program.Sub.cmdExClear_Click.End
+Program.Sub.cmdExDel_Click.Start
+	V.Local.sJob.Declare
+	V.Local.sSuffix.Declare
+	V.Local.sSql.Declare
+	V.Local.sEqEx.Declare
+	
+	F.Intrinsic.Control.If(V.Screen.FieldServiceNotes!txtExType.Text,=,"Expenses")
+		V.Local.sEqEx.Set("E")
+	F.Intrinsic.Control.Else
+		V.Local.sEqEx.Set("Q")
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.String.Left(V.Passed.000001,6,V.Local.sJob)
+	F.Intrinsic.String.Mid(V.Passed.000001,7,3,V.Local.sSuffix)
+	
+	F.Intrinsic.String.Build("UPDATE GAB_5874_FS_EE SET NOTES = '' Where Employee = '{1}' And Job = '{2}' And Suffix = '{3}' And Type='{4}' And Description='{5}';",V.Screen.FieldServiceNotes!txtExNotes.Text,V.Screen.FieldServiceNotes!txtExEmployee.Text,V.Local.sJob,V.Local.sSuffix,V.Local.sEqEx,V.Screen.FieldServiceNotes!txtExDesc.Text, V.Local.sSQL)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL)
+	
+	F.Intrinsic.Control.CallSub(cmdExClear_Click)
+		
+	F.Intrinsic.Control.CallSub(SubFSEx_View)
+Program.Sub.cmdExDel_Click.End
+Program.Sub.cmdEqDel_Click.Start
+	V.Local.sJob.Declare
+	V.Local.sSuffix.Declare
+	V.Local.sText.Declare
+	V.Local.sSql.Declare
+	V.Local.sEqEx.Declare
+	
+	F.Intrinsic.Control.If(V.Screen.FieldServiceNotes!txtEqType.Text,=,"Equipment")
+		V.Local.sEqEx.Set("Q")
+	F.Intrinsic.Control.Else
+		V.Local.sEqEx.Set("E")
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.String.Left(V.Passed.000001,6,V.Local.sJob)
+	F.Intrinsic.String.Mid(V.Passed.000001,7,3,V.Local.sSuffix)
+	
+	F.Intrinsic.String.Build("UPDATE GAB_5874_FS_EE SET NOTES = '' Where Employee = '{1}' And Job = '{2}' And Suffix = '{3}' And Type='{4}' And Description='{5}';",V.Screen.FieldServiceNotes!txtEqNotes.Text,V.Screen.FieldServiceNotes!txtEqEmployee.Text,V.Local.sJob,V.Local.sSuffix,V.Local.sEqEx,V.Screen.FieldServiceNotes!txtEqDesc.Text, V.Local.sSQL)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL)
+	
+	F.Intrinsic.Control.CallSub(cmdEqClear_Click)
+	
+	F.Intrinsic.Control.CallSub(SubFSEq_View)
+Program.Sub.cmdEqDel_Click.End
+Program.Sub.cmdNotesNew_Click.Start
+	V.Local.sJob.Declare
+	V.Local.sSuffix.Declare
+	Gui.FieldServiceNotes..Enabled(False)
+	F.Intrinsic.String.Left(V.Passed.000001,6,V.Local.sJob)
+	F.Intrinsic.String.Mid(V.Passed.000001,7,3,V.Local.sSuffix)
+	Gui.NewNote.txtJob.Text(V.Local.sJob)
+	Gui.NewNote.txtSuffix.Text(V.Local.sSuffix)
+	Gui.NewNote.txtPart.Text(V.Passed.000019)
+	Gui.NewNote.txtDesc.Text(V.Passed.000023)
+	Gui.NewNote..Visible(True)
+Program.Sub.cmdNotesNew_Click.End
+Program.Sub.cmdBrwEmp_Click.Start
+	V.Local.sTitles.Declare
+	V.Local.iWidths.Declare
+	V.Local.sSQL.Declare
+	V.Local.sRet.Declare
+	F.Intrinsic.String.Split("Employee*!*Name","*!*",V.Local.sTitles)
+	F.Intrinsic.String.Split("600*!*1500","*!*",V.Local.iWidths)
+	V.Local.sSQL.Set("select Employee, Name from V_EMPLOYEE_MSTR order by Employee;")
+	F.Intrinsic.UI.SetBrowserHotTypeAhead(True)
+	F.Intrinsic.UI.Browser("Select Employee:","con",V.Local.sSQL,V.Local.sTitles,V.Local.iWidths,"10000","9000",V.Local.sRet)
+	F.Intrinsic.Control.If(V.Local.sRet,<>,"***CANCEL***")
+		F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+		Gui.NewNote.txtEmp.Text(V.Local.sRet(0).Trim)
+		Gui.NewNote.txtEmpN.Text(V.Local.sRet(1).Trim)
+	F.Intrinsic.Control.EndIf
+Program.Sub.cmdBrwEmp_Click.End
+Program.Sub.cmdClear_Click.Start
+	Gui.NewNote.txtJob.Text("")
+	Gui.NewNote.txtSuffix.Text("")
+	Gui.NewNote.txtPart.Text("")
+	Gui.NewNote.txtDesc.Text("")
+	Gui.NewNote.txtEmp.Text("")
+	Gui.NewNote.txtEmpN.Text("")
+	Gui.NewNote.txtNotes.Text("")
+	Gui.NewNote.dtpDt.Value(V.Ambient.Date)
+Program.Sub.cmdClear_Click.End
+Program.Sub.cmdBrwJob_Click.Start
+	V.Local.sTitles.Declare
+	V.Local.iWidths.Declare
+	V.Local.sSQL.Declare
+	V.Local.sRet.Declare
+	F.Intrinsic.String.Split("Job*!*Suffix*!*Description*!*Part*!*Due Date","*!*",V.Local.sTitles)
+	F.Intrinsic.String.Split("600*!*400*!*1500*!*1000*!*800","*!*",V.Local.iWidths)
+	V.Local.sSQL.Set("SELECT JOB AS Job,SUFFIX AS Suffix,DESCRIPTION AS Description,PART AS Part,DATE_DUE FROM V_JOB_HEADER WHERE JOB > '' ORDER BY Job,Suffix;")
+	F.Intrinsic.UI.SetBrowserHotTypeAhead(True)
+	F.Intrinsic.UI.Browser("Select Job:","con",V.Local.sSQL,V.Local.sTitles,V.Local.iWidths,"10000","9000",V.Local.sRet)
+	F.Intrinsic.Control.If(V.Local.sRet,<>,"***CANCEL***")
+		F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+		Gui.NewNote.txtJob.Text(V.Local.sRet(0).Trim)
+		Gui.NewNote.txtSuffix.Text(V.Local.sRet(1).Trim)
+		Gui.NewNote.txtDesc.Text(V.Local.sRet(2).Trim)
+		Gui.NewNote.txtPart.Text(V.Local.sRet(3).Trim)
+	F.Intrinsic.Control.EndIf
+Program.Sub.cmdBrwJob_Click.End
+Program.Sub.cmdSave_Click.Start
+	V.Local.sSQL.Declare
+	V.Local.iSeq.Declare(Long,1)
+	V.Local.dDate.Declare
+	V.Local.sText.Declare
+	
+	V.Local.dDate.Set(V.Screen.NewNote!dtpDt.Value)
+	V.Local.sText.Set(V.Screen.NewNote!txtNotes.Text)
+	F.Intrinsic.String.Build("Select * From GAB_5874_FS_NOTES WHERE JOB='{0}' AND SUFFIX='{1}' AND CREATEDONEMPLOYEEID='{2}' AND CREATEDON='{3}' ORDER BY SEQ DESC",V.Screen.NewNote!txtJob.Text,V.Screen.NewNote!txtSuffix.Text,V.Screen.NewNote!txtEmp.Text,V.Local.dDate.PervasiveDate,V.Local.sSQL)
+	F.ODBC.Connection!con.OpenRecordsetRW("rstNotesSave",V.Local.sSql)
+	F.Intrinsic.Control.If(V.ODBC.con!rstNotesSave.EOF,=,False)
+		F.Intrinsic.Math.Add(V.ODBC.con!rstNotesSave.FieldVal!SEQ,1,V.Local.iSeq)
+	F.Intrinsic.Control.EndIf
+	F.ODBC.con!rstNotesSave.AddNew
+	F.ODBC.con!rstNotesSave.Set!JOB(V.Screen.NewNote!txtJob.Text)
+	F.ODBC.con!rstNotesSave.Set!SUFFIX(V.Screen.NewNote!txtSuffix.Text)
+	F.ODBC.con!rstNotesSave.Set!SEQ(V.Local.iSeq)
+	F.ODBC.Con!rstNotesSave.Set!FSNOTES(V.Local.sText.PSQLFriendly)
+	F.ODBC.con!rstNotesSave.Set!CREATEDON(V.Local.dDate)
+	F.ODBC.con!rstNotesSave.Set!CREATEDONEMPLOYEEID(V.Screen.NewNote!txtEmp.Text)
+	F.ODBC.con!rstNotesSave.Update
+	F.ODBC.con!rstNotesSave.Close
+	
+	F.Intrinsic.Control.CallSub(NewNote_UnLoad)
+	
+Program.Sub.cmdSave_Click.End
+Program.Sub.NewNote_UnLoad.Start
+	F.Intrinsic.Control.CallSub(cmdClear_Click)
+	F.Intrinsic.Control.CallSub(SubFSNotes_View)
+	Gui.FieldServiceNotes..Enabled(True)
+	Gui.NewNote..Visible(False)
+
+		
+Program.Sub.NewNote_UnLoad.End
+
+Program.Sub.Comments.Start
+${$5$}$2.0.0.0$}$2
+${$6$}$rrodriguez$}$20230928085355635$}$YnvOFTUOxTrnxbSzMvfBmnrP7dtKqN6ZKEdpzIv886o2GqAJ28eDrG5yMUCkoIQDbnuL+j93bpwdmDJiyDUm3Q==
+Program.Sub.Comments.End
