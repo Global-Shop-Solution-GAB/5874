@@ -1,0 +1,1228 @@
+Program.Sub.Preflight.Start
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+'About: There were two scripts that were asked to be consolidated into a single script.
+'       It was instructed that they both just be pasted into one script and called individually from main.
+
+'Open Connection
+F.ODBC.Connection!con.OpenCompanyConnection(500)
+
+F.Intrinsic.Control.CallSub("GSMTableUpdateMain")
+F.Intrinsic.Control.CallSub("GSMobileFieldTransferMain")
+
+'Close Connection
+F.ODBC.Connection!con.Close
+Program.Sub.Main.End
+
+'###############################################################################################################
+'										GSMTableUpdate.g2u
+'###############################################################################################################
+
+Program.Sub.GSMTableUpdateMain.Start
+Function.Intrinsic.UI.UsePixels ' Allows you to use Pixels instead of Twips throughout
+
+'Show progress
+F.Intrinsic.UI.InvokeWaitDialog("Opening ODBC Connection","Updating GSM Tables....")
+
+F.Intrinsic.UI.ChangeWaitStatus("Processing Labor....")
+F.Intrinsic.Control.CallSub(Labor)
+
+F.Intrinsic.UI.ChangeWaitStatus("Processing Material....")
+F.Intrinsic.Control.CallSub(Material)
+
+F.Intrinsic.UI.ChangeWaitStatus("Processing Time and Attendance....")
+F.Intrinsic.Control.CallSub(TimeAndAttendance)
+
+F.Intrinsic.UI.ChangeWaitStatus("Processing Remove Jobs....")
+F.Intrinsic.Control.CallSub(RemoveJobs)
+
+'F.Intrinsic.UI.ChangeWaitStatus("Processing Pictures....")
+'F.Intrinsic.Control.CallSub(Pictures)
+
+'F.Intrinsic.UI.ChangeWaitStatus("Processing Notes....")
+'F.Intrinsic.Control.CallSub(Notes)
+
+'Close progress
+F.Intrinsic.UI.ChangeWaitStatus("Update Complete!")
+F.Intrinsic.UI.CloseWaitDialog
+
+Program.Sub.GSMTableUpdateMain.End
+
+Program.Sub.Labor.Start
+	V.Local.iCnt.Declare
+	V.Local.iHID.Declare
+	V.Local.iLID.Declare
+	V.Local.dNullDate.Declare
+	
+	V.Local.dNullDate.Set("1/1/2000")
+	
+	'Get records to move
+	F.Data.DataTable.CreateFromSQL("dtLabor",con,"Select * From cnf_Labor_Staging Where Status = 'Approved';")
+	
+	'Tables to move the records above to 
+	F.Data.DataTable.CreateFromSQL("dtHeader",con,"Select * From GSM_Header Where HID = -1;")
+	F.Data.DataTable.CreateFromSQL("dtHeaderFields",con,"Select * From GSM_Header_Fields Where HID = -1;")
+	F.Data.DataTable.CreateFromSQL("dtLine",con,"Select * From GSM_Line Where HID = -1;")
+	F.Data.DataTable.CreateFromSQL("dtLineFields",con,"Select * From GSM_Line_Fields Where HID = -1;")
+	
+	'Get HID
+	F.ODBC.Connection!con.ExecuteAndReturn("Select MAX(HID) From GSM_Header;",V.Local.iHID)
+	'Get LID
+	F.ODBC.Connection!con.ExecuteAndReturn("Select MAX(LID) From GSM_Line;",V.Local.iLID)
+	
+	'Set data in DataTables
+	F.Intrinsic.Control.For(V.Local.iCnt,0,V.DataTable.dtLabor.RowCount--,1)
+		'Set HID
+			F.Intrinsic.Math.Add(V.Local.iHID,1,V.Local.iHID)
+		'Set LID
+			F.Intrinsic.Math.Add(V.Local.iLID,1,V.Local.iLID)
+		'Header
+			F.Data.DataTable.AddRow("dtHeader","HID",V.Local.iHID,"COCODE",V.DataTable.dtLabor(V.Local.iCnt).COCODE!FieldValTrim,"TransactionType",0,"AttemptedDT",V.Local.dNullDate.PervasiveDate,"TransferDT",V.Local.dNullDate.PervasiveDate)
+		'HeaderFields
+			F.Data.DataTable.AddRow("dtHeaderFields","HFID",0,"HID",V.Local.iHID,"HFieldName","","HFieldVal","")
+		'Line
+			F.Data.DataTable.AddRow("dtLine","LID",V.Local.iLID,"HID",V.Local.iHID)
+		'LineFields
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","Employee","LFIeldVal ",V.DataTable.dtLabor(V.Local.iCnt).Employee!FieldValTrim)
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","Job","LFIeldVal ",V.DataTable.dtLabor(V.Local.iCnt).Job!FieldValTrim)
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","Suffix","LFIeldVal ",V.DataTable.dtLabor(V.Local.iCnt).Suffix!FieldValTrim)
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","Seq","LFIeldVal ",V.DataTable.dtLabor(V.Local.iCnt).Seq!FieldValTrim)
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","Workcenter","LFIeldVal ",V.DataTable.dtLabor(V.Local.iCnt).Workcenter!FieldValTrim)
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","Hours","LFIeldVal ",V.DataTable.dtLabor(V.Local.iCnt).Hours!FieldValTrim)
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","ClosedFlag","LFIeldVal ",V.DataTable.dtLabor(V.Local.iCnt).ClosedFlag!FieldValTrim)
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","Indirect","LFIeldVal ",V.DataTable.dtLabor(V.Local.iCnt).Indirect!FieldValTrim)
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","Date","LFIeldVal ",V.DataTable.dtLabor(V.Local.iCnt).LaborDate!FieldValTrim)
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","StartTime","LFIeldVal ",V.DataTable.dtLabor(V.Local.iCnt).StartTime!FieldValTrim)
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","FinishTime","LFIeldVal ",V.DataTable.dtLabor(V.Local.iCnt).FinishTime!FieldValTrim)
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","RateType","LFIeldVal ",V.DataTable.dtLabor(V.Local.iCnt).RateType!FieldValTrim)
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","GoodPieces","LFIeldVal ",V.DataTable.dtLabor(V.Local.iCnt).GoodPieces!FieldValTrim)
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","ScrapPieces","LFIeldVal ",V.DataTable.dtLabor(V.Local.iCnt).ScrapPieces!FieldValTrim)
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","ScrapCode","LFIeldVal ",V.DataTable.dtLabor(V.Local.iCnt).ScrapCode!FieldValTrim)
+	F.Intrinsic.Control.Next(V.Local.iCnt)
+	
+	'Save data to GSM Tables
+	F.Data.DataTable.SaveToDB("dtHeader",con,"GSM_Header","HID",256)
+	F.Data.DataTable.SaveToDB("dtHeaderFields",con,"GSM_Header_Fields","HFID",256)
+	F.Data.DataTable.SaveToDB("dtLine",con,"GSM_Line","LID",256)
+	F.Data.DataTable.SaveToDB("dtLineFields",con,"GSM_Line_Fields","LFID",256)
+	
+	'Set dtLabor to Processed
+	F.Data.DataTable.SetValue("dtLabor",-1,"Status","Processed")
+	F.Data.DataTable.SaveToDB("dtLabor",con,"cnf_Labor_Staging","ID",256)
+Program.Sub.Labor.End
+
+Program.Sub.Material.Start
+	V.Local.iCnt.Declare
+	V.Local.iHID.Declare
+	V.Local.iLID.Declare
+	V.Local.dNullDate.Declare
+	
+	V.Local.dNullDate.Set("1/1/2000")
+	
+	'Get records to move
+	F.Data.DataTable.CreateFromSQL("dtMaterial",con,"Select * From cnf_Material_Staging Where Status = 'Approved';")
+	
+	'Tables to move the records above to 
+	F.Data.DataTable.CreateFromSQL("dtHeader",con,"Select * From GSM_Header Where HID = -1;")
+	F.Data.DataTable.CreateFromSQL("dtHeaderFields",con,"Select * From GSM_Header_Fields Where HID = -1;")
+	F.Data.DataTable.CreateFromSQL("dtLine",con,"Select * From GSM_Line Where HID = -1;")
+	F.Data.DataTable.CreateFromSQL("dtLineFields",con,"Select * From GSM_Line_Fields Where HID = -1;")
+	
+	'Get HID
+	F.ODBC.Connection!con.ExecuteAndReturn("Select MAX(HID) From GSM_Header;",V.Local.iHID)
+	'Get LID
+	F.ODBC.Connection!con.ExecuteAndReturn("Select MAX(LID) From GSM_Line;",V.Local.iLID)
+	
+	'Set data in DataTables
+	F.Intrinsic.Control.For(V.Local.iCnt,0,V.DataTable.dtMaterial.RowCount--,1)
+		'Set HID
+			F.Intrinsic.Math.Add(V.Local.iHID,1,V.Local.iHID)
+		'Set LID
+			F.Intrinsic.Math.Add(V.Local.iLID,1,V.Local.iLID)
+		'Header
+			F.Data.DataTable.AddRow("dtHeader","HID",V.Local.iHID,"COCODE",V.DataTable.dtMaterial(V.Local.iCnt).COCODE!FieldValTrim,"TransactionType",1,"AttemptedDT",V.Local.dNullDate.PervasiveDate,"TransferDT",V.Local.dNullDate.PervasiveDate)
+		'HeaderFields
+			F.Data.DataTable.AddRow("dtHeaderFields","HFID",0,"HID",V.Local.iHID,"HFieldName","","HFieldVal","")
+		'Line
+			F.Data.DataTable.AddRow("dtLine","LID",V.Local.iLID,"HID",V.Local.iHID)
+		'LineFields
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","Part","LFIeldVal ",V.DataTable.dtMaterial(V.Local.iCnt).Part!FieldValTrim)
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","Rev","LFIeldVal ",V.DataTable.dtMaterial(V.Local.iCnt).Rev!FieldValTrim)
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","Loc","LFIeldVal ",V.DataTable.dtMaterial(V.Local.iCnt).Loc!FieldValTrim)
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","Quantity","LFIeldVal ",V.DataTable.dtMaterial(V.Local.iCnt).Quantity!FieldValTrim)
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","Lot","LFIeldVal ",V.DataTable.dtMaterial(V.Local.iCnt).Lot!FieldValTrim)
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","Bin","LFIeldVal ",V.DataTable.dtMaterial(V.Local.iCnt).Bin!FieldValTrim)
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","Heat","LFIeldVal ",V.DataTable.dtMaterial(V.Local.iCnt).Heat!FieldValTrim)
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","Serial","LFIeldVal ",V.DataTable.dtMaterial(V.Local.iCnt).Serial!FieldValTrim)
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","Job","LFIeldVal ",V.DataTable.dtMaterial(V.Local.iCnt).Job!FieldValTrim)
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","Suffix","LFIeldVal ",V.DataTable.dtMaterial(V.Local.iCnt).Suffix!FieldValTrim)
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","Seq","LFIeldVal ",V.DataTable.dtMaterial(V.Local.iCnt).Seq!FieldValTrim)
+	F.Intrinsic.Control.Next(V.Local.iCnt)
+	
+	'Save data to GSM Tables
+	F.Data.DataTable.SaveToDB("dtHeader",con,"GSM_Header","HID",256)
+	F.Data.DataTable.SaveToDB("dtHeaderFields",con,"GSM_Header_Fields","HFID",256)
+	F.Data.DataTable.SaveToDB("dtLine",con,"GSM_Line","LID",256)
+	F.Data.DataTable.SaveToDB("dtLineFields",con,"GSM_Line_Fields","LFID",256)
+	
+	'Set dtMaterial to Processed
+	F.Data.DataTable.SetValue("dtMaterial",-1,"Status","Processed")
+	F.Data.DataTable.SaveToDB("dtMaterial",con,"cnf_Material_Staging","ID",256)
+Program.Sub.Material.End
+
+Program.Sub.TimeAndAttendance.Start
+	V.Local.iCnt.Declare
+	V.Local.iHID.Declare
+	V.Local.iLID.Declare
+	V.Local.dNullDate.Declare
+	
+	V.Local.dNullDate.Set("1/1/2000")
+	
+	'Get records to move
+	F.Data.DataTable.CreateFromSQL("dtTA",con,"Select * From CNF_TA_STAGING Where Status = 'Submitted';")
+	
+	'Tables to move the records above to 
+	F.Data.DataTable.CreateFromSQL("dtHeader",con,"Select * From GSM_Header Where HID = -1;")
+	F.Data.DataTable.CreateFromSQL("dtHeaderFields",con,"Select * From GSM_Header_Fields Where HID = -1;")
+	F.Data.DataTable.CreateFromSQL("dtLine",con,"Select * From GSM_Line Where HID = -1;")
+	F.Data.DataTable.CreateFromSQL("dtLineFields",con,"Select * From GSM_Line_Fields Where HID = -1;")
+	
+	'Get HID
+	F.ODBC.Connection!con.ExecuteAndReturn("Select MAX(HID) From GSM_Header;",V.Local.iHID)
+	'Get LID
+	F.ODBC.Connection!con.ExecuteAndReturn("Select MAX(LID) From GSM_Line;",V.Local.iLID)
+	
+	'Set data in DataTables
+	F.Intrinsic.Control.For(V.Local.iCnt,0,V.DataTable.dtTA.RowCount--,1)
+		'Set HID
+			F.Intrinsic.Math.Add(V.Local.iHID,1,V.Local.iHID)
+		'Set LID
+			F.Intrinsic.Math.Add(V.Local.iLID,1,V.Local.iLID)
+		'Header
+			F.Data.DataTable.AddRow("dtHeader","HID",V.Local.iHID,"COCODE",V.DataTable.dtTA(V.Local.iCnt).COCODE!FieldValTrim,"TransactionType",2,"AttemptedDT",V.Local.dNullDate.PervasiveDate,"TransferDT",V.Local.dNullDate.PervasiveDate)
+		'HeaderFields
+			F.Data.DataTable.AddRow("dtHeaderFields","HFID",0,"HID",V.Local.iHID,"HFieldName","","HFieldVal","")
+		'Line
+			F.Data.DataTable.AddRow("dtLine","LID",V.Local.iLID,"HID",V.Local.iHID)
+		'LineFields
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","Employee","LFIeldVal ",V.DataTable.dtTA(V.Local.iCnt).Employee!FieldValTrim)
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","DateIn","LFIeldVal ",V.DataTable.dtTA(V.Local.iCnt).DateIn!FieldValTrim)
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","TimeIn","LFIeldVal ",V.DataTable.dtTA(V.Local.iCnt).TimeIn!FieldValTrim)
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","DateOut","LFIeldVal ",V.DataTable.dtTA(V.Local.iCnt).DateOut!FieldValTrim)
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","TimeOut","LFIeldVal ",V.DataTable.dtTA(V.Local.iCnt).TimeOut!FieldValTrim)
+	F.Intrinsic.Control.Next(V.Local.iCnt)
+	
+	'Save data to GSM Tables
+	F.Data.DataTable.SaveToDB("dtHeader",con,"GSM_Header","HID",256)
+	F.Data.DataTable.SaveToDB("dtHeaderFields",con,"GSM_Header_Fields","HFID",256)
+	F.Data.DataTable.SaveToDB("dtLine",con,"GSM_Line","LID",256)
+	F.Data.DataTable.SaveToDB("dtLineFields",con,"GSM_Line_Fields","LFID",256)
+	
+	'Set dtTA to Processed
+	F.Data.DataTable.SetValue("dtTA",-1,"Status","Processed")
+	F.Data.DataTable.SaveToDB("dtTA",con,"CNF_TA_STAGING","ID",256)
+Program.Sub.TimeAndAttendance.End
+
+Program.Sub.RemoveJobs.Start
+	V.Local.iCnt.Declare
+	V.Local.iHID.Declare
+	V.Local.iLID.Declare
+	V.Local.dNullDate.Declare
+	
+	V.Local.dNullDate.Set("1/1/2000")
+	
+	'Get records to move
+	F.Data.DataTable.CreateFromSQL("dtRemoveJobs",con,"Select * From CNF_RJ_STAGING Where Status = 'Submitted';")
+	
+	'Tables to move the records above to 
+	F.Data.DataTable.CreateFromSQL("dtHeader",con,"Select * From GSM_Header Where HID = -1;")
+	F.Data.DataTable.CreateFromSQL("dtHeaderFields",con,"Select * From GSM_Header_Fields Where HID = -1;")
+	F.Data.DataTable.CreateFromSQL("dtLine",con,"Select * From GSM_Line Where HID = -1;")
+	F.Data.DataTable.CreateFromSQL("dtLineFields",con,"Select * From GSM_Line_Fields Where HID = -1;")
+	
+	'Get HID
+	F.ODBC.Connection!con.ExecuteAndReturn("Select MAX(HID) From GSM_Header;",V.Local.iHID)
+	'Get LID
+	F.ODBC.Connection!con.ExecuteAndReturn("Select MAX(LID) From GSM_Line;",V.Local.iLID)
+	
+	'Set data in DataTables
+	F.Intrinsic.Control.For(V.Local.iCnt,0,V.DataTable.dtRemoveJobs.RowCount--,1)
+		'Set HID
+			F.Intrinsic.Math.Add(V.Local.iHID,1,V.Local.iHID)
+		'Set LID
+			F.Intrinsic.Math.Add(V.Local.iLID,1,V.Local.iLID)
+		'Header
+			F.Data.DataTable.AddRow("dtHeader","HID",V.Local.iHID,"COCODE",V.DataTable.dtRemoveJobs(V.Local.iCnt).COCODE!FieldValTrim,"TransactionType",3,"AttemptedDT",V.Local.dNullDate.PervasiveDate,"TransferDT",V.Local.dNullDate.PervasiveDate)
+		'HeaderFields
+			F.Data.DataTable.AddRow("dtHeaderFields","HFID",0,"HID",V.Local.iHID,"HFieldName","","HFieldVal","")
+		'Line
+			F.Data.DataTable.AddRow("dtLine","LID",V.Local.iLID,"HID",V.Local.iHID)
+		'LineFields
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","Job","LFIeldVal",V.DataTable.dtRemoveJobs(V.Local.iCnt).Job!FieldValTrim)
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","Suffix","LFIeldVal",V.DataTable.dtRemoveJobs(V.Local.iCnt).Suffix!FieldValTrim)
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","EmployeeID","LFIeldVal",V.DataTable.dtRemoveJobs(V.Local.iCnt).EmployeeID!FieldValTrim)
+	F.Intrinsic.Control.Next(V.Local.iCnt)
+	
+	'Save data to GSM Tables
+	F.Data.DataTable.SaveToDB("dtHeader",con,"GSM_Header","HID",256)
+	F.Data.DataTable.SaveToDB("dtHeaderFields",con,"GSM_Header_Fields","HFID",256)
+	F.Data.DataTable.SaveToDB("dtLine",con,"GSM_Line","LID",256)
+	F.Data.DataTable.SaveToDB("dtLineFields",con,"GSM_Line_Fields","LFID",256)
+	
+	'Set dtRemoveJobs to Processed
+	F.Data.DataTable.SetValue("dtRemoveJobs",-1,"Status","Processed")
+	F.Data.DataTable.SaveToDB("dtRemoveJobs",con,"CNF_RJ_STAGING","ID",256)
+Program.Sub.RemoveJobs.End
+
+Program.Sub.Pictures.Start
+	V.Local.iCnt.Declare
+	V.Local.iHID.Declare
+	V.Local.iLID.Declare
+	V.Local.iPID.Declare
+	V.Local.dNullDate.Declare
+	
+	V.Local.dNullDate.Set("1/1/2000")
+	
+	'Get records to move
+	F.Data.DataTable.CreateFromSQL("dtPictures",con,"Select * From cnf_Pictures_Staging Where Status = 'Submitted';")
+	
+	'Tables to move the records above to 
+	F.Data.DataTable.CreateFromSQL("dtHeader",con,"Select * From GSM_Header Where HID = -1;")
+	F.Data.DataTable.CreateFromSQL("dtHeaderFields",con,"Select * From GSM_Header_Fields Where HID = -1;")
+	F.Data.DataTable.CreateFromSQL("dtLine",con,"Select * From GSM_Line Where HID = -1;")
+	F.Data.DataTable.CreateFromSQL("dtLineFields",con,"Select * From GSM_Line_Fields Where HID = -1;")
+	F.Data.DataTable.CreateFromSQL("dtPicturesGSM",con,"Select * From GSM_Pictures Where PID = -1;")
+	
+	'Get HID
+	F.ODBC.Connection!con.ExecuteAndReturn("Select MAX(HID) From GSM_Header;",V.Local.iHID)
+	'Get LID
+	F.ODBC.Connection!con.ExecuteAndReturn("Select MAX(LID) From GSM_Line;",V.Local.iLID)
+	'Get PID
+	F.ODBC.Connection!con.ExecuteAndReturn("Select MAX(PID) From GSM_Pictures;",V.Local.iPID)
+	
+	'Set data in DataTables
+	F.Intrinsic.Control.For(V.Local.iCnt,0,V.DataTable.dtPictures.RowCount--,1)
+		'Set HID
+			F.Intrinsic.Math.Add(V.Local.iHID,1,V.Local.iHID)
+		'Set LID
+			F.Intrinsic.Math.Add(V.Local.iLID,1,V.Local.iLID)
+		'Set PID
+			F.Intrinsic.Math.Add(V.Local.iPID,1,V.Local.iPID)
+		'Header
+			F.Data.DataTable.AddRow("dtHeader","HID",V.Local.iHID,"COCODE",V.DataTable.dtPictures(V.Local.iCnt).COCODE!FieldValTrim,"TransactionType",4,"AttemptedDT",V.Local.dNullDate.PervasiveDate,"TransferDT",V.Local.dNullDate.PervasiveDate)
+		'HeaderFields
+			F.Data.DataTable.AddRow("dtHeaderFields","HFID",0,"HID",V.Local.iHID,"HFieldName","","HFieldVal","")
+		'Line
+			F.Data.DataTable.AddRow("dtLine","LID",V.Local.iLID,"HID",V.Local.iHID)
+		'LineFields
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","Job","LFIeldVal ",V.DataTable.dtPictures(V.Local.iCnt).Job!FieldValTrim)
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","Suffix","LFIeldVal ",V.DataTable.dtPictures(V.Local.iCnt).Suffix!FieldValTrim)
+		'PicturesGSM
+			F.Data.DataTable.AddRow("dtPicturesGSM","PID",V.Local.iPID,"HID",V.Local.iHID,"Picture",V.DataTable.dtPictures(V.Local.iCnt).Picture!FieldValTrim)
+	F.Intrinsic.Control.Next(V.Local.iCnt)
+	
+	'Save data to GSM Tables
+	F.Data.DataTable.SaveToDB("dtHeader",con,"GSM_Header","HID",256)
+	F.Data.DataTable.SaveToDB("dtHeaderFields",con,"GSM_Header_Fields","HFID",256)
+	F.Data.DataTable.SaveToDB("dtLine",con,"GSM_Line","LID",256)
+	F.Data.DataTable.SaveToDB("dtLineFields",con,"GSM_Line_Fields","LFID",256)
+	F.Data.DataTable.SaveToDB("dtPicturesGSM",con,"GSM_Pictures","PID",256)
+	
+	'Set dtPictures to Processed
+	F.Data.DataTable.SetValue("dtPictures",-1,"Status","Processed")
+	F.Data.DataTable.SaveToDB("dtPictures",con,"cnf_Pictures_Staging","ID",256)
+Program.Sub.Pictures.End
+
+Program.Sub.Notes.Start
+	V.Local.iCnt.Declare
+	V.Local.iHID.Declare
+	V.Local.iLID.Declare
+	V.Local.iNID.Declare
+	V.Local.dNullDate.Declare
+	
+	V.Local.dNullDate.Set("1/1/2000")
+	
+	'Get records to move
+	F.Data.DataTable.CreateFromSQL("dtNotes",con,"Select * From cnf_Notes_Staging Where Status = 'Submitted';")
+	
+	'Tables to move the records above to 
+	F.Data.DataTable.CreateFromSQL("dtHeader",con,"Select * From GSM_Header Where HID = -1;")
+	F.Data.DataTable.CreateFromSQL("dtHeaderFields",con,"Select * From GSM_Header_Fields Where HID = -1;")
+	F.Data.DataTable.CreateFromSQL("dtLine",con,"Select * From GSM_Line Where HID = -1;")
+	F.Data.DataTable.CreateFromSQL("dtLineFields",con,"Select * From GSM_Line_Fields Where HID = -1;")
+	F.Data.DataTable.CreateFromSQL("dtNotesGSM",con,"Select * From GSM_Notes Where NID = -1;")
+	
+	'Get HID
+	F.ODBC.Connection!con.ExecuteAndReturn("Select MAX(HID) From GSM_Header;",V.Local.iHID)
+	'Get LID
+	F.ODBC.Connection!con.ExecuteAndReturn("Select MAX(LID) From GSM_Line;",V.Local.iLID)
+	'Get NID
+	F.ODBC.Connection!con.ExecuteAndReturn("Select MAX(NID) From GSM_Notes;",V.Local.iNID)
+	
+	'Set data in DataTables
+	F.Intrinsic.Control.For(V.Local.iCnt,0,V.DataTable.dtNotes.RowCount--,1)
+		'Set HID
+			F.Intrinsic.Math.Add(V.Local.iHID,1,V.Local.iHID)
+		'Set LID
+			F.Intrinsic.Math.Add(V.Local.iLID,1,V.Local.iLID)
+		'Set NID
+			F.Intrinsic.Math.Add(V.Local.iNID,1,V.Local.iNID)
+		'Header
+			F.Data.DataTable.AddRow("dtHeader","HID",V.Local.iHID,"COCODE",V.DataTable.dtNotes(V.Local.iCnt).COCODE!FieldValTrim,"TransactionType",5,"AttemptedDT",V.Local.dNullDate.PervasiveDate,"TransferDT",V.Local.dNullDate.PervasiveDate)
+		'HeaderFields
+			F.Data.DataTable.AddRow("dtHeaderFields","HFID",0,"HID",V.Local.iHID,"HFieldName","","HFieldVal","")
+		'Line
+			F.Data.DataTable.AddRow("dtLine","LID",V.Local.iLID,"HID",V.Local.iHID)
+		'LineFields
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","Job","LFIeldVal ",V.DataTable.dtNotes(V.Local.iCnt).Job!FieldValTrim)
+			F.Data.DataTable.AddRow("dtLineFields","LFID",0,"LID",V.Local.iLID,"HID",V.Local.iHID,"LFieldName","Suffix","LFIeldVal ",V.DataTable.dtNotes(V.Local.iCnt).Suffix!FieldValTrim)
+		'NotesGSM
+			F.Data.DataTable.AddRow("dtNotesGSM","NID",V.Local.iNID,"HID",V.Local.iHID,"Notes",V.DataTable.dtNotes(V.Local.iCnt).Notes!FieldValTrim)
+	F.Intrinsic.Control.Next(V.Local.iCnt)
+	
+	'Save data to GSM Tables
+	F.Data.DataTable.SaveToDB("dtHeader",con,"GSM_Header","HID",256)
+	F.Data.DataTable.SaveToDB("dtHeaderFields",con,"GSM_Header_Fields","HFID",256)
+	F.Data.DataTable.SaveToDB("dtLine",con,"GSM_Line","LID",256)
+	F.Data.DataTable.SaveToDB("dtLineFields",con,"GSM_Line_Fields","LFID",256)
+	F.Data.DataTable.SaveToDB("dtNotesGSM",con,"GSM_Notes","NID",256)
+	
+	'Set dtNotes to Processed
+	F.Data.DataTable.SetValue("dtNotes",-1,"Status","Processed")
+	F.Data.DataTable.SaveToDB("dtNotes",con,"cnf_Notes_Staging","ID",256)
+Program.Sub.Notes.End
+
+'###############################################################################################################
+'									GSS_GSMobileFieldTransfer.g2u
+'###############################################################################################################
+
+Program.Sub.GSMobileFieldTransferMain.Start
+'About: This program was originally written to transfer data from the AzureSQL database that was collected when doing field service via a PowerBI app and transfer it to the company's pervasive database.
+'       It was later changed to instead use transfer data from pervasive tables to the wireless tables.
+
+'Pervasive Tables Used: WIRELESS_HDR, WIRELESS_LINE, FIELD_SVC_IMAGE, FIELD_SVC_NOTES, GSM_HEADER, GSM_HEADER_FIELDS, GSM_LINE_FIELDS, GSM_PICTURES, GSM_NOTES
+V.Global.sLogginFilePath.Declare(String)
+
+V.Local.sCompanies.Declare(string)
+V.Local.sSQL.Declare(string)
+V.Local.sPaddedTransactionID.Declare(string)
+V.Local.sTransactionType.Declare(string)
+V.Local.sUsername.Declare(string)
+V.Local.sError.Declare(string)
+V.Local.sTime.Declare(string)
+
+V.Local.iCompanies.Declare(long)
+V.Local.iHeaders.Declare(long)
+V.Local.iLinesTransactionID.Declare(long)
+V.Local.iTransactionID.Declare(long)
+V.Local.iHID.Declare(long)
+
+V.Local.bSuccess.Declare(boolean)
+
+V.Local.dFailedDate.Declare(date, "2000-01-01 00:00:00")
+
+F.Intrinsic.Control.CallSub(CreateTransactionTypeDictionary)
+
+'enable logging
+F.Intrinsic.Debug.EnableLogging
+
+'Get new Data
+F.Intrinsic.String.Build("SELECT GSM_HEADER.HID, GSM_HEADER.COCODE, GSM_HEADER.TRANSACTIONTYPE, GSM_HEADER_FIELDS.HFIELDNAME, GSM_HEADER_FIELDS.HFIELDVAL FROM GSM_HEADER RIGHT JOIN GSM_HEADER_FIELDS ON GSM_HEADER.HID = GSM_HEADER_FIELDS.HID WHERE GSM_HEADER.TRANSFERDT = '{0}' AND GSM_HEADER.COCODE = '{1}';", V.Local.dFailedDate.PervasiveDate, V.Caller.CompanyCode, V.Local.sSQL)
+
+F.Data.Datatable.CreateFromSQL("dtHeader", con, V.Local.sSQL, true)
+
+'if no new data, close
+F.Intrinsic.Control.if(V.DataTable.dtHeader.RowCount, =, 0)
+	F.Intrinsic.Debug.SetLA("There is currently no data needing to be transferred.")
+	F.Intrinsic.Control.End
+F.Intrinsic.Control.EndIf
+
+'Insert Row into WIRELESS_HDR
+F.Intrinsic.Control.For(V.Local.iHeaders, 0, V.DataTable.dtHeader.RowCount--)
+	'Set HID
+	V.Local.iHID.Set(V.DataTable.dtHeader(V.Local.iHeaders).HID!FieldValTrim)
+	
+	'Set TransactionType
+	V.Local.sTransactionType.Set(V.Dictionary.dictTransactionTypes![V.DataTable.dtHeader(V.Local.iHeaders).TRANSACTIONTYPE!FieldValTrim])
+	
+	'Set UserID
+	F.Intrinsic.Control.If(V.DataTable.dtHeader(V.Local.iHeaders).HFIELDNAME!FieldValTrim, =, "UID")
+		F.Global.Security.GetUsernameFromID(V.DataTable.dtHeader(V.Local.iHeaders).HFIELDVAL!FieldValTrim, V.Local.sUsername)
+		F.Intrinsic.String.Replace(V.Local.sUsername, "*!*", "", V.Local.sUsername)
+		
+		F.Intrinsic.Control.If(V.Local.sUsername, =, "***NORETURN***")
+			V.Local.sUsername.Set("")
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+	
+	'Get TransactionID from Header and Lines and use whichever is bigger
+	F.ODBC.Connection!con.ExecuteAndReturn("SELECT TOP 1 TRANS_ID FROM WIRELESS_HDR ORDER BY TRANS_ID DESC;", V.Local.iTransactionID)
+	F.ODBC.Connection!con.ExecuteAndReturn("SELECT TOP 1 TRANS_ID FROM WIRELESS_LINE ORDER BY TRANS_ID DESC;", V.Local.iLinesTransactionID)
+	F.Intrinsic.Control.If(V.Local.iTransactionID, <, V.Local.iLinesTransactionID)
+		V.Local.iTransactionID.Set(V.Local.iLinesTransactionID)
+	F.Intrinsic.Control.EndIf
+	
+	'Pad Transaction ID
+	F.Intrinsic.Math.Add(V.Local.iTransactionID, 1, V.Local.iTransactionID)
+	F.Intrinsic.String.LPad(V.Local.iTransactionID, "0", 9, V.Local.sPaddedTransactionID)
+	
+	'Insert new row into WIRELESS_HDR
+	F.Intrinsic.Control.Try
+		
+		F.Intrinsic.Control.If(V.Local.sTransactionType, =, "T10")
+			'If Time Clock Transaction, set Attempted and Success FLag to 'Y'
+			F.Intrinsic.String.Build("INSERT INTO WIRELESS_HDR (TRANS_ID, TRANS_TYPE, SUCCESSFUL_FLAG, ATTEMPTED_FLAG, USER_ID, DATE_LAST_CHG, TIME_LAST_CHG, LAST_CHG_BY) VALUES ('{0}', '{1}', 'Y', 'Y', '{2}', '{3}', '{4}', 'FLDSVC');", V.Local.sPaddedTransactionID, V.Local.sTransactionType, V.Local.sUsername, V.Ambient.Now.FormatyyyyMMdd, V.Ambient.Now.FormatHHmmss00, V.Local.sSQL)
+		F.Intrinsic.Control.Else
+			'Originally set WIRELESS_HDR.ATTEMPTED_FLAG to 'Y' so that it doesn't get polled before the lines table is ready
+			F.Intrinsic.String.Build("INSERT INTO WIRELESS_HDR (TRANS_ID, TRANS_TYPE, ATTEMPTED_FLAG, USER_ID, DATE_LAST_CHG, TIME_LAST_CHG, LAST_CHG_BY) VALUES ('{0}', '{1}', 'Y', '{2}', '{3}', '{4}', 'FLDSVC');", V.Local.sPaddedTransactionID, V.Local.sTransactionType, V.Local.sUsername, V.Ambient.Now.FormatyyyyMMdd, V.Ambient.Now.FormatHHmmss00, V.Local.sSQL)
+		F.Intrinsic.Control.EndIf
+		
+		F.ODBC.Connection!con.Execute(V.Local.sSQL)
+	F.Intrinsic.Control.Catch
+		'Log issue and skip to next HID
+		F.Intrinsic.String.Build("Failed to insert information from HID {0} into WIRELESS_HDR: {1}", V.Local.iHID, V.Ambient.ErrorDescription, V.Local.sError)
+		F.Intrinsic.Debug.SetLA(V.Local.sError)
+		F.Intrinsic.Control.ClearErrors()
+		F.Intrinsic.Control.Next(V.Local.iHeaders)
+	F.Intrinsic.Control.EndTry
+	
+	'Insert New Row into WIRELESS_LINE
+	F.Intrinsic.Control.SelectCase(V.DataTable.dtHeader(V.Local.iHeaders).TRANSACTIONTYPE!FieldValTrim)
+		F.Intrinsic.Control.Case(0)
+			F.Intrinsic.Control.CallSub(InsertLaborRow, "HID", V.Local.iHID, "TransactionID", V.Local.sPaddedTransactionID)
+		F.Intrinsic.Control.Case(1)
+			F.Intrinsic.Control.CallSub(InsertIssueRow, "HID", V.Local.iHID, "TransactionID", V.Local.sPaddedTransactionID)
+		F.Intrinsic.Control.Case(2)
+			F.Intrinsic.Control.CallSub(InsertTimeClockRow, "HID", V.Local.iHID, "TransactionID", V.Local.sPaddedTransactionID)
+		F.Intrinsic.Control.Case(3)
+			F.Intrinsic.Control.CallSub(InsertRemoveRow, "HID", V.Local.iHID, "TransactionID", V.Local.sPaddedTransactionID)
+		'F.Intrinsic.Control.Case(4)
+			'F.Intrinsic.Control.CallSub(InsertImageRow, "HID", V.Local.iHID, "TransactionID", V.Local.sPaddedTransactionID)
+		F.Intrinsic.Control.Case(5)
+			F.Intrinsic.Control.CallSub(InsertNotesRow, "HID", V.Local.iHID, "TransactionID", V.Local.sPaddedTransactionID)
+		F.Intrinsic.Control.CaseElse
+			'Do Nothing
+	F.Intrinsic.Control.EndSelect
+	
+	'Clean up based on Success in inserting the new line
+	F.Intrinsic.Control.If(V.Args.SuccessfullyInserted)
+		'if successfully inserted the Wireless Line, Update GSM_HEADER, Set WIRELESS_HDR FLAG BACK TO NULL
+		
+		'Update TYransfer date to current datetime
+		F.Intrinsic.String.Build("UPDATE GSM_HEADER SET TRANSFERDT = '{0} {1}' WHERE HID = {2};", V.Ambient.Now.Formatyyyy-MM-dd, V.Ambient.Now.FormatHH:mm:ss, V.Local.iHID, V.Local.sSQL)
+		F.ODBC.Connection!con.Execute(V.Local.sSQL)
+		
+		'If not Time Clock Transaction, reset the ATTEMPTED_FLAG to nothing
+		F.Intrinsic.Control.If(V.Local.sTransactionType, <>, "T10")
+			F.Intrinsic.String.Build("UPDATE WIRELESS_HDR SET ATTEMPTED_FLAG = NULL WHERE TRANS_ID = '{0}';", V.Local.sPaddedTransactionID, V.Local.sSQL)
+			F.ODBC.Connection!con.Execute(V.Local.sSQL)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		
+		'Clear All Tables of that TRANSACTION ID
+		F.Intrinsic.String.Build("DELETE FROM WIRELESS_LINE WHERE TRANS_ID = '{0}';", V.Local.sPaddedTransactionID, V.Local.sSQL)
+		F.ODBC.Connection!con.Execute(V.Local.sSQL)
+		
+		F.Intrinsic.String.Build("DELETE FROM WIRELESS_HDR WHERE TRANS_ID = '{0}';", V.Local.sPaddedTransactionID, V.Local.sSQL)
+		F.ODBC.Connection!con.Execute(V.Local.sSQL)
+		
+		F.Intrinsic.String.Build("DELETE FROM FIELD_SVC_IMAGE WHERE TRANS_ID = '{0}';", V.Local.sPaddedTransactionID, V.Local.sSQL)
+		F.ODBC.Connection!con.Execute(V.Local.sSQL)
+		
+		F.Intrinsic.String.Build("DELETE FROM FIELD_SVC_NOTES WHERE TRANS_ID = '{0}';", V.Local.sPaddedTransactionID, V.Local.sSQL)
+		F.ODBC.Connection!con.Execute(V.Local.sSQL)
+		
+		'Update Transfer date to 1/1/2000 00:00:00 if it failed.
+		F.Intrinsic.String.Build("UPDATE GSM_HEADER SET TRANSFERDT = '{0} {1}' WHERE HID = {2};", V.Ambient.Now.Formatyyyy-MM-dd, V.Ambient.Now.FormatHH:mm:ss, V.Local.iHID, V.Local.sSQL)
+		F.ODBC.Connection!con.Execute(V.Local.sSQL)
+		
+	F.Intrinsic.Control.EndIf
+	
+F.Intrinsic.Control.Next(V.Local.iHeaders)
+
+F.Data.Datatable.Close("dtHeader")
+
+F.Data.Dictionary.Close("dictTransactionTypes")
+
+Program.Sub.GSMobileFieldTransferMain.End
+
+Program.Sub.CreateTransactionTypeDictionary.Start
+'TRANSACTION TYPES
+'0 = Labor (L10)
+'1 = Issue (J55)
+'2 = Timeclock (T10)
+'3 = Remove (C18)
+'4 = Image (C19)
+'5 = Notes (C20)
+
+F.Data.Dictionary.Create("dictTransactionTypes")
+F.Data.Dictionary.AddItem("dictTransactionTypes", 0, "L10")
+F.Data.Dictionary.AddItem("dictTransactionTypes", 1, "J55")
+F.Data.Dictionary.AddItem("dictTransactionTypes", 2, "T10")
+F.Data.Dictionary.AddItem("dictTransactionTypes", 3, "C18")
+F.Data.Dictionary.AddItem("dictTransactionTypes", 4, "C19")
+F.Data.Dictionary.AddItem("dictTransactionTypes", 5, "C20")
+Program.Sub.CreateTransactionTypeDictionary.End
+
+Program.Sub.InsertLaborRow.Start
+'LABOR FIELDS
+'Field_1 = Date (MMddyy)
+'Field_2 = Employee (LPad("0", 5))
+'Field_3 = Job (trim(6))
+'Field_4 = Suffix (trim(3))
+'Field_5 = Sequence (trim(6))
+'Field_6 = Workcenter (UCase(Trim(4)))
+'Field_7 = Hours
+'Field_8 = Closed Flag ("Y" or Blank)
+'Field_9 = Indirect/Direct
+'Field_10 = Start Time (HHmmss)
+'Field_11 = Finish Time (HHmmss)
+'Field_12 = Rate Type (Always blank) 'Constant: excluded from datatable columns
+'Field_13 = Good Pieces (Should already be multiplied by 10,000)
+'Field_14 = Scrap Pieces (Should already be multiplied by 10,000) 
+'Field_15 = Scrap Code (Trim(2))
+
+V.Local.sField1.Declare(String)
+V.Local.sField2.Declare(String)
+V.Local.sField3.Declare(String)
+V.Local.sField4.Declare(String)
+V.Local.sField5.Declare(String)
+V.Local.sField6.Declare(String)
+V.Local.sField7.Declare(String)
+V.Local.sField8.Declare(String)
+V.Local.sField9.Declare(String)
+V.Local.sField10.Declare(String)
+V.Local.sField11.Declare(String)
+V.Local.sField13.Declare(String)
+V.Local.sField14.Declare(String)
+V.Local.sField15.Declare(String)
+
+V.Local.iLines.Declare(long)
+V.Local.sSQL.Declare(string)
+V.Local.sError.Declare(string)
+V.Local.bSuccessfullyInserted.Declare(boolean, False)
+V.Local.sFieldName.Declare(string)
+
+F.Intrinsic.Control.Try
+	
+	F.Intrinsic.String.Build("SELECT UPPER(LFIELDNAME) AS 'LFIELDNAME', LFIELDVAL FROM GSM_LINE_FIELDS WHERE HID = {0};", V.Args.HID, V.Local.sSQL)
+	F.Data.Datatable.CreateFromSQL("dtLines", con, V.Local.sSQL)
+	
+	F.Intrinsic.Control.For(V.Local.iLines, 0, V.DataTable.dtLines.RowCount--)
+	V.Local.sFieldName.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDNAME!FieldValTrim)
+		F.Intrinsic.Control.SelectCase(V.Local.sFieldName.UCase)
+			F.Intrinsic.Control.Case("DATE")
+			    V.Local.sField1.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+			    F.Intrinsic.Control.CallSub(ConvertDateStringToProperDateMask, "Date", V.Local.sField1)
+			    V.Local.sField1.Set(V.Args.ReturnDate)
+			F.Intrinsic.Control.Case("EMPLOYEE")
+			    V.Local.sField2.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+			    F.Intrinsic.String.LPad(V.Local.sField2, "0", 5, V.Local.sField2)
+			F.Intrinsic.Control.Case("JOB")
+			    V.Local.sField3.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)	
+			F.Intrinsic.Control.Case("SUFFIX")
+			    V.Local.sField4.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)	
+			F.Intrinsic.Control.Case("SEQ")
+			    V.Local.sField5.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+			F.Intrinsic.Control.Case("WORKCENTER")
+			    V.Local.sField6.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+			    F.Intrinsic.String.UCase(V.Local.sField6, V.Local.sField6)
+			F.Intrinsic.Control.Case("HOURS")
+			    V.Local.sField7.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+			F.Intrinsic.Control.Case("CLOSEDFLAG")
+			    V.Local.sField8.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+			F.Intrinsic.Control.Case("INDIRECT")
+			    V.Local.sField9.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+			F.Intrinsic.Control.Case("STARTTIME")
+			    V.Local.sField10.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim.Left4)
+			F.Intrinsic.Control.Case("FINISHTIME")
+			    V.Local.sField11.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim.Left4)
+			F.Intrinsic.Control.Case("GOODPIECES")
+			    V.Local.sField13.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+			F.Intrinsic.Control.Case("SCRAPPIECES")
+			    V.Local.sField14.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+			F.Intrinsic.Control.Case("SCRAPCODE")
+			    V.Local.sField15.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+			F.Intrinsic.Control.CaseElse
+				'Do nothing
+		F.Intrinsic.Control.EndSelect
+	F.Intrinsic.Control.Next(V.Local.iLines)
+	F.Data.Datatable.Close("dtLines")
+	
+	
+	F.Intrinsic.String.Build("'{0}', '0000', 'L10', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '', '{12}', '{13}', '{14}', '{15}', '{16}', 'FLDSVC'", V.Args.TransactionID, V.Local.sField1, V.Local.sField2, V.Local.sField3.Left6, V.Local.sField4.Left3, V.Local.sField5.Left6, V.Local.sField6.Left4, V.Local.sField7, V.Local.sField8, V.Local.sField9.Left1, V.Local.sField10, V.Local.sField11, V.Local.sField13, V.Local.sField14, V.Local.sField15.Left2, V.Ambient.Now.FormatyyyyMMdd, V.Ambient.Now.FormatHHmmss00, V.Local.sSQL) 
+	F.Intrinsic.String.Build("INSERT INTO WIRELESS_LINE (TRANS_ID, SEQ, TRANS_TYPE, FIELD_1, FIELD_2, FIELD_3, FIELD_4, FIELD_5, FIELD_6, FIELD_7, FIELD_8, FIELD_9, FIELD_10, FIELD_11, FIELD_12, FIELD_13, FIELD_14, FIELD_15, DATE_LAST_CHG, TIME_LAST_CHG, LAST_CHG_BY) VALUES ({0});", V.Local.sSQL, V.Local.sSQL)
+	
+	F.ODBC.Connection!con.Execute(V.Local.sSQL)
+	
+	V.Local.bSuccessfullyInserted.Set(True)
+
+F.Intrinsic.Control.Catch
+Function.Intrinsic.Debug.Stop
+
+	F.Intrinsic.String.Build("Failed to insert information from HID {0} into WIRELESS_LINES: {1}", V.Args.HID, V.Ambient.ErrorDescription, V.Local.sError)
+	F.Intrinsic.Debug.SetLA(V.Local.sError)
+	V.Local.bSuccessfullyInserted.Set(False)
+	F.Intrinsic.Control.ClearErrors()
+F.Intrinsic.Control.EndTry
+
+F.Intrinsic.Variable.AddRV("SuccessfullyInserted", V.Local.bSuccessfullyInserted)
+Program.Sub.InsertLaborRow.End
+
+Program.Sub.InsertIssueRow.Start
+'ISSUE FIELDS
+'Field_1 = Part (Replace(Trim(20), """, """"))
+'Field_2 = Rev (Trim(3))
+'Field_3 = Loc (Trim(2))
+'Field_4 = Quantity (Value + "0000")
+'Field_5 = Lot (Trim(15))
+'Field_6 = Bin (Trim(6))
+'Field_7 = Heat (Trim(15))
+'Field_8 = Serial (Trim(30))
+'Field_9 = Job (Trim(6))
+'Field_10 = Suffix (Trim(3))
+'Field_11 = Sequence (Trim(6))
+'Field_12 = Print Quantity
+
+V.Local.sField1.Declare(String)
+V.Local.sField2.Declare(String)
+V.Local.sField3.Declare(String)
+V.Local.sField4.Declare(String)
+V.Local.sField5.Declare(String)
+V.Local.sField6.Declare(String)
+V.Local.sField7.Declare(String)
+V.Local.sField8.Declare(String)
+V.Local.sField9.Declare(String)
+V.Local.sField10.Declare(String)
+V.Local.sField11.Declare(String)
+V.Local.sField12.Declare(String)
+
+V.Local.iLines.Declare(long)
+V.Local.bUseRevisions.Declare(boolean)
+V.Local.sSQL.Declare(string)
+V.Local.bSuccessfullyInserted.Declare(boolean, False)
+V.Local.sError.Declare(string)
+V.Local.sFieldName.Declare(String)
+
+F.Intrinsic.Control.Try
+
+	F.Intrinsic.String.Build("SELECT UPPER(LFIELDNAME) AS 'LFIELDNAME', LFIELDVAL FROM GSM_LINE_FIELDS WHERE HID = {0};", V.Args.HID, V.Local.sSQL)
+	F.Data.Datatable.CreateFromSQL("dtLines", con, V.Local.sSQL)
+	
+	'Check option for using Rev
+	F.Global.General.ReadOption("070008", 0, False, V.Local.bUseRevisions)
+	
+	F.Intrinsic.Control.For(V.Local.iLines, 0, V.DataTable.dtLines.RowCount--)
+		V.Local.sFieldName.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDNAME!FieldValTrim)
+		F.Intrinsic.Control.SelectCase(V.Local.sFieldName.UCase)
+			F.Intrinsic.Control.Case("PART")
+				'Check option for part/rev
+			    V.Local.sField1.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+				F.Intrinsic.Control.If(V.Local.bUseRevisions)
+					'If using Rev and part is greater than 17 characters, grab the left 17 for part, and the characters after as the rev
+					F.Intrinsic.Control.If(V.Local.sField1.Length, >, 17)
+						F.Intrinsic.String.Mid(V.Local.sField1, 18, V.Local.sField2)
+						V.Local.sField1.Set(V.Local.sField1.Left17)
+					F.Intrinsic.Control.EndIf
+				F.Intrinsic.Control.EndIf
+				
+			    V.Local.sField1.Set(V.Local.sField1.PSQLFriendly)
+			F.Intrinsic.Control.Case("REV")
+				'Set REV only if it has not been set yet from the part above
+				F.Intrinsic.Control.If(V.Local.sField2, =, "")
+			    	V.Local.sField2.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+			    F.Intrinsic.Control.EndIf
+			F.Intrinsic.Control.Case("LOC")
+			    V.Local.sField3.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)	
+			F.Intrinsic.Control.Case("QUANTITY")
+			    V.Local.sField4.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+			    F.Intrinsic.String.Build("{0}0000", V.Local.sField4, V.Local.sField4)
+			F.Intrinsic.Control.Case("LOT")
+			    V.Local.sField5.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+			F.Intrinsic.Control.Case("BIN")
+			    V.Local.sField6.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+			F.Intrinsic.Control.Case("HEAT")
+			    V.Local.sField7.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+			F.Intrinsic.Control.Case("SERIAL")
+			    V.Local.sField8.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+			F.Intrinsic.Control.Case("JOB")
+			    V.Local.sField9.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+			F.Intrinsic.Control.Case("SUFFIX")
+			    V.Local.sField10.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+			F.Intrinsic.Control.Case("SEQ")
+			    V.Local.sField11.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+			F.Intrinsic.Control.Case("PRINT QUANTITY")
+			    V.Local.sField12.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+			F.Intrinsic.Control.CaseElse
+				'Do nothing
+		F.Intrinsic.Control.EndSelect
+	F.Intrinsic.Control.Next(V.Local.iLines)
+	F.Data.Datatable.Close("dtLines")
+	
+	F.Intrinsic.String.Build("'{0}', '0000', 'J55', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}', '{14}', 'FLDSVC'", V.Args.TransactionID, V.Local.sField1.Left20, V.Local.sField2.Left3, V.Local.sField3.Left2, V.Local.sField4, V.Local.sField5.Left15, V.Local.sField6.Left6, V.Local.sField7.Left15, V.Local.sField8.Left30, V.Local.sField9.Left6, V.Local.sField10.Left3, V.Local.sField11.Left6, V.Local.sField12, V.Ambient.Now.FormatyyyyMMdd, V.Ambient.Now.FormatHHmmss00, V.Local.sSQL) 
+	F.Intrinsic.String.Build("INSERT INTO WIRELESS_LINE (TRANS_ID, SEQ, TRANS_TYPE, FIELD_1, FIELD_2, FIELD_3, FIELD_4, FIELD_5, FIELD_6, FIELD_7, FIELD_8, FIELD_9, FIELD_10, FIELD_11, FIELD_12, DATE_LAST_CHG, TIME_LAST_CHG, LAST_CHG_BY) VALUES ({0});", V.Local.sSQL, V.Local.sSQL)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL)
+	
+	V.Local.bSuccessfullyInserted.Set(True)
+
+F.Intrinsic.Control.Catch
+	Function.Intrinsic.Debug.Stop
+	F.Intrinsic.String.Build("Failed to insert information from HID {0} into WIRELESS_LINES: {1}", V.Args.HID, V.Ambient.ErrorDescription, V.Local.sError)
+	F.Intrinsic.Debug.SetLA(V.Local.sError)
+	V.Local.bSuccessfullyInserted.Set(False)
+	F.Intrinsic.Control.ClearErrors()
+F.Intrinsic.Control.EndTry
+
+F.Intrinsic.Variable.AddRV("SuccessfullyInserted", V.Local.bSuccessfullyInserted)
+Program.Sub.InsertIssueRow.End
+
+Program.Sub.InsertTimeClockRow.Start
+'TIMECLOCK FIELDS
+'Field_1 = Date In (yyyyMMdd)
+'Field_2 = Employee (Lpad("0"),5)
+'Field_3 = Employee Name (Lookup from Employee_Mstr)
+'Field_4 = Time In (HHmmss)
+'Field_5 = Time Out (HHmmss)
+
+V.Local.sField1.Declare(String)
+V.Local.sField2.Declare(String)
+V.Local.sField3.Declare(String)
+V.Local.sField4.Declare(String)
+V.Local.sField5.Declare(String)
+
+V.Local.iLines.Declare(long)
+V.Local.sSQL.Declare(string)
+V.Local.bSuccessfullyInserted.Declare(boolean, False)
+V.Local.sEmployeeID.Declare(string)
+V.Local.sError.Declare(string)
+V.Local.sMonthDay.Declare(string)
+V.Local.sYear.Declare(string)
+V.Local.sUsername.Declare(String)
+V.Local.sFieldName.Declare(string)
+
+F.Intrinsic.Control.Try
+	F.Intrinsic.String.Build("SELECT UPPER(LFIELDNAME) AS 'LFIELDNAME', LFIELDVAL FROM GSM_LINE_FIELDS WHERE HID = {0};", V.Args.HID, V.Local.sSQL)
+	F.Data.Datatable.CreateFromSQL("dtLines", con, V.Local.sSQL)
+	
+	F.Intrinsic.Control.For(V.Local.iLines, 0, V.DataTable.dtLines.RowCount--)
+		V.Local.sFieldName.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDNAME!FieldValTrim)
+		F.Intrinsic.Control.SelectCase(V.Local.sFieldName.UCase)
+			F.Intrinsic.Control.Case("DATEIN")
+			
+			    V.Local.sField1.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+			    '6 character dates need to be formatted to 4 digit years
+			    'E.G. 010120 = 01012020
+			    F.Intrinsic.Control.If(V.Local.sField1.Length, =, 6)
+			    	F.Intrinsic.String.Left(V.Local.sField1, 4, V.Local.sMonthDay)
+			    	F.Intrinsic.String.Right(V.Local.sField1, 2, V.Local.sYear)
+			        F.Intrinsic.String.Build("{0}20{1}", V.Local.sMonthDay, V.Local.sYear, V.Local.sField1)
+			    F.Intrinsic.Control.Endif
+			    
+			    F.Intrinsic.String.Format(V.Local.sField1, "yyyymmdd", V.Local.sField1)
+			F.Intrinsic.Control.Case("EMPLOYEE")
+			    V.Local.sEmployeeID.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+			    F.Intrinsic.String.LPad(V.Local.sEmployeeID, "0", 5, V.Local.sField2)
+			    
+			    'Set Field 3 (Employee Name) from ID above
+			    F.Global.Security.GetUsernameFromID(V.Local.sEmployeeID, V.Local.sUsername)
+				F.Intrinsic.String.Split(V.Local.sUsername, "*!*", V.Local.sUsername)
+				V.Local.sField3.Set(V.Local.sUsername(0))
+				
+				F.Intrinsic.Control.If(V.Local.sField3, =, "***NORETURN***")
+					V.Local.sField3.Set("")
+				F.Intrinsic.Control.EndIf
+				
+			F.Intrinsic.Control.Case("TIMEIN")
+			    V.Local.sField4.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+			    F.Intrinsic.String.RPad(V.Local.sField4, "0", 6, V.Local.sField4)
+			F.Intrinsic.Control.Case("TIMEOUT")
+			    V.Local.sField5.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+			    F.Intrinsic.String.RPad(V.Local.sField5, "0", 6, V.Local.sField5)
+			F.Intrinsic.Control.CaseElse
+				'Do nothing
+		F.Intrinsic.Control.EndSelect
+	F.Intrinsic.Control.Next(V.Local.iLines)
+	F.Data.Datatable.Close("dtLines")
+	
+	F.Intrinsic.String.Build("'{0}', '0000', 'T10', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', 'FLDSVC'", V.Args.TransactionID, V.Local.sField1, V.Local.sField2, V.Local.sField3, V.Local.sField4, V.Local.sField5, V.Ambient.Now.FormatyyyyMMdd, V.Ambient.Now.FormatHHmmss00, V.Local.sSQL) 
+	F.Intrinsic.String.Build("INSERT INTO WIRELESS_LINE (TRANS_ID, SEQ, TRANS_TYPE, FIELD_1, FIELD_2, FIELD_3, FIELD_4, FIELD_5, DATE_LAST_CHG, TIME_LAST_CHG, LAST_CHG_BY) VALUES ({0});", V.Local.sSQL, V.Local.sSQL)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL)
+	
+	'Insert information into time and attendance
+	F.Intrinsic.Control.CallSub("InsertIntoTimeAndAttendance", "EmployeeID", V.Local.sfield2, "DateIn", V.Local.sField1, "TimeIn", V.Local.sField4, "TimeOut", V.Local.sField5)
+	
+	V.Local.bSuccessfullyInserted.Set(True)
+
+F.Intrinsic.Control.Catch
+	Function.Intrinsic.Debug.Stop
+	F.Intrinsic.String.Build("Failed to insert information from HID {0} into WIRELESS_LINES: {1}", V.Args.HID, V.Ambient.ErrorDescription, V.Local.sError)
+	F.Intrinsic.Debug.SetLA(V.Local.sError)
+	V.Local.bSuccessfullyInserted.Set(False)
+	F.Intrinsic.Control.ClearErrors()
+F.Intrinsic.Control.EndTry
+
+F.Intrinsic.Variable.AddRV("SuccessfullyInserted", V.Local.bSuccessfullyInserted)
+Program.Sub.InsertTimeClockRow.End
+
+Program.Sub.InsertRemoveRow.Start
+'REMOVE FIELDS
+'Field_1 = Job (Trim(6))
+'Field_2 = Suffix (Trim(3))
+'Field_3 = Employee ID
+
+V.Local.sField1.Declare(String)
+V.Local.sField2.Declare(String)
+V.Local.sField3.Declare(String)
+
+V.Local.iLines.Declare(long)
+V.Local.sSQL.Declare(string)
+V.Local.bSuccessfullyInserted.Declare(boolean, False)
+V.Local.sError.Declare(string)
+V.Local.bHasEmployee.Declare(boolean, false)
+V.Local.sFieldName.Declare(string)
+
+F.Intrinsic.Control.Try
+
+	F.Intrinsic.String.Build("SELECT UPPER(LFIELDNAME) AS 'LFIELDNAME', LFIELDVAL FROM GSM_LINE_FIELDS WHERE HID = {0};", V.Args.HID, V.Local.sSQL)
+	F.Data.Datatable.CreateFromSQL("dtLines", con, V.Local.sSQL)
+	
+	F.Intrinsic.Control.For(V.Local.iLines, 0, V.DataTable.dtLines.RowCount--)
+		V.Local.sFieldName.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDNAME!FieldValTrim)
+		F.Intrinsic.Control.SelectCase(V.Local.sFieldName.UCase)
+			F.Intrinsic.Control.Case("JOB")
+			    V.Local.sField1.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+			F.Intrinsic.Control.Case("SUFFIX")
+			    V.Local.sField2.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+			F.Intrinsic.Control.Case("EMPLOYEEID")
+			    V.Local.sField3.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+			    V.Local.bHasEmployee.Set(True)
+			F.Intrinsic.Control.CaseElse
+				'Do nothing
+		F.Intrinsic.Control.EndSelect
+	F.Intrinsic.Control.Next(V.Local.iLines)
+	F.Data.Datatable.Close("dtLines")
+	
+	F.Intrinsic.Control.If(V.Local.bHasEmployee)
+		F.Intrinsic.String.Build("'{0}', '0000', 'C18', '{1}', '{2}', '{3}', '{4}', '{5}', 'FLDSVC'", V.Args.TransactionID, V.Local.sField1.Left6, V.Local.sField2.Left3, V.Local.sField3, V.Ambient.Now.FormatyyyyMMdd, V.Ambient.Now.FormatHHmmss00, V.Local.sSQL) 
+		F.Intrinsic.String.Build("INSERT INTO WIRELESS_LINE (TRANS_ID, SEQ, TRANS_TYPE, FIELD_1, FIELD_2, FIELD_3, DATE_LAST_CHG, TIME_LAST_CHG, LAST_CHG_BY) VALUES ({0});", V.Local.sSQL, V.Local.sSQL)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.String.Build("'{0}', '0000', 'C18', '{1}', '{2}', '{3}', '{4}', 'FLDSVC'", V.Args.TransactionID, V.Local.sField1.Left6, V.Local.sField2.Left3, V.Ambient.Now.FormatyyyyMMdd, V.Ambient.Now.FormatHHmmss00, V.Local.sSQL) 
+		F.Intrinsic.String.Build("INSERT INTO WIRELESS_LINE (TRANS_ID, SEQ, TRANS_TYPE, FIELD_1, FIELD_2, DATE_LAST_CHG, TIME_LAST_CHG, LAST_CHG_BY) VALUES ({0});", V.Local.sSQL, V.Local.sSQL)
+	F.Intrinsic.Control.EndIf
+	F.ODBC.Connection!con.Execute(V.Local.sSQL)
+	
+	V.Local.bSuccessfullyInserted.Set(True)
+
+F.Intrinsic.Control.Catch
+	Function.Intrinsic.Debug.Stop
+	F.Intrinsic.String.Build("Failed to insert information from HID {0} into WIRELESS_LINES: {1}", V.Args.HID, V.Ambient.ErrorDescription, V.Local.sError)
+	F.Intrinsic.Debug.SetLA(V.Local.sError)
+	V.Local.bSuccessfullyInserted.Set(False)
+	F.Intrinsic.Control.ClearErrors()
+F.Intrinsic.Control.EndTry
+
+F.Intrinsic.Variable.AddRV("SuccessfullyInserted", V.Local.bSuccessfullyInserted)
+Program.Sub.InsertRemoveRow.End
+
+Program.Sub.InsertImageRow.Start
+'IMAGE FIELDS
+'Field_1 = Job (Trim(6))
+'Field_2 = Suffix (Trim(3))
+'Field_3 = PictureName
+
+V.Local.sField1.Declare(String)
+V.Local.sField2.Declare(String)
+V.Local.sField3.Declare(String)
+
+V.Local.iLines.Declare(long)
+V.Local.sSQL.Declare(string)
+V.Local.bSuccessfullyInserted.Declare(boolean, False)
+V.Local.sError.Declare(string)
+V.Local.iImages.Declare(long)
+V.Local.sFieldName.Declare(string)
+
+F.Intrinsic.Control.Try
+	
+	F.Intrinsic.String.Build("SELECT UPPER(LFIELDNAME) AS 'LFIELDNAME', LFIELDVAL FROM GSM_LINE_FIELDS WHERE HID = {0};", V.Args.HID, V.Local.sSQL)
+	F.Data.Datatable.CreateFromSQL("dtLines", con, V.Local.sSQL)
+
+	F.Intrinsic.Control.For(V.Local.iLines, 0, V.DataTable.dtLines.RowCount--)
+		V.Local.sFieldName.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDNAME!FieldValTrim)
+		F.Intrinsic.Control.SelectCase(V.Local.sFieldName.UCase)
+			F.Intrinsic.Control.Case("JOB")
+			    V.Local.sField1.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+			F.Intrinsic.Control.Case("SUFFIX")
+			    V.Local.sField2.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+			F.Intrinsic.Control.Case("PICTURENAME")
+				V.Local.sField3.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+			F.Intrinsic.Control.CaseElse
+				'Do nothing
+		F.Intrinsic.Control.EndSelect
+	F.Intrinsic.Control.Next(V.Local.iLines)
+	F.Data.Datatable.Close("dtLines")
+	
+	F.Intrinsic.String.Build("'{0}', '0000', 'C19', '{1}', '{2}', '{3}', '{4}', '{5}', 'FLDSVC'", V.Args.TransactionID, V.Local.sField1.Left6, V.Local.sField2.Left3, V.Local.sField3.PSQLFriendly, V.Ambient.Now.FormatyyyyMMdd, V.Ambient.Now.FormatHHmmss00, V.Local.sSQL) 
+	F.Intrinsic.String.Build("INSERT INTO WIRELESS_LINE (TRANS_ID, SEQ, TRANS_TYPE, FIELD_1, FIELD_2, FIELD_3, DATE_LAST_CHG, TIME_LAST_CHG, LAST_CHG_BY) VALUES ({0});", V.Local.sSQL, V.Local.sSQL)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL)
+	
+	'Insert Images into Field Service Image Table
+	'Has to be done via RecordSet due to BLOBs
+	F.Intrinsic.String.Build("SELECT PICTURE FROM GSM_PICTURES WHERE HID = {0}", V.Args.HID, V.Local.sSQL)
+	F.Data.Datatable.CreateFromSQL("dtFromImages", con, V.Local.sSQL)
+	
+	F.Intrinsic.String.Build("SELECT FSIID, TRANS_ID, IMAGE FROM FIELD_SVC_IMAGE WHERE TRANS_ID = '{0}'", V.Args.TransactionID, V.Local.sSQL)
+	F.Data.Datatable.CreateFromSQL("dtToImages", con, V.Local.sSQL)
+	
+	F.Intrinsic.Control.For(V.Local.iImages, 0, V.DataTable.dtFromImages.RowCount--)
+		
+		'Add new row to datatable
+		F.Data.Datatable.AddRow("dtToImages", "TRANS_ID", V.Args.TransactionID, "IMAGE", V.DataTable.dtFromImages(V.Local.iImages).PICTURE!FieldValTrim)
+
+	F.Intrinsic.Control.Next(V.Local.iImages)
+	
+	
+	F.Data.Datatable.SaveToDB("dtToImages", con, "FIELD_SVC_IMAGE", "FSIID")
+	F.Data.Datatable.Close("dtFromImages")
+	F.Data.Datatable.Close("dtToImages")
+	
+	V.Local.bSuccessfullyInserted.Set(True)
+	
+F.Intrinsic.Control.Catch
+	Function.Intrinsic.Debug.Stop
+	F.Intrinsic.String.Build("Failed to insert information from HID {0} into WIRELESS_LINES: {1}", V.Args.HID, V.Ambient.ErrorDescription, V.Local.sError)
+	F.Intrinsic.Debug.SetLA(V.Local.sError)
+	V.Local.bSuccessfullyInserted.Set(False)
+	F.Intrinsic.Control.ClearErrors()
+F.Intrinsic.Control.EndTry
+
+F.Intrinsic.Variable.AddRV("SuccessfullyInserted", V.Local.bSuccessfullyInserted)
+Program.Sub.InsertImageRow.End
+
+Program.Sub.InsertNotesRow.Start
+'NOTES FIELDS
+'Field_1 = Job (Trim(6))
+'Field_2 = Suffix (Trim(3))
+
+V.Local.sField1.Declare(String)
+V.Local.sField2.Declare(String)
+
+V.Local.iLines.Declare(long)
+V.Local.sSQL.Declare(string)
+V.Local.bSuccessfullyInserted.Declare(boolean, False)
+V.Local.iNotes.Declare(long)
+V.Local.sNotes.Declare(string)
+V.Local.sError.Declare(string)
+V.Local.sFieldName.Declare(string)
+
+F.Intrinsic.Control.Try
+	F.Intrinsic.String.Build("SELECT UPPER(LFIELDNAME) AS 'LFIELDNAME', LFIELDVAL FROM GSM_LINE_FIELDS WHERE HID = {0};", V.Args.HID, V.Local.sSQL)
+	F.Data.Datatable.CreateFromSQL("dtLines", con, V.Local.sSQL)
+	
+	F.Intrinsic.Control.For(V.Local.iLines, 0, V.DataTable.dtLines.RowCount--)
+		V.Local.sFieldName.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDNAME!FieldValTrim)
+		F.Intrinsic.Control.SelectCase(V.Local.sFieldName.UCase)
+			F.Intrinsic.Control.Case("JOB")
+			    V.Local.sField1.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+			F.Intrinsic.Control.Case("SUFFIX")
+			    V.Local.sField2.Set(V.DataTable.dtLines(V.Local.iLines).LFIELDVAL!FieldValTrim)
+			F.Intrinsic.Control.CaseElse
+				'Do nothing
+		F.Intrinsic.Control.EndSelect
+	F.Intrinsic.Control.Next(V.Local.iLines)
+	F.Data.Datatable.Close("dtLines")
+	
+	F.Intrinsic.String.Build("'{0}', '0000', 'C20', '{1}', '{2}', '{3}', '{4}', 'FLDSVC'", V.Args.TransactionID, V.Local.sField1.Left6, V.Local.sField2.Left3, V.Ambient.Now.FormatyyyyMMdd, V.Ambient.Now.FormatHHmmss00, V.Local.sSQL) 
+	F.Intrinsic.String.Build("INSERT INTO WIRELESS_LINE (TRANS_ID, SEQ, TRANS_TYPE, FIELD_1, FIELD_2, DATE_LAST_CHG, TIME_LAST_CHG, LAST_CHG_BY) VALUES ({0});", V.Local.sSQL, V.Local.sSQL)
+	F.ODBC.Connection!con.Execute(V.Local.sSQL)
+	
+	'Insert Notes into Field Service Note Table
+	F.Intrinsic.String.Build("SELECT NOTES FROM GSM_NOTES WHERE HID = {0}", V.Args.HID, V.Local.sSQL)
+	F.Data.Datatable.CreateFromSQL("dtNotes", con, V.Local.sSQL)
+	F.Intrinsic.Control.For(V.Local.iNotes, 0, V.DataTable.dtNotes.RowCount--)
+		V.Local.sNotes.Set(V.DataTable.dtNotes(V.Local.iNotes).NOTES!FieldValTrim)
+		F.Intrinsic.String.Build("INSERT INTO FIELD_SVC_NOTES (TRANS_ID, FSNOTES) VALUES ('{0}', '{1}');", V.Args.TransactionID, V.Local.sNotes.PSQLFriendly, V.Local.sSQL)
+		F.ODBC.Connection!con.Execute(V.Local.sSQL)
+	F.Intrinsic.Control.Next(V.Local.iNotes)
+	F.Data.Datatable.Close("dtNotes")
+	
+	V.Local.bSuccessfullyInserted.Set(True)
+
+F.Intrinsic.Control.Catch
+Function.Intrinsic.Debug.Stop
+
+	F.Intrinsic.String.Build("Failed to insert information from HID {0} into WIRELESS_LINES: {1}", V.Args.HID, V.Ambient.ErrorDescription, V.Local.sError)
+	F.Intrinsic.Debug.SetLA(V.Local.sError)
+	V.Local.bSuccessfullyInserted.Set(False)
+	F.Intrinsic.Control.ClearErrors()
+F.Intrinsic.Control.EndTry
+
+F.Intrinsic.Variable.AddRV("SuccessfullyInserted", V.Local.bSuccessfullyInserted)
+Program.Sub.InsertNotesRow.End
+
+Program.Sub.InsertIntoTimeAndAttendance.Start
+V.Local.sFullName.Declare(string)
+V.Local.sChargeDate.Declare(string)
+V.Local.dDateIn.Declare(date)
+V.Local.dTimeIn.Declare(date)
+V.Local.dTimeOut.Declare(date)
+V.Local.dDatetimeIn.Declare(date)
+V.Local.dDatetimeOut.Declare(date)
+V.Local.sCurrentDate.Declare(String)
+V.Local.sCurrentTime.Declare(string)
+V.Local.iWeekday.Declare(long)
+V.Local.sSQL.Declare(string)
+V.Local.iRowCount.Declare(string)
+V.Local.sDepartmentShiftRec.Declare(string)
+V.Local.iInTSMin.Declare(long)
+V.Local.iOutTSMin.Declare(long)
+V.Local.sError.Declare(string)
+V.Local.iTotalMinutesWorked.Declare(float)
+V.Local.iTotalHoursWorked.Declare(float)
+V.Local.sDateOut.Declare(string)
+
+F.Intrinsic.Control.Try
+	'Make sure time in/out are provided
+	F.Intrinsic.Control.If(V.Args.DateIn, =, V.Ambient.Null, "OR", V.Args.TimeIn, =, V.Ambient.Null)
+		F.Intrinsic.Control.RaiseError(100, "No Date or Time In Provided for Time and Attendance Record.")
+	F.Intrinsic.Control.ElseIf(V.Args.TimeOut, =, V.Ambient.Null)
+		F.Intrinsic.Control.RaiseError(100, "No Time Out Provided for Time and Attendance Record.")
+	F.Intrinsic.Control.EndIf
+
+	'Get Full Date Time In
+	F.Intrinsic.Date.ConvertDString(V.Args.DateIn, "yyyyMMdd", V.Local.dDateIn)
+	F.Intrinsic.Date.ConvertTString(V.Args.TimeIn, "HHNNSS", V.Local.dTimeIn)
+	F.Intrinsic.Date.CombineDateTime(V.Local.dDateIn, V.Local.dTimeIn, V.Local.dDatetimeIn)
+	
+	'Get Full Date Time Out
+	F.Intrinsic.Date.ConvertTString(V.Args.TimeOut, "HHNNSS", V.Local.dTimeOut)
+	F.Intrinsic.Date.CombineDateTime(V.Local.dDateIn, V.Local.dTimeOut, V.Local.dDatetimeOut)
+	
+	'Add 1 day to the time out if it is before the time in
+	F.Intrinsic.Control.If(V.Local.dDateTimeIn, >, V.Local.dDatetimeOut)
+		F.Intrinsic.Date.DateAdd("D", 1, V.Local.dDatetimeOut, V.Local.dDatetimeOut)
+	F.Intrinsic.Control.Endif
+	
+	'Set Date Out
+	V.Local.sDateOut.Set(V.Local.dDatetimeOut.FormatyyyyMMdd)
+	
+	'Get Worked hours and minutes
+	F.Intrinsic.Date.DateDiff("N", V.Local.dDateTimeIn, V.Local.dDatetimeOut, V.Local.iTotalMinutesWorked)
+	F.Intrinsic.Math.Div(V.Local.iTotalMinutesWorked, 60, V.Local.iTotalHoursWorked)
+	F.Intrinsic.Math.Floor(V.Local.iTotalHoursWorked, V.Local.iTotalHoursWorked)
+	F.Intrinsic.Math.Mod(V.Local.iTotalMinutesWorked, 60, V.Local.iTotalMinutesWorked)
+	
+	'Get Current Date in yyyyMMdd format string
+	F.Intrinsic.String.DateString(V.Ambient.Now, V.Local.sCurrentDate)
+	
+	'Get Current Time in HHmmss00 format time
+	F.Intrinsic.String.TimeString(V.Ambient.Now, V.Local.sCurrentTime)
+	F.Intrinsic.String.Build("{0}0000", V.Local.sCurrentTime, V.Local.sCurrentTime)
+
+	'Get Full Name
+	F.Intrinsic.String.Build("SELECT NAME FROM EMPLOYEE_MSTR WHERE EMPLOYEE = '{0}';", V.Args.EmployeeID, V.Local.sSQL)
+	F.ODBC.Connection!con.ExecuteAndReturn(V.Local.sSQL, V.Local.sFullName)
+
+	'Get Day of week of transaction date
+	'For Time and Attendance: 1 = Monday... 7 = Sunday
+	'WeekDay function returns: 1 = Sunday... 7 = Saturday
+	'Get Weekday function return and subtract 1, then if it is 0, set it to 7
+	F.Intrinsic.Date.Weekday(V.Local.dDateIn, V.Local.iWeekday)
+	F.Intrinsic.Math.Sub(V.Local.iWeekday, 1, V.Local.iWeekday)
+	F.Intrinsic.Control.If(V.Local.iWeekday, =, 0)
+		V.Local.iWeekday.Set(7)
+	F.Intrinsic.Control.EndIf
+	
+	'Get Department, Shift, and Rec Group from EMPLOYEE_SHIFT
+	'if no rows exist in EMPLOYEE_SHIFT, use EMPLOYEE_MSTR
+	
+	F.Intrinsic.String.Build("SELECT COUNT(1) FROM EMPLOYEE_SHIFT WHERE EMPLOYEE='{0}' AND DAY = '{1}';", V.Args.EmployeeID, V.Local.iWeekday, V.Local.sSQL)
+	F.ODBC.Connection!con.ExecuteAndReturn(V.Local.sSQL, V.Local.iRowCount)
+	F.Intrinsic.Control.If(V.Local.iRowCount, >, 0)
+		F.Intrinsic.String.Build("SELECT TOP 1 DEPT, SHIFT, F_GROUP FROM EMPLOYEE_SHIFT WHERE EMPLOYEE='{0}' AND DAY = '{1}';", V.Args.EmployeeID, V.Local.iWeekday, V.Local.sSQL)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.String.Build("SELECT TOP 1 DEPT_EMPLOYEE, SHIFT, PR_BALANCE_GROUP FROM EMPLOYEE_MSTR WHERE EMPLOYEE='{0}' AND RECORD_TYPE = 0;", V.Args.EmployeeID, V.Local.sSQL)
+	F.Intrinsic.Control.EndIf
+	F.ODBC.Connection!con.ExecuteAndReturn(V.Local.sSQL, V.Local.sDepartmentShiftRec)
+	
+	'if no return, exit sub as there is not info to post: TODO, Should it post the T&A anyways with no dept, shift, rec group?	
+	F.Intrinsic.Control.If(V.Local.sDepartmentShiftRec, =, "")
+		F.Intrinsic.String.Build("No department, shift, or rec group returned for employee {0} in EMPLOYEE_SHIFT or EMPLOYEE_MSTR. Time and Attendance record was not added.", V.Args.EmployeeID, V.Local.sError)
+		F.Intrinsic.Debug.SetLA(V.Local.sError)
+		F.Intrinsic.Control.ExitSub
+	F.Intrinsic.Control.EndIf
+
+ 	'Split on delimiter index 0 = dept, 1 = shift, 2 = rec group
+	F.Intrinsic.String.Split(V.Local.sDepartmentShiftRec, "*!*", V.Local.sDepartmentShiftRec)
+	
+	'Get Time In and Time Out TS Min value (minutes since 1/1/1968 00:00:00 to the clock in/out date and time)
+	F.Intrinsic.Date.DateDiff("n", "01/01/1968 00:00:00", V.Local.dDatetimeIn, V.Local.iInTSMin)
+	F.Intrinsic.Date.DateDiff("n", "01/01/1968 00:00:00", V.Local.dDatetimeOut, V.Local.iOutTSMin)
+	
+	'Broke up building the insert statement into 3 parts because this table be WACK.
+	'Build insert statement (Part 1 of 3)
+	F.Intrinsic.String.Build("'{0}', '{1}', {2}, {3}, '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}'", V.Args.EmployeeID, V.Args.DateIn, V.Local.iInTSMin, V.Local.iOutTSMin, V.Args.DateIn, V.Args.TimeIn, V.Local.sDateOut, V.Args.TimeOut, V.Local.sFullName.Trim, V.Local.sDepartmentShiftRec(0), V.Local.sDepartmentShiftRec(1), V.Local.sDepartmentShiftRec(2), V.Local.sSQL)
+	
+	'Build insert statement (Part 2 of 3)
+	F.Intrinsic.String.Build("{0}, 'T','', '', '', '', '', '00000000', '{1}', '{2}', {3}, 'FldSvc', '{4}', '{5}', '', '0.00', '{6}', '', ''", V.Local.sSQL, V.Local.sCurrentDate, V.Local.sCurrentTime, V.Args.EmployeeID, V.Local.iTotalHoursWorked, V.Local.iTotalMinutesWorked, V.Ambient.Now.PervasiveDate, V.Local.sSQL)
+	
+	'Build Insert Statement (Part 3 of 3)
+	F.Intrinsic.String.Build("INSERT INTO TIME_ATTENDANCE VALUES ({0});", V.Local.sSQL, V.Local.sSQL)
+	
+	F.ODBC.Connection!con.Execute(V.Local.sSQL)
+	
+F.Intrinsic.Control.Catch
+
+	F.Intrinsic.String.Build("Failed to insert into TIME_ATTENDANCE: {0}", V.Ambient.ErrorDescription, V.Local.sError)
+	F.Intrinsic.Debug.SetLA(V.Local.sError)
+	F.Intrinsic.Control.ClearErrors()
+F.Intrinsic.Control.EndTry
+
+Program.Sub.InsertIntoTimeAndAttendance.End
+
+Program.Sub.ConvertDateStringToProperDateMask.Start
+V.Local.dDateMask.Declare(date)
+V.Local.sReturnDate.Declare(string)
+V.Local.bHasSlashes.Declare(boolean)
+
+F.Intrinsic.Control.Try
+	F.Intrinsic.Control.If(V.Args.Date.Length, =, 6)
+		'MMddyy
+	    V.Local.sReturnDate.Set(V.Args.Date)
+	F.Intrinsic.Control.ElseIf(V.Args.Date.Length, =, 8)
+		F.Intrinsic.String.IsInString(V.Args.Date, "/", true, V.Local.bHasSlashes)
+		F.Intrinsic.Control.If(V.Local.bHasSlashes)
+			'MM/dd/yy
+			F.Intrinsic.Date.ConvertDString(V.Args.Date, "MM/DD/YY", V.Local.dDateMask)
+		    F.Intrinsic.String.Format(V.Local.dDateMask, "MMDDYY", V.Local.sReturnDate)
+		F.Intrinsic.Control.Else
+			'yyyyMMdd
+		    F.Intrinsic.Date.ConvertDString(V.Args.Date, "YYYYMMDD", V.Local.dDateMask)
+		    F.Intrinsic.String.Format(V.Local.dDateMask, "MMDDYY", V.Local.sReturnDate)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		'Assume 10 digits
+		F.Intrinsic.String.IsInString(V.Args.Date.Left4, "/", true, V.Local.bHasSlashes)
+		F.Intrinsic.Control.If(V.Local.bHasSlashes)
+			'MM/dd/yyyy
+			F.Intrinsic.Date.ConvertDString(V.Args.Date, "MM/DD/YYYY", V.Local.dDateMask)
+		    F.Intrinsic.String.Format(V.Local.dDateMask, "MMDDYY", V.Local.sReturnDate)
+		F.Intrinsic.Control.Else
+			'yyyy/MM/dd
+		    F.Intrinsic.Date.ConvertDString(V.Args.Date, "YYYY/MM/DD", V.Local.dDateMask)
+		    F.Intrinsic.String.Format(V.Local.dDateMask, "MMDDYY", V.Local.sReturnDate)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		
+	F.Intrinsic.Control.Endif
+	
+	F.Intrinsic.Variable.AddRV("ReturnDate", V.Local.sReturnDate)
+F.Intrinsic.Control.Catch
+	F.Intrinsic.Control.RaiseError(100, "Unable to parse date provided to MMddyy format.")
+F.Intrinsic.Control.EndTry
+Program.Sub.ConvertDateStringToProperDateMask.End
+
+Program.Sub.Comments.Start
+${$5$}$3.0.0.0$}$1
+${$6$}$avaldez$}$20210303170956289$}$CBUu04veoT9NExad5Mkb3ylWEN0INN4AUyK2dte7VsdiGqRygLk+5+UVuYChumyC6+zuE2mWBLY=
+Program.Sub.Comments.End
