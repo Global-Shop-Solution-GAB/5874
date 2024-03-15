@@ -1,0 +1,100 @@
+Program.Sub.ScreenSU.Start
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+V.Local.bTableExists.Declare
+'Mod 030421 RRC
+'Wireless, Custom Hooks
+' 39018 - Custom 1 - Remove Job
+' 39020 - Custom 3 - Add Notes to Job
+
+f.ODBC.Connection!Conx.openconnection(v.Ambient.PDSN,v.Ambient.PUser,v.Ambient.PPass)
+	
+F.ODBC.Connection!Conx.TableExists("Gab_5874_FS_Notes", V.Local.bTableExists)
+F.Intrinsic.Control.If(V.Local.bTableExists, =, False)
+	F.ODBC.Connection!Conx.Execute("CREATE TABLE GAB_5874_FS_Notes( JOB CHAR(6), SUFFIX CHAR(3), FSNOTES LONGVARCHAR );")
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.SelectCase(V.Caller.Hook)
+	F.Intrinsic.Control.Case(39018) ' 39018 - Custom 1 - Remove Job
+		F.Intrinsic.Control.CallSub(SubRemoveJob)
+	F.Intrinsic.Control.Case(39020)	' 39020 - Custom 3 - Add Notes to Job
+		F.Intrinsic.Control.CallSub(SubAddNotes)
+
+F.Intrinsic.Control.EndSelect
+
+F.ODBC.Connection!Conx.Close
+
+Program.Sub.Main.End
+
+Program.Sub.SubRemoveJob.Start
+V.Local.sSql.Declare
+V.Local.sSql2.Declare
+V.Local.sTransID.Declare
+V.Local.sTransSfx.Declare
+
+V.Local.sTransID.Set(V.Passed.DATA-TRANSID)
+V.Local.sTransSfx.Set("0000")
+
+F.Intrinsic.String.Build("select SUCCESSFUL_FLAG from WIRELESS_HDR WHERE TRANS_ID='{0}' AND TRANS_TYPE='C18'",V.Local.sTransID,V.Local.sSql)
+F.ODBC.Connection!Conx.OpenRecordsetRW("rstWIRH",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.Conx!rstWIRH.EOF,=,False)
+	F.Intrinsic.String.Build("Select FIELD_1 AS JOB, FIELD_2 AS SUFFIX, FIELD_3 AS EMPLOYEE from WIRELESS_LINE WHERE TRANS_ID='{0}' AND SEQ={1} AND TRANS_TYPE='C18'",V.Local.sTransID,V.Local.sTransSfx,V.Local.sSql)
+	F.ODBC.Connection!Conx.OpenRecordsetRW("rstWIR",V.Local.sSql)
+	F.Intrinsic.Control.If(V.ODBC.Conx!rstWIR.EOF,=,False)
+		F.Intrinsic.String.Build("Delete Gab_5874_FS_Job Where Job='{0}' and Suffix='{1}' and EmployeeID='{2}';",V.ODBC.Conx!rstWIR.FieldValTrim!JOB,V.ODBC.Conx!rstWIR.FieldValTrim!SUFFIX,V.ODBC.Conx!rstWIR.FieldValTrim!EMPLOYEE,V.Local.sSql2)
+		F.ODBC.Connection!Conx.Execute(V.Local.sSql2)
+	F.Intrinsic.Control.EndIf
+	F.ODBC.Conx!rstWIR.Close
+	'Change flag in Wireless Header
+	F.ODBC.Conx!rstWIRH.Set!SUCCESSFUL_FLAG("Y")
+	F.ODBC.Conx!rstWIRH.Update
+F.Intrinsic.Control.EndIf
+F.ODBC.Conx!rstWIRH.Close
+
+Program.Sub.SubRemoveJob.End
+
+Program.Sub.SubAddNotes.Start
+V.Local.sSql.Declare
+V.Local.sTransID.Declare
+V.Local.sTransSfx.Declare
+
+V.Local.sTransID.Set(V.Passed.DATA-TRANSID)
+V.Local.sTransSfx.Set("0000")
+F.Intrinsic.String.Build("select SUCCESSFUL_FLAG from WIRELESS_HDR WHERE TRANS_ID='{0}' AND TRANS_TYPE='C20'",V.Local.sTransID,V.Local.sSql)
+F.ODBC.Connection!Conx.OpenRecordsetRW("rstWIRH",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.Conx!rstWIRH.EOF,=,False)
+	F.Intrinsic.String.Build("Select FIELD_1 AS JOB, FIELD_2 AS SUFFIX from WIRELESS_LINE WHERE TRANS_ID='{0}' AND SEQ={1} AND TRANS_TYPE='C20'",V.Local.sTransID,V.Local.sTransSfx,V.Local.sSql)
+	F.ODBC.Connection!Conx.OpenRecordsetRW("rstWIR",V.Local.sSql)
+	F.Intrinsic.Control.If(V.ODBC.Conx!rstWIR.EOF,=,False)
+		F.Intrinsic.String.Build("Select FSNOTES from FIELD_SVC_NOTES WHERE TRANS_ID='{0}'",V.Local.sTransID,V.Local.sSql)
+		F.ODBC.Connection!Conx.OpenRecordsetRW("rstFSNotes",V.Local.sSql)
+		F.Intrinsic.Control.If(V.ODBC.Conx!rstFSNotes.EOF,=,False)
+			F.Intrinsic.String.Build("Select * FROM GAB_5874_FS_Notes WHERE JOB='{0}' AND SUFFIX='{1}'",V.ODBC.Conx!rstWIR.FieldValTrim!JOB,V.ODBC.Conx!rstWIR.FieldValTrim!SUFFIX,V.Local.sSql)
+			F.ODBC.Connection!Conx.OpenRecordsetRW("rstSaveNotes",V.Local.sSql)
+			F.Intrinsic.Control.If(V.ODBC.Conx!rstSaveNotes.EOF,=,True)
+				F.ODBC.Conx!rstSaveNotes.AddNew
+				F.ODBC.Conx!rstSaveNotes.Set!JOB(V.ODBC.Conx!rstWIR.FieldValTrim!JOB)
+				F.ODBC.Conx!rstSaveNotes.Set!SUFFIX(V.ODBC.Conx!rstWIR.FieldValTrim!SUFFIX)
+			F.Intrinsic.Control.EndIf
+			F.ODBC.Conx!rstSaveNotes.Set!FSNOTES(V.ODBC.Conx!rstFSNotes.FieldValTrim!FSNOTES)
+			F.ODBC.Conx!rstSaveNotes.Update
+			F.ODBC.Conx!rstSaveNotes.Close
+		F.Intrinsic.Control.EndIf
+		F.ODBC.Conx!rstFSNotes.Delete
+		F.ODBC.Conx!rstFSNotes.Update
+		F.ODBC.Conx!rstFSNotes.Close
+	F.Intrinsic.Control.Else
+		F.Intrinsic.Control.End
+	F.Intrinsic.Control.EndIf
+	F.ODBC.Conx!rstWIR.Close
+
+	F.ODBC.Conx!rstWIRH.Set!SUCCESSFUL_FLAG("Y")
+	F.ODBC.Conx!rstWIRH.Update
+F.Intrinsic.Control.EndIf
+F.ODBC.Conx!rstWIRH.Close
+
+Program.Sub.SubAddNotes.End
