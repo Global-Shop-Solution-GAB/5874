@@ -1,0 +1,445 @@
+﻿Program.Sub.ScreenSU.Start
+Gui.F_Main..create(BaseForm)
+Gui.F_Main..caption("Field Service DCC Admin")
+Gui.F_Main..size(4230,3765)
+Gui.F_Main..position(0,0)
+Gui.F_Main..event(UnLoad,exit)
+Gui.F_Main..forecolor(0)
+Gui.F_Main..fontstyle(False,False,False,False,False)
+Gui.F_Main..BackColor(-2147483633)
+Gui.F_Main..maxbutton(False)
+Gui.F_Main..mousepointer(0)
+Gui.F_Main..sizeable(False)
+Gui.F_Main..MinX(0)
+Gui.F_Main..MinY(0)
+Gui.F_Main..MinButton(False)
+Gui.F_Main..AlwaysOnTop(False)
+Gui.F_Main..FontName("Tahoma")
+Gui.F_Main..FontSize(8.25)
+Gui.F_Main..ControlBox(True)
+Gui.F_Main..Moveable(True)
+Gui.F_Main..ShowInTaskBar(True)
+Gui.F_Main..TitleBar(True)
+Gui.F_Main.frmControls.create(frame)
+Gui.F_Main.frmControls.size(3975,570)
+Gui.F_Main.frmControls.position(120,2025)
+Gui.F_Main.frmControls.borderstyle(0)
+Gui.F_Main.frmControls.Enabled(True)
+Gui.F_Main.frmControls.Visible(True)
+Gui.F_Main.frmControls.Zorder(0)
+Gui.F_Main.frmControls.Caption("")
+Gui.F_Main.frmControls.FontName("Tahoma")
+Gui.F_Main.frmControls.FontSize(8.25)
+Gui.F_Main.cmdSave.create(button)
+Gui.F_Main.cmdSave.caption("Save")
+Gui.F_Main.cmdSave.size(855,375)
+Gui.F_Main.cmdSave.position(0,150)
+Gui.F_Main.cmdSave.parent("frmControls")
+Gui.F_Main.cmdSave.event(Click,cmdSave_Click)
+Gui.F_Main.cmdSave.TabStop(True)
+Gui.F_Main.cmdSave.TabIndex(6)
+Gui.F_Main.cmdSave.Enabled(True)
+Gui.F_Main.cmdSave.Visible(True)
+Gui.F_Main.cmdSave.Zorder(0)
+Gui.F_Main.cmdSave.FontName("Tahoma")
+Gui.F_Main.cmdSave.FontSize(8.25)
+Gui.F_Main.cmdDelete.create(button)
+Gui.F_Main.cmdDelete.caption("Delete")
+Gui.F_Main.cmdDelete.size(855,375)
+Gui.F_Main.cmdDelete.position(900,150)
+Gui.F_Main.cmdDelete.parent("frmControls")
+Gui.F_Main.cmdDelete.event(Click,cmdDelete_Click)
+Gui.F_Main.cmdDelete.TabStop(True)
+Gui.F_Main.cmdDelete.TabIndex(7)
+Gui.F_Main.cmdDelete.Enabled(True)
+Gui.F_Main.cmdDelete.Visible(True)
+Gui.F_Main.cmdDelete.Zorder(0)
+Gui.F_Main.cmdDelete.FontName("Tahoma")
+Gui.F_Main.cmdDelete.FontSize(8.25)
+Gui.F_Main.cmdClearGrp.create(button)
+Gui.F_Main.cmdClearGrp.caption("Clear Grp")
+Gui.F_Main.cmdClearGrp.size(975,375)
+Gui.F_Main.cmdClearGrp.position(1800,150)
+Gui.F_Main.cmdClearGrp.parent("frmControls")
+Gui.F_Main.cmdClearGrp.event(Click,cmdClearGrp_Click)
+Gui.F_Main.cmdClearGrp.TabStop(True)
+Gui.F_Main.cmdClearGrp.TabIndex(8)
+Gui.F_Main.cmdClearGrp.Enabled(True)
+Gui.F_Main.cmdClearGrp.Visible(True)
+Gui.F_Main.cmdClearGrp.Zorder(0)
+Gui.F_Main.cmdClearGrp.FontName("Tahoma")
+Gui.F_Main.cmdClearGrp.FontSize(8.25)
+Gui.F_Main.cmdClearPath.Create(Button)
+Gui.F_Main.cmdClearPath.Size(1065,375)
+Gui.F_Main.cmdClearPath.Position(2820,150)
+Gui.F_Main.cmdClearPath.Parent("frmControls")
+Gui.F_Main.cmdClearPath.TabStop(True)
+Gui.F_Main.cmdClearPath.TabIndex(8)
+Gui.F_Main.cmdClearPath.Caption("Clear Path")
+Gui.F_Main.cmdClearPath.Event(Click,cmdClearPath_Click)
+Gui.F_Main.cmdClearPath.Enabled(True)
+Gui.F_Main.cmdClearPath.Visible(True)
+Gui.F_Main.cmdClearPath.Zorder(0)
+Gui.F_Main.cmdClearPath.FontName("Tahoma")
+Gui.F_Main.cmdClearPath.FontSize(8.25)
+Gui.F_Main.lblID.create(label,"ID",True,2490,255,1,105,150,True,0,"Arial",8,-2147483633,0,0)
+Gui.F_Main.lblID.BorderStyle(0)
+Gui.F_Main.txtGRP_ID.create(textbox,"",True,870,300,0,105,405,False,0,"Arial",8,-2147483643,1)
+Gui.F_Main.txtGRP_ID.text("")
+Gui.F_Main.txtGRP_ID.TabStop(True)
+Gui.F_Main.txtGRP_ID.TabIndex(1)
+Gui.F_Main.cmdGRP_ID.create(button)
+Gui.F_Main.cmdGRP_ID.size(315,315)
+Gui.F_Main.cmdGRP_ID.position(1005,405)
+Gui.F_Main.cmdGRP_ID.event(Click,cmdGRP_ID_Click)
+Gui.F_Main.cmdGRP_ID.BackColor(-2147483643)
+Gui.F_Main.cmdGRP_ID.TabStop(True)
+Gui.F_Main.cmdGRP_ID.TabIndex(2)
+Gui.F_Main.cmdGRP_ID.Enabled(True)
+Gui.F_Main.cmdGRP_ID.Visible(True)
+Gui.F_Main.cmdGRP_ID.Zorder(0)
+Gui.F_Main.cmdGRP_ID.Caption("^")
+Gui.F_Main.cmdGRP_ID.FontName("Tahoma")
+Gui.F_Main.cmdGRP_ID.FontSize(8.25)
+Gui.F_Main.lblName.create(label,"Name",True,2490,255,1,1425,165,True,0,"Arial",8,-2147483633,0,0)
+Gui.F_Main.lblName.BorderStyle(0)
+Gui.F_Main.txtGRP_NAME.create(textbox,"",True,2625,300,0,1395,405,False,0,"Arial",8,-2147483643,1)
+Gui.F_Main.txtGRP_NAME.text("")
+Gui.F_Main.txtGRP_NAME.TabStop(True)
+Gui.F_Main.txtGRP_NAME.TabIndex(3)
+Gui.F_Main.txtGRP_NAME.Locked(True)
+Gui.F_Main.lblDesc.create(label,"Description",True,2490,255,1,105,795,True,0,"Arial",8,-2147483633,0,0)
+Gui.F_Main.lblDesc.BorderStyle(0)
+Gui.F_Main.txtGRP_Desc.create(textbox,"",True,3960,300,0,90,1050,False,0,"Arial",8,-2147483643,1)
+Gui.F_Main.txtGRP_Desc.text("")
+Gui.F_Main.txtGRP_Desc.TabStop(True)
+Gui.F_Main.txtGRP_Desc.TabIndex(4)
+Gui.F_Main.txtGRP_Desc.Locked(True)
+Gui.F_Main.lblPath.Create(Label,"Path",True,2490,255,1,135,1500,True,0,"Arial",8,-2147483633,0,0)
+Gui.F_Main.lblPath.BorderStyle(0)
+Gui.F_Main.txtPath.Create(TextBox,"",True,3960,300,0,105,1695,True,0,"Arial",8,-2147483643,1)
+Gui.F_Main.txtPath.TabStop(True)
+Gui.F_Main.txtPath.TabIndex(5)
+Gui.F_Main.txtPath.MaxLength(300)
+Gui.F_Main.cmdEqExp.Create(Button)
+Gui.F_Main.cmdEqExp.Enabled(True)
+Gui.F_Main.cmdEqExp.Visible(True)
+Gui.F_Main.cmdEqExp.Zorder(0)
+Gui.F_Main.cmdEqExp.Size(1920,345)
+Gui.F_Main.cmdEqExp.Position(2070,2850)
+Gui.F_Main.cmdEqExp.Caption("Equipment and Expenses")
+Gui.F_Main.cmdEqExp.FontName("Tahoma")
+Gui.F_Main.cmdEqExp.FontSize(8.25)
+Gui.F_Main.cmdEqExp.Event(Click,cmdEqExp_Click)
+Gui.FrmEqExp..Create(BaseForm)
+Gui.FrmEqExp..Caption("Equipment and Expenses")
+Gui.FrmEqExp..Size(5610,2685)
+Gui.FrmEqExp..MinX(0)
+Gui.FrmEqExp..MinY(0)
+Gui.FrmEqExp..Position(0,0)
+Gui.FrmEqExp..AlwaysOnTop(False)
+Gui.FrmEqExp..FontName("Tahoma")
+Gui.FrmEqExp..FontSize(8.25)
+Gui.FrmEqExp..ControlBox(True)
+Gui.FrmEqExp..MaxButton(True)
+Gui.FrmEqExp..MinButton(True)
+Gui.FrmEqExp..MousePointer(0)
+Gui.FrmEqExp..Moveable(True)
+Gui.FrmEqExp..Sizeable(True)
+Gui.FrmEqExp..ShowInTaskBar(True)
+Gui.FrmEqExp..TitleBar(True)
+Gui.FrmEqExp..Event(UnLoad,FrmEqExp_UnLoad)
+Gui.FrmEqExp.ddlExExpType.Create(DropDownList)
+Gui.FrmEqExp.ddlExExpType.Enabled(True)
+Gui.FrmEqExp.ddlExExpType.Visible(True)
+Gui.FrmEqExp.ddlExExpType.Zorder(0)
+Gui.FrmEqExp.ddlExExpType.Size(1425,300)
+Gui.FrmEqExp.ddlExExpType.Position(135,810)
+Gui.FrmEqExp.ddlExExpType.FontName("Tahoma")
+Gui.FrmEqExp.ddlExExpType.FontSize(8.25)
+Gui.FrmEqExp.lblEqExpType.Create(Label,"Type",True,360,195,0,195,555,True,0,"Tahoma",8.25,,0,0)
+Gui.FrmEqExp.lblEqExpType.BorderStyle(0)
+Gui.FrmEqExp.txtEqExpDesc.Create(TextBox,"",True,2100,300,0,1650,810,True,0,"Tahoma",8.25,,1)
+Gui.FrmEqExp.txtEqExpDesc.MaxLength(20)
+Gui.FrmEqExp.lblEqExpDesc.Create(Label,"Description",True,795,195,0,1695,555,True,0,"Tahoma",8.25,,0,0)
+Gui.FrmEqExp.lblEqExpDesc.BorderStyle(0)
+Gui.FrmEqExp.lblEqExpValue.Create(Label,"Value",True,390,195,0,3960,540,True,0,"Tahoma",8.25,,0,0)
+Gui.FrmEqExp.lblEqExpValue.BorderStyle(0)
+Gui.FrmEqExp.txtEqExpValue.Create(TextBox,"",True,1500,300,0,3915,810,True,0,"Tahoma",8.25,,1)
+Gui.FrmEqExp.txtEqExpValue.NumericOnly(1)
+Gui.FrmEqExp.cmdEqExpSave.Create(Button)
+Gui.FrmEqExp.cmdEqExpSave.Enabled(True)
+Gui.FrmEqExp.cmdEqExpSave.Visible(True)
+Gui.FrmEqExp.cmdEqExpSave.Zorder(0)
+Gui.FrmEqExp.cmdEqExpSave.Size(1125,345)
+Gui.FrmEqExp.cmdEqExpSave.Position(150,1545)
+Gui.FrmEqExp.cmdEqExpSave.Caption("Save")
+Gui.FrmEqExp.cmdEqExpSave.FontName("Tahoma")
+Gui.FrmEqExp.cmdEqExpSave.FontSize(8.25)
+Gui.FrmEqExp.cmdEqExpSave.Event(Click,cmdEqExpSave_Click)
+Gui.FrmEqExp.cmdEqExpDel.Create(Button)
+Gui.FrmEqExp.cmdEqExpDel.Enabled(True)
+Gui.FrmEqExp.cmdEqExpDel.Visible(True)
+Gui.FrmEqExp.cmdEqExpDel.Zorder(0)
+Gui.FrmEqExp.cmdEqExpDel.Size(1125,345)
+Gui.FrmEqExp.cmdEqExpDel.Position(1425,1545)
+Gui.FrmEqExp.cmdEqExpDel.Caption("Delete")
+Gui.FrmEqExp.cmdEqExpDel.FontName("Tahoma")
+Gui.FrmEqExp.cmdEqExpDel.FontSize(8.25)
+Gui.FrmEqExp.cmdEqExpDel.Event(Click,cmdEqExpDel_Click)
+Gui.FrmEqExp.cmdEqExpClear.Create(Button)
+Gui.FrmEqExp.cmdEqExpClear.Enabled(True)
+Gui.FrmEqExp.cmdEqExpClear.Visible(True)
+Gui.FrmEqExp.cmdEqExpClear.Zorder(0)
+Gui.FrmEqExp.cmdEqExpClear.Size(1125,345)
+Gui.FrmEqExp.cmdEqExpClear.Position(2715,1545)
+Gui.FrmEqExp.cmdEqExpClear.Caption("Clear")
+Gui.FrmEqExp.cmdEqExpClear.FontName("Tahoma")
+Gui.FrmEqExp.cmdEqExpClear.FontSize(8.25)
+Gui.FrmEqExp.cmdEqExpClear.Event(Click,cmdEqExpClear_Click)
+Gui.FrmEqExp.cmdEqExpBrw.Create(Button)
+Gui.FrmEqExp.cmdEqExpBrw.Enabled(True)
+Gui.FrmEqExp.cmdEqExpBrw.Visible(True)
+Gui.FrmEqExp.cmdEqExpBrw.Zorder(0)
+Gui.FrmEqExp.cmdEqExpBrw.Size(330,330)
+Gui.FrmEqExp.cmdEqExpBrw.Position(150,90)
+Gui.FrmEqExp.cmdEqExpBrw.Caption("^")
+Gui.FrmEqExp.cmdEqExpBrw.FontName("Tahoma")
+Gui.FrmEqExp.cmdEqExpBrw.FontSize(8.25)
+Gui.FrmEqExp.cmdEqExpBrw.Event(Click,cmdEqExpBrw_Click)
+Gui.FrmEqExp.lblEqExp.Create(Label,"Equipment/Expenses",True,1500,195,0,615,180,True,0,"Tahoma",8.25,,0,0)
+Gui.FrmEqExp.lblEqExp.BorderStyle(0)
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+V.Local.bTableExists.Declare
+
+'Created 04/28/20 RRC (ARC 5874)
+'Mod 01/10/23 RRC
+F.ODBC.Connection!con.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+
+Gui.FrmEqExp.ddlExExpType.AddItem("Expense","E")
+Gui.FrmEqExp.ddlExExpType.AddItem("Equipment","Q")
+
+F.ODBC.Connection!con.TableExists("GAB_5874_FS_DCCPATH", V.Local.bTableExists)
+F.Intrinsic.Control.If(V.Local.bTableExists, =, False)
+	F.ODBC.Connection!con.Execute("CREATE TABLE GAB_5874_FS_DCCPATH(GDCCID INTEGER, GRP_ID INTEGER, PATH LONGVARCHAR);")
+F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.CallSub(subLoadValues)
+Gui.F_Main..Show
+
+Program.Sub.Main.End
+
+Program.Sub.cmdGRP_ID_Click.Start
+V.Local.sCol.Declare(String)
+V.Local.sWidth.Declare(String)
+V.Local.sret.Declare(String)
+V.Local.squery.Declare(String)
+
+Gui.F_Main..Visible(False)
+F.Intrinsic.String.Split("GRP_ID*!*GRP_NAME*!*GRP_Desc*!*Path","*!*",V.Local.sCol)
+F.Intrinsic.String.Split("800*!*2000*!*2800*!*4000","*!*",V.Local.swidth)
+V.Local.squery.Set("SELECT ADG.GRP_ID, ADG.GRP_NAME, ADG.GRP_Desc, FSDCC.PATH FROM ATG_DOC_GRP  ADG LEFT OUTER JOIN GAB_5874_FS_DCCPATH FSDCC ON ADG.GRP_ID=FSDCC.GRP_ID ORDER BY ADG.GRP_ID")
+F.intrinsic.UI.Browser("SELECT","con",V.Local.squery,V.Local.sCol,V.Local.sWidth,7000,5000,V.Local.sret)
+F.Intrinsic.Control.If(V.Local.sret,<>,"***CANCEL***")
+	F.Intrinsic.string.Split(V.Local.sret,"*!*",V.Local.sret)
+
+	Gui.F_Main.txtGRP_ID.text(V.local.sret(0).trim)
+	Gui.F_Main.txtGRP_NAME.text(V.local.sret(1).trim)
+	Gui.F_Main.txtGRP_Desc.text(V.local.sret(2).trim)
+	Gui.F_Main.cmdSave.ForeColor("Red")
+
+F.Intrinsic.Control.EndIf
+Gui.F_Main..Visible(True)
+
+Program.Sub.cmdGRP_ID_Click.End
+
+Program.Sub.cmdClear_click.Start
+Gui.f_main.txtGRP_ID.text("")
+Gui.f_main.txtGRP_NAME.text("")
+Gui.f_main.txtGRP_Desc.text("")
+Gui.F_Main.txtPath.Text("")
+
+Program.Sub.cmdClear_click.End
+
+Program.Sub.exit.Start
+F.ODBC.Connection!con.close
+F.intrinsic.control.end
+Program.Sub.exit.End
+
+Program.Sub.cmdSave_Click.Start
+V.Local.sSql.Declare
+V.Local.sVal.Declare
+
+F.Intrinsic.String.Trim(V.Screen.F_Main!txtPath.Value,V.Local.sVal)
+F.Intrinsic.Control.If(V.Local.sVal,<>,"","OR",V.Screen.F_Main!txtGRP_ID.Value,<>,"")
+	V.Local.sSql.Set("Select * FROM GAB_5874_FS_DCCPATH WHERE GDCCID=0")
+	F.ODBC.Connection!con.OpenRecordsetRW("rstFSDCC",V.Local.sSql)
+	F.Intrinsic.Control.If(V.ODBC.con!rstFSDCC.EOF,=,True)
+		F.ODBC.con!rstFSDCC.AddNew
+		F.ODBC.con!rstFSDCC.Set!GDCCID(0)
+	F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.If(V.Screen.F_Main!txtGRP_ID.Value,=,"")
+		F.ODBC.con!rstFSDCC.Set!GRP_ID(-1)
+	F.Intrinsic.Control.Else
+		F.ODBC.con!rstFSDCC.Set!GRP_ID(V.Screen.F_Main!txtGRP_ID.Value)
+	F.Intrinsic.Control.EndIf	
+	F.ODBC.con!rstFSDCC.Set!PATH(V.Screen.F_Main!txtPath.Value)
+	F.ODBC.con!rstFSDCC.Update
+	F.ODBC.con!rstFSDCC.Close
+	F.Intrinsic.UI.Msgbox("Info Saved","Field Serv DCC")
+	Gui.F_Main.cmdSave.ForeColor("Black")
+F.Intrinsic.Control.EndIf
+
+Program.Sub.cmdSave_Click.End
+
+Program.Sub.cmdDelete_Click.Start
+V.Local.sSql.Declare
+
+F.Intrinsic.String.Build("Select * FROM GAB_5874_FS_DCCPATH WHERE GRP_ID='{0}'",V.Screen.F_Main!txtGRP_ID.Value,V.Local.sSql)
+F.ODBC.Connection!con.OpenRecordsetRW("rstFSDCC",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.con!rstFSDCC.EOF,=,False)
+	F.ODBC.con!rstFSDCC.Delete
+	F.ODBC.con!rstFSDCC.Update
+	F.Intrinsic.Control.CallSub(cmdClearGrp_Click)
+	F.Intrinsic.Control.CallSub(cmdClearPath_Click)
+F.Intrinsic.Control.EndIf
+F.ODBC.con!rstFSDCC.Close
+
+Program.Sub.cmdDelete_Click.End
+Program.Sub.cmdClearGrp_Click.Start
+Gui.f_main.txtGRP_ID.text("")
+Gui.f_main.txtGRP_NAME.text("")
+Gui.f_main.txtGRP_Desc.text("")
+Gui.F_Main.cmdSave.ForeColor("Red")
+
+Program.Sub.cmdClearGrp_Click.End
+Program.Sub.cmdClearPath_Click.Start
+Gui.F_Main.txtPath.Text("")
+Gui.F_Main.cmdSave.ForeColor("Red")
+Program.Sub.cmdClearPath_Click.End
+Program.Sub.subLoadValues.Start
+V.Local.sSql.Declare
+V.Local.sSql.Set("Select * FROM GAB_5874_FS_DCCPATH WHERE GDCCID=0")
+F.ODBC.Connection!con.OpenRecordsetRW("rstLoadDCC",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.con!rstLoadDCC.EOF,=,False)
+	F.Intrinsic.Control.If(V.ODBC.con!rstLoadDCC.FieldVal!GRP_ID,=,-1)
+		Gui.F_Main.txtGRP_ID.text("")
+		Gui.F_Main.txtGRP_NAME.text("")
+		Gui.F_Main.txtGRP_Desc.text("")
+	F.Intrinsic.Control.Else
+		F.Intrinsic.String.Build("Select * From ATG_DOC_GRP Where GRP_ID='{0}'",V.ODBC.con!rstLoadDCC.FieldVal!GRP_ID,V.Local.sSql)
+		F.ODBC.Connection!con.OpenRecordsetRW("rstLoadGrp",V.Local.sSql)
+		F.Intrinsic.Control.If(V.ODBC.con!rstLoadDCC.EOF,=,False)
+			Gui.F_Main.txtGRP_ID.text(V.ODBC.con!rstLoadGrp.FieldVal!GRP_ID)
+			Gui.F_Main.txtGRP_NAME.text(V.ODBC.con!rstLoadGrp.FieldVal!GRP_NAME)
+			Gui.F_Main.txtGRP_Desc.text(V.ODBC.con!rstLoadGrp.FieldVal!GRP_DESC)
+		F.Intrinsic.Control.Else
+			Gui.F_Main.txtGRP_ID.text("")
+			Gui.F_Main.txtGRP_NAME.text("")
+			Gui.F_Main.txtGRP_Desc.text("")
+			F.Intrinsic.UI.Msgbox("Invalid group stored, save again","Group not found")
+		F.Intrinsic.Control.EndIf
+		F.ODBC.con!rstLoadGrp.Close
+	F.Intrinsic.Control.EndIf
+	Gui.F_Main.txtPath.Text(V.ODBC.con!rstLoadDCC.FieldVal!PATH)
+
+F.Intrinsic.Control.EndIf
+F.ODBC.con!rstLoadDCC.Close
+
+Program.Sub.subLoadValues.End
+Program.Sub.cmdEqExp_Click.Start
+Gui.F_Main..Visible(False)
+Gui.FrmEqExp..Visible(true)
+Program.Sub.cmdEqExp_Click.End
+Program.Sub.cmdEqExpBrw_Click.Start
+
+V.Local.sCol.Declare(String)
+V.Local.sWidth.Declare(String)
+V.Local.sret.Declare(String)
+V.Local.squery.Declare(String)
+
+Gui.FrmEqExp..Enabled(False)
+F.Intrinsic.String.Split("Type*!*Description*!*Value","*!*",V.Local.sCol)
+F.Intrinsic.String.Split("800*!*2000*!*2800","*!*",V.Local.swidth)
+V.Local.squery.Set("select IF(TYPE='E','Expense','Equipment') as Type, DESCRIPTION, VALUE from GAB_5874_FS_EETABLE ORDER by TYPE, DESCRIPTION")
+F.intrinsic.UI.Browser("SELECT","con",V.Local.squery,V.Local.sCol,V.Local.sWidth,7000,5000,V.Local.sret)
+F.Intrinsic.Control.If(V.Local.sret,<>,"***CANCEL***")
+	F.Intrinsic.string.Split(V.Local.sret,"*!*",V.Local.sret)
+	Gui.FrmEqExp.ddlExExpType.Text(V.local.sret(0).trim)
+	Gui.FrmEqExp.txtEqExpDesc.text(V.local.sret(1).trim)
+	Gui.FrmEqExp.txtEqExpValue.Text(V.local.sret(2).trim)
+F.Intrinsic.Control.EndIf
+Gui.FrmEqExp..Enabled(True)
+
+Program.Sub.cmdEqExpBrw_Click.End
+Program.Sub.cmdEqExpSave_Click.Start
+V.Local.sType.Declare
+V.Local.sSql.Declare
+V.Local.sText.Declare
+
+F.Intrinsic.Control.SelectCase(V.Screen.FrmEqExp!ddlExExpType.Value)
+F.Intrinsic.Control.Case("Expense")
+	V.Local.sType.Set("E")
+F.Intrinsic.Control.Case("Equipment")
+	V.Local.sType.Set("Q")
+F.Intrinsic.Control.EndSelect
+
+F.Intrinsic.String.Build("Select * FROM GAB_5874_FS_EETABLE WHERE Type='{0}' and UPPER(Description)=UPPER('{1}')",V.Local.sType,V.Screen.FrmEqExp!txtEqExpDesc.Text,V.Local.sSql)
+F.ODBC.Connection!con.OpenRecordsetRW("rstEqExpSave",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.con!rstEqExpSave.EOF,=,True)
+	F.ODBC.con!rstEqExpSave.AddNew
+	F.ODBC.con!rstEqExpSave.Set!TYPE(V.Local.sType)
+F.Intrinsic.Control.EndIf
+F.ODBC.con!rstEqExpSave.Set!DESCRIPTION(V.Screen.FrmEqExp!txtEqExpDesc.Text)
+F.ODBC.con!rstEqExpSave.Set!VALUE(V.Screen.FrmEqExp!txtEqExpValue.Text)
+F.ODBC.con!rstEqExpSave.Update
+F.ODBC.con!rstEqExpSave.Close
+
+F.Intrinsic.String.Build("{0} is saved",V.Screen.FrmEqExp!ddlExExpType.Value,V.Local.sText)
+F.Intrinsic.UI.Msgbox(V.Local.sText,"Save Message")
+
+Program.Sub.cmdEqExpSave_Click.End
+Program.Sub.cmdEqExpDel_Click.Start
+V.Local.sType.Declare
+V.Local.sSql.Declare
+V.Local.sText.Declare
+
+F.Intrinsic.Control.SelectCase(V.Screen.FrmEqExp!ddlExExpType.Value)
+F.Intrinsic.Control.Case("Expense")
+	V.Local.sType.Set("E")
+F.Intrinsic.Control.Case("Equipment")
+	V.Local.sType.Set("Q")
+F.Intrinsic.Control.EndSelect
+
+F.Intrinsic.String.Build("Select * FROM GAB_5874_FS_EETABLE WHERE Type='{0}' and UPPER(Description)=UPPER('{1}')",V.Local.sType,V.Screen.FrmEqExp!txtEqExpDesc.Text,V.Local.sSql)
+F.ODBC.Connection!con.OpenRecordsetRW("rstEqExpDel",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.con!rstEqExpDel.EOF,=,False)
+	F.ODBC.con!rstEqExpDel.Delete
+	F.ODBC.con!rstEqExpDel.Update
+
+	F.Intrinsic.String.Build("{0} is Deleted",V.Screen.FrmEqExp!ddlExExpType.Value,V.Local.sText)
+	F.Intrinsic.UI.Msgbox(V.Local.sText,"Delete Message")	
+F.Intrinsic.Control.EndIf
+F.ODBC.con!rstEqExpDel.Close
+F.Intrinsic.Control.CallSub(cmdEqExpClear_Click)
+
+Program.Sub.cmdEqExpDel_Click.End
+Program.Sub.cmdEqExpClear_Click.Start
+Gui.FrmEqExp.ddlExExpType.Text("Expense")
+Gui.FrmEqExp.txtEqExpDesc.Text("")
+Gui.FrmEqExp.txtEqExpValue.Text("")
+
+Program.Sub.cmdEqExpClear_Click.End
+Program.Sub.FrmEqExp_UnLoad.Start
+Gui.FrmEqExp..Visible(False)
+Gui.F_Main..Visible(True)
+Program.Sub.FrmEqExp_UnLoad.End
+
+Program.Sub.Comments.Start
+${$5$}$2.0.0.0$}$2
+${$6$}$rrodriguez$}$20230116134912062$}$YnvOFTUOxTrnxbSzMvfBmnrP7dtKqN6ZKEdpzIv886pvJfH8PrNzRo7KE26BvKWoO6UenLXaXNTxPDilSBTfbw==
+Program.Sub.Comments.End
